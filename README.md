@@ -1,1 +1,1 @@
-**fork frome [yanzai/goindex](https://github.com/yanzai/goindex)**
+**fork from [yanzai/goindex](https://github.com/yanzai/goindex)**
