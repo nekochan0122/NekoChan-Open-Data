@@ -2,7 +2,7 @@
 
 **[NekoChan Open Data](https://nekochan.ml)**
 
-fork from [yanzai/goindex](https://github.com/yanzai/goindex)
+**fork from [yanzai/goindex](https://github.com/yanzai/goindex)**
 
 ## 更改內容
 - 新增 自訂背景
