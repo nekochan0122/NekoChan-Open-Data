@@ -10,3 +10,6 @@ fork from [yanzai/goindex](https://github.com/yanzai/goindex)
 
 ### 預覽
 ![image](https://i.imgur.com/girkvqP.png)
+
+## 聯絡
+Discord：NekoChan#2851
