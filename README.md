@@ -14,6 +14,10 @@
 - 影片結束後自動切換下一集（如果有的話）
 - 啟用 Dplayer 截圖功能
 
+## 1.1.4 更新內容
+- 新增 notyf 通知
+- 影片播放中自動進入全螢幕
+
 ### 預覽
 ![image](https://i.imgur.com/girkvqP.png)
 
