@@ -10,6 +10,10 @@
 - 新增 [Dplayer](https://github.com/MoePlayer/DPlayer) 播放器 [v1.25.1](https://github.com/MoePlayer/DPlayer/releases/tag/v1.25.1)
 - 支援 各裝置的 播放器串流 [PotPlayer(Win)](https://potplayer.daum.net/?lang=zh_TW)、[IINA(Mac)](https://iina.io/)、[MX Player(Android)](https://play.google.com/store/apps/details?id=com.mxtech.videoplayer.ad)、[Infuse(iOS)](https://apps.apple.com/tw/app/infuse-6/id1136220934)
 
+## 1.0.7 更新內容
+- 影片結束後自動切換下一集(如果有的話)
+- 啟用 Dplayer 截圖功能
+
 ### 預覽
 ![image](https://i.imgur.com/girkvqP.png)
 
