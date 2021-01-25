@@ -28,8 +28,11 @@
 - 更新 mdui 1.0.1
 - 更新 markdown-it 12.0.4
 - 更新 DPlayer 1.25.1
-- 修復 Dplayer影片載入失敗 問題（添加了新的事件解決：error）
+- 修復 DPlayer影片載入失敗 問題（添加了新的事件解決：error）
 - 修復 console 警告的錯誤 (A Parser-blocking, cross-origin script...)
+
+## 1.5.1 更新內如
+- 修復 DPlayer 有時無法正常載入的問題（添加了新的判斷式）
 
 ### 預覽
 ![image](https://i.imgur.com/girkvqP.png)
