@@ -452,23 +452,25 @@ function file_video(i) {
 		)}">Infuse 串流</a>`
 	}
 	let m = `\n<div class="mdui-container-fluid">\n    <br>\n    <div class="mdui-textfield">\n    <label class="mdui-textfield-label mdui-text-color-white">目前檔案：</label>\n    <input class="mdui-textfield-input mdui-text-color-white" type="text" value="${n}" readonly/>\n    </div>\n    <div class="mdui-center" id="player"></div>\n    <br>\n    <div id="imgWrap">\n    ${s}\n    </div>\n    <br>\n    ${(r += `<br><a style="margin-top: 15px" href="${e}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">直連下載檔案</a>`)}\n    <div class="mdui-textfield">\n      <label class="mdui-textfield-label mdui-text-color-white">注意：若影片沒有畫面，請嘗試播放器。或通知我本人。</label>\n    </div>\n    <hr>\n</div>\n    `
-	$('#content').html(m)
-	let c = () => {
-		console.log('開始讀取影片')
-		let i = null
-		;(i = new DPlayer({
-			container: document.getElementById('player'),
-			theme: '#0080ff',
-			autoplay: !0,
-			lang: 'zh-tw',
-			screenshot: !0,
-			video: { url: e },
-			contextmenu: [{ text: 'NekoChan Open Data', link: '//nekochan.ml/' }],
-		})).on('error', () => {
-			c(), console.log('影片載入失敗，已重新讀取。')
-		})
-	}
-	c(),
+	$('#content').html(m),
+		$(document).ready(function () {
+			let i = () => {
+				console.log('開始讀取影片')
+				let t = null
+				;(t = new DPlayer({
+					container: document.getElementById('player'),
+					theme: '#0080ff',
+					autoplay: !0,
+					lang: 'zh-tw',
+					screenshot: !0,
+					video: { url: e },
+					contextmenu: [{ text: 'NekoChan Open Data', link: '//nekochan.ml/' }],
+				})).on('error', () => {
+					i(), console.log('影片載入失敗，已重新讀取。')
+				})
+			}
+			i()
+		}),
 		$('#leftBtn, #rightBtn').click((i) => {
 			let t = $(i.target)
 			;['I', 'SPAN'].includes(i.target.nodeName) && (t = $(i.target).parent())
