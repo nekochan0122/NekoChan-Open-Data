@@ -471,7 +471,6 @@ function file_video(i) {
 							],
 						})).on('error', () => {
 							;(i = n.video.currentTime),
-								n.destroy(),
 								e(),
 								n.seek(i),
 								console.log('影片載入失敗，已重新讀取。')
