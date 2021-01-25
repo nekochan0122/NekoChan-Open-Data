@@ -113,22 +113,18 @@ function nav(t) {
 		mdui.mutation(),
 		mdui.updateTextFields()
 }
-try {
-	function requestListPath(i, t, e, n) {
-		let d = {
-			password: t.password || null,
-			page_token: t.page_token || null,
-			page_index: t.page_index || 0,
-		}
-		$.post(i, d, (t, a) => {
-			let l = jQuery.parseJSON(t)
-			l && l.error && '401' == l.error.code && '500' == l.error.code
-				? n && n(i)
-				: l && l.data && e && e(l, i, d)
-		})
+function requestListPath(i, t, e, n) {
+	let d = {
+		password: t.password || null,
+		page_token: t.page_token || null,
+		page_index: t.page_index || 0,
 	}
-} catch (i) {
-	console.log(`發送POST請求發生錯誤：${i}`), window.location.reload()
+	$.post(i, d, (t, a) => {
+		let l = jQuery.parseJSON(t)
+		l && l.error && '401' == l.error.code && '500' == l.error.code
+			? n && n(i)
+			: l && l.data && e && e(l, i, d)
+	})
 }
 function requestSearch(i, t) {
 	let e = {
@@ -146,6 +142,9 @@ function list(i) {
 		'\n\t<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>\n\t <div class="mdui-row"> \n\t  <ul class="mdui-list"> \n\t   <li class="mdui-list-item th"> \n\t    <div class="mdui-col-xs-12 mdui-col-sm-7">\n      檔案名稱\n\t<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>\n\t    </div> \n\t    <div class="mdui-col-sm-3 mdui-text-right">\n      修改時間\n\t<i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>\n\t    </div> \n\t    <div class="mdui-col-sm-2 mdui-text-right">\n      檔案大小\n\t<i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>\n\t    </div> \n\t    </li> \n\t  </ul> \n\t </div> \n\t <div class="mdui-row"> \n\t  <ul id="list" class="mdui-list"> \n\t  </ul> \n    <div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>NekoChan Open Data</div>\n\t </div>\n\t <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>\n\t'
 	)
 	let t = localStorage.getItem(`password${i}`)
+	function e() {
+		window.location.reload()
+	}
 	$('#list').html(
 		'<div class="mdui-progress"><div class="mdui-progress-indeterminate"></div></div>'
 	),
@@ -154,7 +153,7 @@ function list(i) {
 		requestListPath(
 			i,
 			{ password: t },
-			function i(t, e, n) {
+			function i(t, n, d) {
 				$('#list')
 					.data('nextPageToken', t.nextPageToken)
 					.data('curPageIndex', t.curPageIndex),
@@ -163,13 +162,13 @@ function list(i) {
 						? ($(window).off('scroll'),
 						  (window.scroll_status.event_bound = !1),
 						  (window.scroll_status.loading_lock = !1),
-						  append_files_to_list(e, t.data.files))
-						: (append_files_to_list(e, t.data.files),
+						  append_files_to_list(n, t.data.files))
+						: (append_files_to_list(n, t.data.files),
 						  !0 !== window.scroll_status.event_bound &&
 								($(window).on('scroll', function () {
 									let t = $(this).scrollTop(),
-										d = getDocumentHeight()
-									if (t + $(this).height() > d - (Os.isMobile ? 130 : 80)) {
+										a = getDocumentHeight()
+									if (t + $(this).height() > a - (Os.isMobile ? 130 : 80)) {
 										if (!0 === window.scroll_status.loading_lock) return
 										;(window.scroll_status.loading_lock = !0),
 											$(
@@ -178,14 +177,14 @@ function list(i) {
 											mdui.updateSpinners()
 										let t = $('#list')
 										requestListPath(
-											e,
+											n,
 											{
-												password: n.password,
+												password: d.password,
 												page_token: t.data('nextPageToken'),
 												page_index: t.data('curPageIndex') + 1,
 											},
 											i,
-											null
+											e
 										)
 									}
 								}),
