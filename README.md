@@ -5,7 +5,11 @@
 **fork from [yanzai/goindex](https://github.com/yanzai/goindex)**
 
 ## 已知問題
-- 有時會發生 POST 請求錯誤 狀態碼：500
+- 有時會發生 POST 請求錯誤 狀態碼：500 （導致列表渲染不出來的主要原因）
+
+## 1.6.1
+- 新增 Twitter 按鈕
+- 新增 重新整理 按鈕
 
 ## 1.5.7 更新內容
 - 新增 Dplayer 載入失敗或跳轉時發生載入失敗時，自動跳轉至上一次跳轉的播放時間或跳轉時間。
