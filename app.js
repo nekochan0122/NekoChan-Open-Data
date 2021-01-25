@@ -457,17 +457,20 @@ function file_video(i) {
 			let i = () => {
 				console.log('開始讀取影片')
 				let t = null
-				;(t = new DPlayer({
-					container: document.getElementById('player'),
-					theme: '#0080ff',
-					autoplay: !0,
-					lang: 'zh-tw',
-					screenshot: !0,
-					video: { url: e },
-					contextmenu: [{ text: 'NekoChan Open Data', link: '//nekochan.ml/' }],
-				})).on('error', () => {
-					i(), console.log('影片載入失敗，已重新讀取。')
-				})
+				window.DPlayer || window.location.reload(),
+					(t = new DPlayer({
+						container: document.getElementById('player'),
+						theme: '#0080ff',
+						autoplay: !0,
+						lang: 'zh-tw',
+						screenshot: !0,
+						video: { url: e },
+						contextmenu: [
+							{ text: 'NekoChan Open Data', link: '//nekochan.ml/' },
+						],
+					})).on('error', () => {
+						i(), console.log('影片載入失敗，已重新讀取。')
+					})
 			}
 			i()
 		}),
