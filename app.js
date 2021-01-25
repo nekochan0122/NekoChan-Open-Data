@@ -470,10 +470,15 @@ function file_video(i) {
 								{ text: 'NekoChan Open Data', link: '//nekochan.ml/' },
 							],
 						})).on('error', () => {
-							0 != n.video.currentTime && (i = n.video.currentTime),
+							console.log(`當前播放時間: ${n.video.currentTime}`),
+								0 != n.video.currentTime &&
+									((i = n.video.currentTime),
+									console.log(`以記錄當前播放時間: ${n.video.currentTime}`)),
 								e(),
-								n.seek(i),
 								console.log('影片載入失敗，已重新讀取。')
+						}),
+						n.on('canplay', () => {
+							n.seek(i), console.log(`以跳轉至：${i}`)
 						})
 				}
 			e()
