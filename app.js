@@ -148,7 +148,8 @@ function list(i) {
 		'<div class="mdui-progress"><div class="mdui-progress-indeterminate"></div></div>'
 	),
 		$('#readme_md').hide().html(''),
-		$('#head_md').hide().html(''),
+		$('#head_md').hide().html('')
+	try {
 		requestListPath(
 			i,
 			{ password: t },
@@ -198,6 +199,10 @@ function list(i) {
 					null != t && '' != t ? list(i) : history.go(-1)
 			}
 		)
+	} catch (error) {
+		console.log(error)
+		window.location.reload()
+	}
 }
 function append_files_to_list(t, e) {
 	let n = $('#list'),
