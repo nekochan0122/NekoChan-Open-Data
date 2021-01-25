@@ -80,11 +80,11 @@ function nav(e) {
 		n = '',
 		d = window.current_drive_order || 0
 	n += `<a href="/${d}:/" class="mdui-typo-headline folder">${document.siteName}</a>`
-	let a = window.drive_names
+	let o = window.drive_names
 	if (
 		((n +=
 			'<select class="mdui-select" onchange="window.location.href=this.value" mdui-select style="overflow:visible;padding-left:8px;padding-right:8px">'),
-		a.forEach((i, e) => {
+		o.forEach((i, e) => {
 			n += `<option value="/${e}:/"  ${
 				e === d ? 'selected="selected"' : ''
 			} >${i}</option>`
@@ -93,21 +93,21 @@ function nav(e) {
 		!t.is_search_page)
 	) {
 		let t = e.trim('/').split('/'),
-			a = '/'
+			o = '/'
 		if (t.length > 1)
 			for (i in (t.shift(), t)) {
 				let e = t[i]
-				if (((a += `${(e = decodeURI(e))}/`), '' == e)) break
-				n += `<i class="mdui-icon material-icons mdui-icon-dark folder" style="margin:0;">chevron_right</i><a class="folder" href="/${d}:${a}">${e}</a>`
+				if (((o += `${(e = decodeURI(e))}/`), '' == e)) break
+				n += `<i class="mdui-icon material-icons mdui-icon-dark folder" style="margin:0;">chevron_right</i><a class="folder" href="/${d}:${o}">${e}</a>`
 			}
 	}
-	let l = (t.is_search_page && t.q) || ''
-	const o = Os.isMobile
+	let a = (t.is_search_page && t.q) || ''
+	const l = Os.isMobile
 	let s = `<div class="mdui-toolbar-spacer"></div>\n        <div id="search_bar" class="mdui-textfield mdui-textfield-expandable mdui-float-right ${
 		t.is_search_page ? 'mdui-textfield-expanded' : ''
 	}" style="max-width:${
-		o ? 300 : 400
-	}px">\n            <button class="mdui-textfield-icon mdui-btn mdui-btn-icon" onclick="if($('#search_bar').hasClass('mdui-textfield-expanded') && $('#search_bar_form>input').val()) $('#search_bar_form').submit();">\n                <i class="mdui-icon material-icons">search</i>\n            </button>\n            <form id="search_bar_form" method="get" action="/${d}:search">\n            <input class="mdui-textfield-input" type="text" name="q" placeholder="Search in current drive" value="${l}"/>\n            </form>\n            <button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>\n        </div>`
+		l ? 300 : 400
+	}px">\n            <button class="mdui-textfield-icon mdui-btn mdui-btn-icon" onclick="if($('#search_bar').hasClass('mdui-textfield-expanded') && $('#search_bar_form>input').val()) $('#search_bar_form').submit();">\n                <i class="mdui-icon material-icons">search</i>\n            </button>\n            <form id="search_bar_form" method="get" action="/${d}:search">\n            <input class="mdui-textfield-input" type="text" name="q" placeholder="Search in current drive" value="${a}"/>\n            </form>\n            <button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>\n        </div>`
 	t.root_type < 2 && (n += s),
 		$('#nav').html(n),
 		mdui.mutation(),
@@ -119,11 +119,11 @@ function requestListPath(i, e, t, n) {
 		page_token: e.page_token || null,
 		page_index: e.page_index || 0,
 	}
-	$.post(i, d, (e, a) => {
-		let l = jQuery.parseJSON(e)
-		l && l.error && '401' == l.error.code
+	$.post(i, d, (e, o) => {
+		let a = jQuery.parseJSON(e)
+		a && a.error && '401' == a.error.code
 			? n && n(i)
-			: l && l.data && t && t(l, i, d)
+			: a && a.data && t && t(a, i, d)
 	})
 }
 function requestSearch(i, e) {
@@ -200,23 +200,23 @@ function list(i) {
 function append_files_to_list(e, t) {
 	let n = $('#list'),
 		d = null === n.data('nextPageToken'),
-		a = '0' == n.data('curPageIndex')
+		o = '0' == n.data('curPageIndex')
 	html = ''
-	let l = []
+	let a = []
 	for (i in t) {
 		let n = t[i],
-			a = `${e + n.name}/`
+			o = `${e + n.name}/`
 		if (
 			(null == n.size && (n.size = ''),
 			(n.modifiedTime = utc2beijing(n.modifiedTime)),
 			(n.size = formatFileSize(n.size)),
 			'application/vnd.google-apps.folder' == n.mimeType)
 		)
-			html += `<li class="mdui-list-item mdui-ripple"><a href="${a}" class="folder">\n\t            <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${n.name}">\n\t            <i class="mdui-icon material-icons">folder_open</i>\n\t              ${n.name}\n\t            </div>\n\t            <div class="mdui-col-sm-3 mdui-text-right">${n.modifiedTime}</div>\n\t            <div class="mdui-col-sm-2 mdui-text-right">${n.size}</div>\n\t            </a>\n\t        </li>`
+			html += `<li class="mdui-list-item mdui-ripple"><a href="${o}" class="folder">\n\t            <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${n.name}">\n\t            <i class="mdui-icon material-icons">folder_open</i>\n\t              ${n.name}\n\t            </div>\n\t            <div class="mdui-col-sm-3 mdui-text-right">${n.modifiedTime}</div>\n\t            <div class="mdui-col-sm-2 mdui-text-right">${n.size}</div>\n\t            </a>\n\t        </li>`
 		else {
 			let i = e + n.name
 			const t = e + n.name
-			let a = 'file'
+			let o = 'file'
 			d &&
 				'!readme.md' == n.name &&
 				get_file(i, n, (i) => {
@@ -226,24 +226,24 @@ function append_files_to_list(e, t) {
 					get_file(i, n, (i) => {
 						markdown('#head_md', i)
 					})
-			let o = i.split('.').pop().toLowerCase()
+			let l = i.split('.').pop().toLowerCase()
 			'|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|pdf|'.includes(
-				`|${o}|`
-			) && (l.push(t), (i += '?a=view'), (a += ' view')),
-				(html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${n.mimeType}" href="${i}" class="${a}">\n\t          <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${n.name}">\n\t          <i class="mdui-icon material-icons">insert_drive_file</i>\n\t            ${n.name}\n\t          </div>\n\t          <div class="mdui-col-sm-3 mdui-text-right">${n.modifiedTime}</div>\n\t          <div class="mdui-col-sm-2 mdui-text-right">${n.size}</div>\n\t          </a>\n\t      </li>`)
+				`|${l}|`
+			) && (a.push(t), (i += '?a=view'), (o += ' view')),
+				(html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${n.mimeType}" href="${i}" class="${o}">\n\t          <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${n.name}">\n\t          <i class="mdui-icon material-icons">insert_drive_file</i>\n\t            ${n.name}\n\t          </div>\n\t          <div class="mdui-col-sm-3 mdui-text-right">${n.modifiedTime}</div>\n\t          <div class="mdui-col-sm-2 mdui-text-right">${n.size}</div>\n\t          </a>\n\t      </li>`)
 		}
 	}
-	if (l.length > 0) {
+	if (a.length > 0) {
 		let i = localStorage.getItem(e),
-			t = l
-		if (!a && i) {
+			t = a
+		if (!o && i) {
 			let e
 			try {
 				;(e = JSON.parse(i)), Array.isArray(e) || (e = [])
 			} catch (i) {
 				e = []
 			}
-			t = e.concat(l)
+			t = e.concat(a)
 		}
 		localStorage.setItem(e, JSON.stringify(t))
 	}
@@ -411,21 +411,21 @@ function file_video(i) {
 		t = e
 	const n = decodeURI(i.slice(i.lastIndexOf('/') + 1, i.length)),
 		d = window.location.pathname,
-		a = d.lastIndexOf('/'),
-		l = d.slice(0, a + 1)
-	let o = localStorage.getItem(l),
+		o = d.lastIndexOf('/'),
+		a = d.slice(0, o + 1)
+	let l = localStorage.getItem(a),
 		s = ''
-	if (o) {
+	if (l) {
 		try {
-			;(o = JSON.parse(o)), Array.isArray(o) || (o = [])
+			;(l = JSON.parse(l)), Array.isArray(l) || (l = [])
 		} catch (i) {
-			console.error(i), (o = [])
+			console.error(i), (l = [])
 		}
-		if (o.length > 0 && o.includes(i)) {
-			let e = o.length,
-				t = o.indexOf(i),
-				n = t - 1 > -1 ? o[t - 1] : null,
-				d = t + 1 < e ? o[t + 1] : null
+		if (l.length > 0 && l.includes(i)) {
+			let e = l.length,
+				t = l.indexOf(i),
+				n = t - 1 > -1 ? l[t - 1] : null,
+				d = t + 1 < e ? l[t + 1] : null
 			s = `\n            <div class="mdui-container">\n                <div class="mdui-row-xs-2 mdui-m-b-1">\n                    <div class="mdui-col">\n                        ${
 				n
 					? `<button id="leftBtn" data-filepath="${n}" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">上一集</button>`
@@ -469,16 +469,30 @@ function file_video(i) {
 							contextmenu: [
 								{ text: 'NekoChan Open Data', link: '//nekochan.ml/' },
 							],
-						})).on('error', () => {
+						})),
+						console.log(`已跳轉至 ${i}`),
+						n.seek(i),
+						n.on('error', () => {
 							console.log(`當前播放時間: ${n.video.currentTime}`),
 								0 != n.video.currentTime &&
 									((i = n.video.currentTime),
-									console.log(`以記錄當前播放時間: ${n.video.currentTime}`)),
+									console.log(
+										`以記錄當前播放時間(error): ${n.video.currentTime}`
+									)),
 								e(),
 								console.log('影片載入失敗，已重新讀取。')
 						}),
-						n.on('canplay', () => {
-							n.seek(i), console.log(`以跳轉至：${i}`)
+						n.on('seeked', () => {
+							;(i = n.video.currentTime),
+								console.log(
+									`以記錄當前播放時間(seeked): ${n.video.currentTime}`
+								)
+						}),
+						n.on('seeking', () => {
+							;(i = n.video.currentTime),
+								console.log(
+									`以記錄當前播放時間(seeking): ${n.video.currentTime}`
+								)
 						})
 				}
 			e()
@@ -505,15 +519,15 @@ function utc2beijing(i) {
 		(timestamp = timestamp.getTime()),
 		(timestamp /= 1e3)
 	var d = timestamp + 28800
-	let a = 1900 + (d = new Date(1e3 * d)).getYear(),
-		l = `0${d.getMonth() + 1}`,
-		o = `0${d.getDate()}`,
+	let o = 1900 + (d = new Date(1e3 * d)).getYear(),
+		a = `0${d.getMonth() + 1}`,
+		l = `0${d.getDate()}`,
 		s = `0${d.getHours()}`,
 		r = `0${d.getMinutes()}`,
 		m = `0${d.getSeconds()}`
-	return `${a}/${l.substring(l.length - 2, l.length)}/${o.substring(
-		o.length - 2,
-		o.length
+	return `${o}/${a.substring(a.length - 2, a.length)}/${l.substring(
+		l.length - 2,
+		l.length
 	)} ${s.substring(s.length - 2, s.length)}:${r.substring(
 		r.length - 2,
 		r.length
