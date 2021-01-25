@@ -4,18 +4,14 @@
 
 **fork from [yanzai/goindex](https://github.com/yanzai/goindex)**
 
-## 更改內容
-- 新增 自訂背景
-- 新增 支援繁體中文字體
-- 新增 [Dplayer](https://github.com/MoePlayer/DPlayer) 播放器 [v1.25.1](https://github.com/MoePlayer/DPlayer/releases/tag/v1.25.1)
-- 支援 各裝置的 播放器串流 [PotPlayer(Win)](https://potplayer.daum.net/?lang=zh_TW)、[IINA(Mac)](https://iina.io/)、[MX Player(Android)](https://play.google.com/store/apps/details?id=com.mxtech.videoplayer.ad)、[Infuse(iOS)](https://apps.apple.com/tw/app/infuse-6/id1136220934)
+## 已知問題
+- 有時會發生 POST 請求錯誤 狀態碼：500
 
-## 1.0.7 更新內容
-- 影片結束後自動切換下一集（如果有的話）
-- 啟用 Dplayer 截圖功能
+## 1.5.7 更新內容
+- 新增 Dplayer 載入失敗或跳轉時發生載入失敗時，自動跳轉至上一次跳轉的播放時間或跳轉時間。
 
-## 1.1.7 更新內容
-- 新增 notyf 通知
+## 1.5.1 更新內容
+- 修復 DPlayer 有時無法正常載入的問題（添加了新的判斷式）
 
 ## 1.4.7 更新內容
 - 改寫了部分語法、以 ES6 語法壓縮檔案
@@ -31,14 +27,18 @@
 - 修復 DPlayer影片載入失敗 問題（添加了新的事件解決：error）
 - 修復 console 警告的錯誤 (A Parser-blocking, cross-origin script...)
 
-## 1.5.1 更新內容
-- 修復 DPlayer 有時無法正常載入的問題（添加了新的判斷式）
+## 1.1.7 更新內容
+- 新增 notyf 通知
 
-## 1.5.7 更新內容
-- 新增 Dplayer 載入失敗或跳轉時發生載入失敗時，自動跳轉至上一次跳轉的播放時間或跳轉時間。
+## 1.0.7 更新內容
+- 影片結束後自動切換下一集（如果有的話）
+- 啟用 Dplayer 截圖功能
 
-## 已知問題
-- 有時會發生 POST 請求錯誤 狀態碼：500
+## 更新內容
+- 新增 自訂背景
+- 新增 支援繁體中文字體
+- 新增 [Dplayer](https://github.com/MoePlayer/DPlayer) 播放器 [v1.25.1](https://github.com/MoePlayer/DPlayer/releases/tag/v1.25.1)
+- 支援 各裝置的 播放器串流 [PotPlayer(Win)](https://potplayer.daum.net/?lang=zh_TW)、[IINA(Mac)](https://iina.io/)、[MX Player(Android)](https://play.google.com/store/apps/details?id=com.mxtech.videoplayer.ad)、[Infuse(iOS)](https://apps.apple.com/tw/app/infuse-6/id1136220934)
 
 ### 預覽
 ![image](https://i.imgur.com/girkvqP.png)
