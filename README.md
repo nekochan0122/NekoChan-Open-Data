@@ -31,7 +31,7 @@
 - 修復 DPlayer影片載入失敗 問題（添加了新的事件解決：error）
 - 修復 console 警告的錯誤 (A Parser-blocking, cross-origin script...)
 
-## 1.5.1 更新內如
+## 1.5.1 更新內容
 - 修復 DPlayer 有時無法正常載入的問題（添加了新的判斷式）
 
 ### 預覽
