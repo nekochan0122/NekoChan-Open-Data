@@ -121,7 +121,7 @@ function requestListPath(i, t, e, n) {
 	}
 	$.post(i, d, (t, a) => {
 		let l = jQuery.parseJSON(t)
-		l && l.error && '401' == l.error.code
+		l && l.error && '401' == l.error.code && '500' == l.error.code
 			? n && n(i)
 			: l && l.data && e && e(l, i, d)
 	})
