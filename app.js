@@ -204,7 +204,15 @@ function append_files_to_list(e, t) {
 			(n.size = formatFileSize(n.size)),
 			'application/vnd.google-apps.folder' == n.mimeType)
 		)
-			html += `<li class="mdui-list-item mdui-ripple"><a href="${d}" class="folder">\n\t            <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${n.name}">\n\t            <i class="mdui-icon material-icons">folder_open</i>\n\t              ${n.name}\n\t            </div>\n\t            <div class="mdui-col-sm-3 mdui-text-right">${n.modifiedTime}</div>\n\t            <div class="mdui-col-sm-2 mdui-text-right">${n.size}</div>\n\t            </a>\n\t        </li>`
+			html += `<li class="mdui-list-item mdui-ripple"><a href="${d}?${Date.now()}" class="folder">\n\t            <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${
+				n.name
+			}">\n\t            <i class="mdui-icon material-icons">folder_open</i>\n\t              ${
+				n.name
+			}\n\t            </div>\n\t            <div class="mdui-col-sm-3 mdui-text-right">${
+				n.modifiedTime
+			}</div>\n\t            <div class="mdui-col-sm-2 mdui-text-right">${
+				n.size
+			}</div>\n\t            </a>\n\t        </li>`
 		else {
 			let t = e + n.name
 			const i = e + n.name
