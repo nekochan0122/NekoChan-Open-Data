@@ -219,7 +219,7 @@ function append_files_to_list(t, e) {
 			let l = e.split('.').pop().toLowerCase()
 			'|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|pdf|'.includes(
 				`|${l}|`
-			) && (o.push(i), (e += '?a=view'), (d += ' view')),
+			) && (o.push(i), (e += `?a=view${Date.now()}`), (d += ' view')),
 				(html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${n.mimeType}" href="${e}" class="${d}">\n\t          <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${n.name}">\n\t          <i class="mdui-icon material-icons">insert_drive_file</i>\n\t            ${n.name}\n\t          </div>\n\t          <div class="mdui-col-sm-3 mdui-text-right">${n.modifiedTime}</div>\n\t          <div class="mdui-col-sm-2 mdui-text-right">${n.size}</div>\n\t          </a>\n\t      </li>`)
 		}
 	}
