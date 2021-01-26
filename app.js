@@ -17,10 +17,10 @@ document.write(
 		'<script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/12.0.4/markdown-it.min.js" integrity="sha512-0DkA2RqFvfXBVeti0R1l0E8oMkmY0X+bAA2i02Ld8xhpjpvqORUcE/UBe+0KOPzi5iNah0aBpW6uaNNrqCk73Q==" crossorigin="anonymous" async></script>'
 	),
 	document.write(
-		'<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Noto+Sans+SC:wght@500&family=Noto+Serif+TC:wght@500&display=swap" rel="stylesheet">'
+		'<link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Noto+Sans+SC:wght@500&family=Noto+Serif+TC:wght@500&display=swap" rel="stylesheet">'
 	),
 	document.write(
-		"<style>* {font-family: 'Noto Serif TC','Noto Sans JP', 'Noto Sans SC', serif;}</style>"
+		"<style>* {font-family: 'Noto Sans TC','Noto Sans JP', 'Noto Sans SC', serif;}</style>"
 	),
 	document.write(
 		'<style>* .mdui-theme-primary-blue .mdui-color-theme{background-color:rgba(35,36,39,1)!important}</style>'
