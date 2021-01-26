@@ -3,12 +3,12 @@ function init() {
 		$('body').addClass(
 			`mdui-theme-primary-${UI.main_color} mdui-theme-accent-${UI.accent_color}`
 		)
-	let i = `\n<header class="mdui-appbar mdui-color-theme">\n  <div id="nav" class="mdui-toolbar mdui-container${
+	let e = `\n<header class="mdui-appbar mdui-color-theme">\n  <div id="nav" class="mdui-toolbar mdui-container${
 		UI.fluid_navigation_bar ? '-fluid' : ''
 	} ${
 		UI.dark_mode ? 'mdui-text-color-white-text' : ''
 	}">\n  </div>\n</header>\n<div id="content" class="mdui-container">\n</div>\n\t`
-	$('body').html(i)
+	$('body').html(e)
 }
 document.write(
 	'<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdui/1.0.1/css/mdui.min.css" integrity="sha512-x4mi26uahzsFv2+ZklhOELAiuLt2e+hSxQ/SWbW/FuZWZJSc4Ffb33Al7SmPqXXyZieN2rNxBiDsRqAtGKsxUA==" crossorigin="anonymous" />'
@@ -53,34 +53,34 @@ const Os = {
 	),
 }
 function getDocumentHeight() {
-	let i = document
+	let e = document
 	return Math.max(
-		i.body.scrollHeight,
-		i.documentElement.scrollHeight,
-		i.body.offsetHeight,
-		i.documentElement.offsetHeight,
-		i.body.clientHeight,
-		i.documentElement.clientHeight
+		e.body.scrollHeight,
+		e.documentElement.scrollHeight,
+		e.body.offsetHeight,
+		e.documentElement.offsetHeight,
+		e.body.clientHeight,
+		e.documentElement.clientHeight
 	)
 }
-function render(i) {
-	i.indexOf('?') > 0 && (i = i.substr(0, i.indexOf('?'))), title(i), nav(i)
+function render(e) {
+	e.indexOf('?') > 0 && (e = e.substr(0, e.indexOf('?'))), title(e), nav(e)
 	window.MODEL.is_search_page
 		? ((window.scroll_status = { event_bound: !1, loading_lock: !1 }),
 		  render_search_result_list())
-		: i.match(/\/\d+:$/g) || '/' == i.substr(-1)
-		? ((window.scroll_status = { event_bound: !1, loading_lock: !1 }), list(i))
-		: file(i)
+		: e.match(/\/\d+:$/g) || '/' == e.substr(-1)
+		? ((window.scroll_status = { event_bound: !1, loading_lock: !1 }), list(e))
+		: file(e)
 }
-function title(i) {
-	i = decodeURI(i)
-	let e = window.current_drive_order || 0,
-		t = window.drive_names[e]
-	;(i = i.replace(`/${e}:`, '')), $('title').html(document.siteName + ' - ' + i)
+function title(e) {
+	e = decodeURI(e)
+	let t = window.current_drive_order || 0,
+		i = window.drive_names[t]
+	;(e = e.replace(`/${t}:`, '')), $('title').html(`${document.siteName} - ${e}`)
 	let n = window.MODEL
 	n.is_search_page
-		? $('title').html(`${document.siteName} - ${t} - 搜索 ${n.q} 的結果`)
-		: $('title').html(`${document.siteName} - ${t} - ${i}`),
+		? $('title').html(`${document.siteName} - ${i} - 搜索 ${n.q} 的結果`)
+		: $('title').html(`${document.siteName} - ${i} - ${e}`),
 		$('title').html(`${document.siteName}`)
 }
 function nav(e) {
@@ -94,10 +94,10 @@ function nav(e) {
 	if (
 		((n +=
 			'<select class="mdui-select" onchange="window.location.href=this.value" mdui-select style="overflow:visible;padding-left:8px;padding-right:8px">'),
-		a.forEach((i, e) => {
-			n += `<option value="/${e}:/"  ${
-				e === d ? 'selected="selected"' : ''
-			} >${i}</option>`
+		a.forEach((e, t) => {
+			n += `<option value="/${t}:/"  ${
+				t === d ? 'selected="selected"' : ''
+			} >${e}</option>`
 		}),
 		(n += '</select>'),
 		!t.is_search_page)
@@ -111,86 +111,86 @@ function nav(e) {
 				n += `<i class="mdui-icon material-icons mdui-icon-dark folder" style="margin:0;">chevron_right</i><a class="folder" href="/${d}:${a}">${e}</a>`
 			}
 	}
-	let o = (t.is_search_page && t.q) || ''
-	const l = Os.isMobile
+	let l = (t.is_search_page && t.q) || ''
+	const o = Os.isMobile
 	let s = `<div class="mdui-toolbar-spacer"></div>\n        <div id="search_bar" class="mdui-textfield mdui-textfield-expandable mdui-float-right ${
 		t.is_search_page ? 'mdui-textfield-expanded' : ''
 	}" style="max-width:${
-		l ? 300 : 400
-	}px">\n            <button class="mdui-textfield-icon mdui-btn mdui-btn-icon" onclick="if($('#search_bar').hasClass('mdui-textfield-expanded') && $('#search_bar_form>input').val()) $('#search_bar_form').submit();">\n                <i class="mdui-icon material-icons">search</i>\n            </button>\n            <form id="search_bar_form" method="get" action="/${d}:search">\n            <input class="mdui-textfield-input" type="text" name="q" placeholder="Search in current drive" value="${o}"/>\n            </form>\n            <button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>\n        </div>`
+		o ? 300 : 400
+	}px">\n            <button class="mdui-textfield-icon mdui-btn mdui-btn-icon" onclick="if($('#search_bar').hasClass('mdui-textfield-expanded') && $('#search_bar_form>input').val()) $('#search_bar_form').submit();">\n                <i class="mdui-icon material-icons">search</i>\n            </button>\n            <form id="search_bar_form" method="get" action="/${d}:search">\n            <input class="mdui-textfield-input" type="text" name="q" placeholder="輸入你想搜尋的內容" value="${l}"/>\n            </form>\n            <button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>\n        </div>`
 	t.root_type < 2 && (n += s),
 		$('#nav').html(n),
 		mdui.mutation(),
 		mdui.updateTextFields()
 }
-function requestListPath(i, e, t, n) {
+function requestListPath(e, t, i, n) {
 	let d = {
-		password: e.password || null,
+		password: t.password || null,
+		page_token: t.page_token || null,
+		page_index: t.page_index || 0,
+	}
+	$.post(e, d, (t, a) => {
+		let l = jQuery.parseJSON(t)
+		l && l.error && '401' == l.error.code
+			? n && n(e)
+			: l && l.data && i && i(l, e, d)
+	})
+}
+function requestSearch(e, t) {
+	let i = {
+		q: e.q || null,
 		page_token: e.page_token || null,
 		page_index: e.page_index || 0,
 	}
-	$.post(i, d, (e, a) => {
-		let o = jQuery.parseJSON(e)
-		o && o.error && '401' == o.error.code
-			? n && n(i)
-			: o && o.data && t && t(o, i, d)
+	$.post(`/${window.current_drive_order}:search`, i, (e, n) => {
+		let d = jQuery.parseJSON(e)
+		d && d.data && t && t(d, i)
 	})
 }
-function requestSearch(i, e) {
-	let t = {
-		q: i.q || null,
-		page_token: i.page_token || null,
-		page_index: i.page_index || 0,
-	}
-	$.post(`/${window.current_drive_order}:search`, t, (i, n) => {
-		let d = jQuery.parseJSON(i)
-		d && d.data && e && e(d, t)
-	})
-}
-function list(i) {
+function list(e) {
 	$('#content').html(
 		'\n\t<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>\n\t <div class="mdui-row"> \n\t  <ul class="mdui-list"> \n\t   <li class="mdui-list-item th"> \n\t    <div class="mdui-col-xs-12 mdui-col-sm-7">\n      檔案名稱\n\t<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>\n\t    </div> \n\t    <div class="mdui-col-sm-3 mdui-text-right">\n      修改時間\n\t<i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>\n\t    </div> \n\t    <div class="mdui-col-sm-2 mdui-text-right">\n      檔案大小\n\t<i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>\n\t    </div> \n\t    </li> \n\t  </ul> \n\t </div> \n\t <div class="mdui-row"> \n\t  <ul id="list" class="mdui-list"> \n\t  </ul> \n    <div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>NekoChan Open Data</div>\n\t </div>\n\t <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>\n\t'
 	)
-	let e = localStorage.getItem(`password${i}`)
+	let t = localStorage.getItem(`password${e}`)
 	$('#list').html(
 		'<div class="mdui-progress"><div class="mdui-progress-indeterminate"></div></div>'
 	),
 		$('#readme_md').hide().html(''),
 		$('#head_md').hide().html(''),
 		requestListPath(
-			i,
-			{ password: e },
-			function i(e, t, n) {
+			e,
+			{ password: t },
+			function e(t, i, n) {
 				$('#list')
-					.data('nextPageToken', e.nextPageToken)
-					.data('curPageIndex', e.curPageIndex),
+					.data('nextPageToken', t.nextPageToken)
+					.data('curPageIndex', t.curPageIndex),
 					$('#spinner').remove(),
-					null === e.nextPageToken
+					null === t.nextPageToken
 						? ($(window).off('scroll'),
 						  (window.scroll_status.event_bound = !1),
 						  (window.scroll_status.loading_lock = !1),
-						  append_files_to_list(t, e.data.files))
-						: (append_files_to_list(t, e.data.files),
+						  append_files_to_list(i, t.data.files))
+						: (append_files_to_list(i, t.data.files),
 						  !0 !== window.scroll_status.event_bound &&
 								($(window).on('scroll', function () {
-									let e = $(this).scrollTop(),
+									let t = $(this).scrollTop(),
 										d = getDocumentHeight()
-									if (e + $(this).height() > d - (Os.isMobile ? 130 : 80)) {
+									if (t + $(this).height() > d - (Os.isMobile ? 130 : 80)) {
 										if (!0 === window.scroll_status.loading_lock) return
 										;(window.scroll_status.loading_lock = !0),
 											$(
 												'<div id="spinner" class="mdui-spinner mdui-spinner-colorful mdui-center"></div>'
 											).insertBefore('#readme_md'),
 											mdui.updateSpinners()
-										let e = $('#list')
+										let t = $('#list')
 										requestListPath(
-											t,
+											i,
 											{
 												password: n.password,
-												page_token: e.data('nextPageToken'),
-												page_index: e.data('curPageIndex') + 1,
+												page_token: t.data('nextPageToken'),
+												page_index: t.data('curPageIndex') + 1,
 											},
-											i,
+											e,
 											null
 										)
 									}
@@ -199,11 +199,11 @@ function list(i) {
 					!0 === window.scroll_status.loading_lock &&
 						(window.scroll_status.loading_lock = !1)
 			},
-			(i) => {
+			(e) => {
 				$('#spinner').remove()
-				let e = prompt('目錄加密, 請輸入密碼', '')
-				localStorage.setItem(`password${i}`, e),
-					null != e && '' != e ? list(i) : history.go(-1)
+				let t = prompt('目錄加密, 請輸入密碼', '')
+				localStorage.setItem(`password${e}`, t),
+					null != t && '' != t ? list(e) : history.go(-1)
 			}
 		)
 }
@@ -212,7 +212,7 @@ function append_files_to_list(e, t) {
 		d = null === n.data('nextPageToken'),
 		a = '0' == n.data('curPageIndex')
 	html = ''
-	let o = []
+	let l = []
 	for (i in t) {
 		let n = t[i],
 			a = `${e + n.name}/`
@@ -234,23 +234,23 @@ function append_files_to_list(e, t) {
 		else {
 			let t = e + n.name
 			const a = e + n.name
-			let l = 'file'
+			let o = 'file'
 			d &&
 				'!readme.md' == n.name &&
-				get_file(t, n, (i) => {
-					markdown('#readme_md', i)
+				get_file(t, n, (e) => {
+					markdown('#readme_md', e)
 				}),
 				'!head.md' == n.name &&
-					get_file(t, n, (i) => {
-						markdown('#head_md', i)
+					get_file(t, n, (e) => {
+						markdown('#head_md', e)
 					})
 			let s = t.split('.').pop().toLowerCase()
 			'|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|pdf|'.includes(
 				`|${s}|`
-			) && (o.push(a), (t += `?a=view${Date.now()}`), (l += ' view')),
+			) && (l.push(a), (t += `?a=view${Date.now()}`), (o += ' view')),
 				(html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a gd-type="${
 					n.mimeType
-				}" href="${t}" class="${l}">\n\t\t\t  <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${
+				}" href="${t}" class="${o}">\n\t\t\t  <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${
 					n.name
 				}">\n\t\t\t  \t${
 					Number(i) + 1
@@ -263,19 +263,19 @@ function append_files_to_list(e, t) {
 				}</div>\n\t          </a>\n\t      </li>`)
 		}
 	}
-	if (o.length > 0) {
-		let i = localStorage.getItem(e),
-			t = o
-		if (!a && i) {
+	if (l.length > 0) {
+		let t = localStorage.getItem(e),
+			i = l
+		if (!a && t) {
 			let e
 			try {
-				;(e = JSON.parse(i)), Array.isArray(e) || (e = [])
-			} catch (i) {
+				;(e = JSON.parse(t)), Array.isArray(e) || (e = [])
+			} catch (t) {
 				e = []
 			}
-			t = e.concat(o)
+			i = e.concat(l)
 		}
-		localStorage.setItem(e, JSON.stringify(t))
+		localStorage.setItem(e, JSON.stringify(i))
 	}
 	n.html(('0' == n.data('curPageIndex') ? '' : n.html()) + html),
 		d &&
@@ -293,36 +293,36 @@ function render_search_result_list() {
 		),
 		$('#readme_md').hide().html(''),
 		$('#head_md').hide().html(''),
-		requestSearch({ q: window.MODEL.q }, function i(e, t) {
+		requestSearch({ q: window.MODEL.q }, function e(t, i) {
 			$('#list')
-				.data('nextPageToken', e.nextPageToken)
-				.data('curPageIndex', e.curPageIndex),
+				.data('nextPageToken', t.nextPageToken)
+				.data('curPageIndex', t.curPageIndex),
 				$('#spinner').remove(),
-				null === e.nextPageToken
+				null === t.nextPageToken
 					? ($(window).off('scroll'),
 					  (window.scroll_status.event_bound = !1),
 					  (window.scroll_status.loading_lock = !1),
-					  append_search_result_to_list(e.data.files))
-					: (append_search_result_to_list(e.data.files),
+					  append_search_result_to_list(t.data.files))
+					: (append_search_result_to_list(t.data.files),
 					  !0 !== window.scroll_status.event_bound &&
 							($(window).on('scroll', function () {
-								var e = $(this).scrollTop(),
-									t = getDocumentHeight()
-								if (e + $(this).height() > t - (Os.isMobile ? 130 : 80)) {
+								let t = $(this).scrollTop(),
+									i = getDocumentHeight()
+								if (t + $(this).height() > i - (Os.isMobile ? 130 : 80)) {
 									if (!0 === window.scroll_status.loading_lock) return
 									;(window.scroll_status.loading_lock = !0),
 										$(
 											'<div id="spinner" class="mdui-spinner mdui-spinner-colorful mdui-center"></div>'
 										).insertBefore('#readme_md'),
 										mdui.updateSpinners()
-									let e = $('#list')
+									let t = $('#list')
 									requestSearch(
 										{
 											q: window.MODEL.q,
-											page_token: e.data('nextPageToken'),
-											page_index: e.data('curPageIndex') + 1,
+											page_token: t.data('nextPageToken'),
+											page_index: t.data('curPageIndex') + 1,
 										},
-										i
+										e
 									)
 								}
 							}),
@@ -332,24 +332,24 @@ function render_search_result_list() {
 		})
 }
 function append_search_result_to_list(e) {
-	var t = $('#list'),
+	let t = $('#list'),
 		n = null === t.data('nextPageToken')
 	for (i in ((html = ''), e)) {
-		var d = e[i]
+		let t = e[i]
 		if (
-			(null == d.size && (d.size = ''),
-			(d.modifiedTime = utc2beijing(d.modifiedTime)),
-			(d.size = formatFileSize(d.size)),
-			'application/vnd.google-apps.folder' == d.mimeType)
+			(null == t.size && (t.size = ''),
+			(t.modifiedTime = utc2beijing(t.modifiedTime)),
+			(t.size = formatFileSize(t.size)),
+			'application/vnd.google-apps.folder' == t.mimeType)
 		)
-			html += `<li class="mdui-list-item mdui-ripple"><a id="${d.id}" onclick="onSearchResultItemClick(this)" class="folder">\n\t            <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${d.name}">\n\t            <i class="mdui-icon material-icons">folder_open</i>\n\t              ${d.name}\n\t            </div>\n\t            <div class="mdui-col-sm-3 mdui-text-right">${d.modifiedTime}</div>\n\t            <div class="mdui-col-sm-2 mdui-text-right">${d.size}</div>\n\t            </a>\n\t        </li>`
+			html += `<li class="mdui-list-item mdui-ripple"><a id="${t.id}" onclick="onSearchResultItemClick(this)" class="folder">\n\t            <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${t.name}">\n\t            <i class="mdui-icon material-icons">folder_open</i>\n\t              ${t.name}\n\t            </div>\n\t            <div class="mdui-col-sm-3 mdui-text-right">${t.modifiedTime}</div>\n\t            <div class="mdui-col-sm-2 mdui-text-right">${t.size}</div>\n\t            </a>\n\t        </li>`
 		else {
-			var a = 'file',
-				o = d.name.split('.').pop().toLowerCase()
-			'|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|'.indexOf(
-				`|${o}|`
-			) >= 0 && (a += ' view'),
-				(html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a id="${d.id}" gd-type="${d.mimeType}" onclick="onSearchResultItemClick(this)" class="${a}">\n\t          <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${d.name}">\n\t          <i class="mdui-icon material-icons">insert_drive_file</i>\n\t            ${d.name}\n\t          </div>\n\t          <div class="mdui-col-sm-3 mdui-text-right">${d.modifiedTime}</div>\n\t          <div class="mdui-col-sm-2 mdui-text-right">${d.size}</div>\n\t          </a>\n\t      </li>`)
+			let e = 'file',
+				i = t.name.split('.').pop().toLowerCase()
+			'|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|'.includes(
+				`|${i}|`
+			) && (e += ' view'),
+				(html += `<li class="mdui-list-item file mdui-ripple" target="_blank"><a id="${t.id}" gd-type="${t.mimeType}" onclick="onSearchResultItemClick(this)" class="${e}">\n\t          <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${t.name}">\n\t          <i class="mdui-icon material-icons">insert_drive_file</i>\n\t            ${t.name}\n\t          </div>\n\t          <div class="mdui-col-sm-3 mdui-text-right">${t.modifiedTime}</div>\n\t          <div class="mdui-col-sm-2 mdui-text-right">${t.size}</div>\n\t          </a>\n\t      </li>`)
 		}
 	}
 	t.html(('0' == t.data('curPageIndex') ? '' : t.html()) + html),
@@ -359,57 +359,67 @@ function append_search_result_to_list(e) {
 				.find('.number')
 				.text(t.find('li.mdui-list-item').length)
 }
-function onSearchResultItemClick(i) {
-	var e = $(i).hasClass('view'),
-		t = window.current_drive_order,
+function onSearchResultItemClick(e) {
+	let t = $(e).hasClass('view'),
+		i = window.current_drive_order,
 		n = mdui.dialog({
 			title: '',
 			content:
-				'<div class="mdui-text-center mdui-typo-title mdui-m-b-1">正在獲取目標路徑...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
+				'<div class="mdui-text-center mdui-typo-title mdui-m-b-1">正在獲取路徑...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
 			history: !1,
 			modal: !0,
 			closeOnEsc: !0,
 		})
 	mdui.updateSpinners(),
-		$.post(`/${t}:id2path`, { id: i.id }, function (i) {
-			if (i) {
+		$.post(`/${i}:id2path`, { id: e.id }, (e) => {
+			if (e) {
 				n.close()
-				var d = `/${t}:${i}${e ? '?a=view' : ''}`
+				let d = `/${i}:${e}${t ? '?a=view' : ''}`
 				n = mdui.dialog({
-					title: '<i class="mdui-icon material-icons">&#xe815;</i>目標路徑',
-					content: `<a href="${d}">${i}</a>`,
+					title: '已成功獲取路徑',
+					content: `<a href="${d}">${e}</a>`,
 					history: !1,
 					modal: !0,
 					closeOnEsc: !0,
 					buttons: [
 						{
-							text: '打開',
-							onClick: function () {
+							text: '開啟',
+							onClick() {
 								window.location.href = d
 							},
 						},
 						{
-							text: '新標籤中打開',
-							onClick: function () {
+							text: '新分頁中開啟',
+							onClick() {
 								window.open(d)
 							},
 						},
 						{ text: '取消' },
 					],
 				})
-			} else n.close(), (n = mdui.dialog({ title: '<i class="mdui-icon material-icons">&#xe811;</i>獲取目標路徑失敗', content: 'o(╯□╰)o 可能是因為該盤中並不存在此項！也可能因為沒有把【與我共享】的文件添加到個人云端硬碟中！', history: !1, modal: !0, closeOnEsc: !0, buttons: [{ text: 'WTF ???' }] }))
+			} else
+				n.close(),
+					(n = mdui.dialog({
+						title: '獲取目標路徑失敗',
+						content:
+							'該資源可能已經移除，或已移動，請通知 NekoChan#2851 解決。',
+						history: !1,
+						modal: !0,
+						closeOnEsc: !0,
+						buttons: [{ text: '確認' }],
+					}))
 		})
 }
-function get_file(i, e, t) {
-	let n = `file_path_${i}${e.modifiedTime}`,
+function get_file(e, t, i) {
+	let n = `file_path_${e}${t.modifiedTime}`,
 		d = localStorage.getItem(n)
-	if (null != d) return t(d)
-	$.get(i, (i) => {
-		localStorage.setItem(n, i), t(i)
+	if (null != d) return i(d)
+	$.get(e, (e) => {
+		localStorage.setItem(n, e), i(e)
 	})
 }
-function file(i) {
-	let e = i
+function file(e) {
+	let t = e
 		.split('/')
 		.pop()
 		.split('.')
@@ -417,33 +427,33 @@ function file(i) {
 		.toLowerCase()
 		.replace('?a=view', '')
 	return '|mp4|webm|avi|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|'.includes(
-		`|${e}|`
+		`|${t}|`
 	)
-		? file_video(i)
-		: '|bmp|jpg|jpeg|png|gif|'.includes(`|${e}|`)
-		? file_image(i)
+		? file_video(e)
+		: '|bmp|jpg|jpeg|png|gif|'.includes(`|${t}|`)
+		? file_image(e)
 		: void 0
 }
-function file_video(i) {
-	let e = decodeURI(window.location.origin + i),
-		t = e
-	const n = decodeURI(i.slice(i.lastIndexOf('/') + 1, i.length)),
+function file_video(e) {
+	let t = decodeURI(window.location.origin + e),
+		i = t
+	const n = decodeURI(e.slice(e.lastIndexOf('/') + 1, e.length)),
 		d = window.location.pathname,
 		a = d.lastIndexOf('/'),
-		o = d.slice(0, a + 1)
-	let l = localStorage.getItem(o),
+		l = d.slice(0, a + 1)
+	let o = localStorage.getItem(l),
 		s = ''
-	if (l) {
+	if (o) {
 		try {
-			;(l = JSON.parse(l)), Array.isArray(l) || (l = [])
-		} catch (i) {
-			console.error(i), (l = [])
+			;(o = JSON.parse(o)), Array.isArray(o) || (o = [])
+		} catch (e) {
+			console.error(e), (o = [])
 		}
-		if (l.length > 0 && l.includes(i)) {
-			let e = l.length,
-				t = l.indexOf(i),
-				n = t - 1 > -1 ? l[t - 1] : null,
-				d = t + 1 < e ? l[t + 1] : null
+		if (o.length > 0 && o.includes(e)) {
+			let t = o.length,
+				i = o.indexOf(e),
+				n = i - 1 > -1 ? o[i - 1] : null,
+				d = i + 1 < t ? o[i + 1] : null
 			s = `\n            <div class="mdui-container">\n                <div class="mdui-row-xs-2 mdui-m-b-1">\n                    <div class="mdui-col">\n                        ${
 				n
 					? `<button id="leftBtn" data-filepath="${n}" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">上一集</button>`
@@ -455,25 +465,25 @@ function file_video(i) {
 			}\n                    </div>\n                </div>\n            </div>\n            `
 		}
 	}
-	let r = `<a href="potplayer://${t}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent windows-btn">PotPlayer 串流</a>`
+	let r = `<a href="potplayer://${i}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent windows-btn">PotPlayer 串流</a>`
 	if (
 		(/(Mac)/i.test(navigator.userAgent) &&
-			(r = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent mac-btn" data-href="iina://open?url=${t}">IINA 串流</button>`),
+			(r = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent mac-btn" data-href="iina://open?url=${i}">IINA 串流</button>`),
 		/(Android)/i.test(navigator.userAgent) &&
-			((r = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${t}#Intent;package=com.mxtech.videoplayer.pro;S.title=${i};end">MXPlayer Pro 串流</button>`),
-			(r += `<br><button style="margin-top: 15px" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${t}#Intent;package=com.mxtech.videoplayer.ad;S.title=${i};end">MXPlayer Free 串流</button>`)),
+			((r = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${i}#Intent;package=com.mxtech.videoplayer.pro;S.title=${e};end">MXPlayer Pro 串流</button>`),
+			(r += `<br><button style="margin-top: 15px" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${i}#Intent;package=com.mxtech.videoplayer.ad;S.title=${e};end">MXPlayer Free 串流</button>`)),
 		/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent))
 	) {
-		r = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="infuse://${e.replace(
+		r = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="infuse://${t.replace(
 			/(^\w+:|^)\/\//,
 			''
 		)}">Infuse 串流</a>`
 	}
-	let m = `\n<div class="mdui-container-fluid">\n    <br>\n    <div class="mdui-textfield">\n    <label class="mdui-textfield-label mdui-text-color-white">目前檔案：</label>\n    <input class="mdui-textfield-input mdui-text-color-white" type="text" value="${n}" readonly/>\n    </div>\n    <div class="mdui-center" id="player"></div>\n    <br>\n    <div id="imgWrap">\n    ${s}\n    </div>\n    <br>\n    ${(r += `<br><a style="margin-top: 15px" href="${t}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">直連下載檔案</a>`)}\n    <div class="mdui-textfield">\n      <label class="mdui-textfield-label mdui-text-color-white">注意：若影片沒有畫面，請嘗試播放器。或通知我本人。</label>\n    </div>\n    <hr>\n</div>\n    `
+	let m = `\n<div class="mdui-container-fluid">\n    <br>\n    <div class="mdui-textfield">\n    <label class="mdui-textfield-label mdui-text-color-white">目前檔案：</label>\n    <input class="mdui-textfield-input mdui-text-color-white" type="text" value="${n}" readonly/>\n    </div>\n    <div class="mdui-center" id="player"></div>\n    <br>\n    <div id="imgWrap">\n    ${s}\n    </div>\n    <br>\n    ${(r += `<br><a style="margin-top: 15px" href="${i}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">直連下載檔案</a>`)}\n    <div class="mdui-textfield">\n      <label class="mdui-textfield-label mdui-text-color-white">注意：若影片沒有畫面，請嘗試播放器。或通知我本人。</label>\n    </div>\n    <hr>\n</div>\n    `
 	$('#content').html(m),
-		$(document).ready(function () {
-			let i = 0,
-				e = () => {
+		$(document).ready(() => {
+			let e = 0,
+				t = () => {
 					let n = null
 					window.DPlayer || window.location.reload(),
 						(n = new DPlayer({
@@ -482,83 +492,83 @@ function file_video(i) {
 							autoplay: !0,
 							lang: 'zh-tw',
 							screenshot: !0,
-							video: { url: t },
+							video: { url: i },
 							contextmenu: [
 								{ text: 'NekoChan Open Data', link: '//nekochan.ml/' },
 							],
-						})).seek(i),
+						})).seek(e),
 						n.on('error', () => {
-							0 != n.video.currentTime && (i = n.video.currentTime), e()
+							0 != n.video.currentTime && (e = n.video.currentTime), t()
 						}),
 						n.on('seeked', () => {
-							i = n.video.currentTime
+							e = n.video.currentTime
 						}),
 						n.on('seeking', () => {
-							i = n.video.currentTime
+							e = n.video.currentTime
 						})
 				}
-			e()
+			t()
 		}),
-		$('#leftBtn, #rightBtn').click((i) => {
-			let e = $(i.target)
-			;['I', 'SPAN'].includes(i.target.nodeName) && (e = $(i.target).parent())
-			const t = e.attr('data-filepath')
-			e.attr('data-direction')
-			file(t)
+		$('#leftBtn, #rightBtn').click((e) => {
+			let t = $(e.target)
+			;['I', 'SPAN'].includes(e.target.nodeName) && (t = $(e.target).parent())
+			const i = t.attr('data-filepath')
+			t.attr('data-direction')
+			file(i)
 		})
 }
-function file_image(i) {
-	let e = `\n<div class="mdui-container-fluid">\n    <br>\n    <img class="mdui-img-fluid" src="${decodeURI(
-		window.location.origin + i
+function file_image(e) {
+	let t = `\n<div class="mdui-container-fluid">\n    <br>\n    <img class="mdui-img-fluid" src="${decodeURI(
+		window.location.origin + e
 	)}"/>\n  <br>\n  <hr>\n</div>`
-	$('#content').html(e)
+	$('#content').html(t)
 }
-function utc2beijing(i) {
-	let e = i.indexOf('T'),
-		t = i.indexOf('Z'),
-		n = `${i.substr(0, e)} ${i.substr(e + 1, t - e - 1)}`
+function utc2beijing(e) {
+	let t = e.indexOf('T'),
+		i = e.indexOf('Z'),
+		n = `${e.substr(0, t)} ${e.substr(t + 1, i - t - 1)}`
 	;(timestamp = new Date(Date.parse(n))),
 		(timestamp = timestamp.getTime()),
 		(timestamp /= 1e3)
 	var d = timestamp + 28800
 	let a = 1900 + (d = new Date(1e3 * d)).getYear(),
-		o = `0${d.getMonth() + 1}`,
-		l = `0${d.getDate()}`,
+		l = `0${d.getMonth() + 1}`,
+		o = `0${d.getDate()}`,
 		s = `0${d.getHours()}`,
 		r = `0${d.getMinutes()}`,
 		m = `0${d.getSeconds()}`
-	return `${a}/${o.substring(o.length - 2, o.length)}/${l.substring(
-		l.length - 2,
-		l.length
+	return `${a}/${l.substring(l.length - 2, l.length)}/${o.substring(
+		o.length - 2,
+		o.length
 	)} ${s.substring(s.length - 2, s.length)}:${r.substring(
 		r.length - 2,
 		r.length
 	)}:${m.substring(m.length - 2, m.length)}`
 }
-function formatFileSize(i) {
-	return (i =
-		i >= 1073741824
-			? `${(i / 1073741824).toFixed(2)} GB`
-			: i >= 1048576
-			? `${(i / 1048576).toFixed(2)} MB`
-			: i >= 1024
-			? `${(i / 1024).toFixed(2)} KB`
-			: i > 1
-			? `${i} Bytes`
-			: 1 == i
-			? `${i} Byte`
+function formatFileSize(e) {
+	return (e =
+		e >= 1073741824
+			? `${(e / 1073741824).toFixed(2)} GB`
+			: e >= 1048576
+			? `${(e / 1048576).toFixed(2)} MB`
+			: e >= 1024
+			? `${(e / 1024).toFixed(2)} KB`
+			: e > 1
+			? `${e} Bytes`
+			: 1 == e
+			? `${e} Byte`
 			: ' 資料夾')
 }
-function markdown(i, e) {
-	if (null == window.md) (window.md = window.markdownit()), markdown(i, e)
+function markdown(e, t) {
+	if (null == window.md) (window.md = window.markdownit()), markdown(e, t)
 	else {
-		let t = md.render(e)
-		$(i).show().html(t)
+		let i = md.render(t)
+		$(e).show().html(i)
 	}
 }
-;(String.prototype.trim = function (i) {
-	return i
-		? this.replace(new RegExp(`^\\${i}+|\\${i}+$`, 'g'), '')
+;(String.prototype.trim = function (e) {
+	return e
+		? this.replace(new RegExp(`^\\${e}+|\\${e}+$`, 'g'), '')
 		: this.replace(/^\s+|\s+$/g, '')
 }),
 	(window.onpopstate = () => {
