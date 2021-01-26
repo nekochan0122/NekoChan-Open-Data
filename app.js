@@ -237,7 +237,7 @@ function append_files_to_list(t, e) {
 				}" href="${e}" class="${l}">\n\t\t\t  <div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${
 					n.name
 				}">\n\t\t\t  \t${
-					i + 1
+					Number(i) + 1
 				}.\n\t          <i class="mdui-icon material-icons">insert_drive_file</i>\n\t            ${
 					n.name
 				}\n\t          </div>\n\t          <div class="mdui-col-sm-3 mdui-text-right">${
