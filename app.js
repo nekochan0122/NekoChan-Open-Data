@@ -450,7 +450,7 @@ function file_video(i) {
 							contextmenu: [
 								{ text: 'NekoChan Open Data', link: '//nekochan.ml/' },
 							],
-							highlight: [{ time: n.video.duration / 2, text: '喵' }],
+							highlight: [{ time: 60, text: '喵' }],
 						})).seek(i),
 						n.on('ended', () => {
 							n.fullScreen.cancel('web')
