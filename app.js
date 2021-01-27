@@ -196,12 +196,9 @@ function append_files_to_list(t, e) {
 			(n.size = formatFileSize(n.size)),
 			'application/vnd.google-apps.folder' == n.mimeType)
 		)
-			console.log(n.name),
-				console.log(n[name]),
-				console.log(typeof n.name),
-				String(n.name).test(/[連載中]/)
-					? (html += `<li class="mdui-list-item mdui-ripple"><a href="${a}" class="folder">\n\t\t\t\t\t<div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate updating" title="${n.name}">\n\t\t\t\t\t<i class="mdui-icon material-icons">folder_open</i>\n\t\t\t\t\t${n.name}\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="mdui-col-sm-3 mdui-text-right">${n.modifiedTime}</div>\n\t\t\t\t\t<div class="mdui-col-sm-2 mdui-text-right">${n.size}</div>\n\t\t\t\t\t</a>\n\t\t\t\t</li>`)
-					: (html += `<li class="mdui-list-item mdui-ripple"><a href="${a}" class="folder">\n\t\t\t\t\t<div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${n.name}">\n\t\t\t\t\t<i class="mdui-icon material-icons">folder_open</i>\n\t\t\t\t\t${n.name}\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="mdui-col-sm-3 mdui-text-right">${n.modifiedTime}</div>\n\t\t\t\t\t<div class="mdui-col-sm-2 mdui-text-right">${n.size}</div>\n\t\t\t\t\t</a>\n\t\t\t\t</li>`)
+			/連載中/.test(n.name)
+				? (html += `<li class="mdui-list-item mdui-ripple"><a href="${a}" class="folder">\n\t\t\t\t\t<div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate updating" title="${n.name}">\n\t\t\t\t\t<i class="mdui-icon material-icons">folder_open</i>\n\t\t\t\t\t${n.name}\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="mdui-col-sm-3 mdui-text-right">${n.modifiedTime}</div>\n\t\t\t\t\t<div class="mdui-col-sm-2 mdui-text-right">${n.size}</div>\n\t\t\t\t\t</a>\n\t\t\t\t</li>`)
+				: (html += `<li class="mdui-list-item mdui-ripple"><a href="${a}" class="folder">\n\t\t\t\t\t<div class="mdui-col-xs-12 mdui-col-sm-7 mdui-text-truncate" title="${n.name}">\n\t\t\t\t\t<i class="mdui-icon material-icons">folder_open</i>\n\t\t\t\t\t${n.name}\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="mdui-col-sm-3 mdui-text-right">${n.modifiedTime}</div>\n\t\t\t\t\t<div class="mdui-col-sm-2 mdui-text-right">${n.size}</div>\n\t\t\t\t\t</a>\n\t\t\t\t</li>`)
 		else {
 			let i = t + n.name
 			const e = t + n.name
