@@ -1,4 +1,4 @@
-# Goindex
+# Goindex 自用
 
 **[NekoChan Open Data](https://nekochan.ml)**
 
