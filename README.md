@@ -4,6 +4,11 @@
 
 **fork from [yanzai/goindex](https://github.com/yanzai/goindex)**
 
+### 預覽
+![image1](https://i.imgur.com/0Jp32GQ.png)
+![image2](https://i.imgur.com/FiS723T.png)
+![image3](https://i.imgur.com/QG6O42u.png)
+
 ### 1.8.8 更新內容
 - 更新 MDUI 排版、CSS
 - 移除 修改時間
@@ -91,12 +96,6 @@
 - 新增 支援繁體中文字體
 - 新增 [Dplayer](https://github.com/MoePlayer/DPlayer) 播放器 [v1.25.1](https://github.com/MoePlayer/DPlayer/releases/tag/v1.25.1)
 - 支援 各裝置的 播放器串流 [PotPlayer(Win)](https://potplayer.daum.net/?lang=zh_TW)、[IINA(Mac)](https://iina.io/)、[MX Player(Android)](https://play.google.com/store/apps/details?id=com.mxtech.videoplayer.ad)、[Infuse(iOS)](https://apps.apple.com/tw/app/infuse-6/id1136220934)
-
-### 預覽
-![image1](https://i.imgur.com/0Jp32GQ.png)
-![image2](https://i.imgur.com/FiS723T.png)
-![image3](https://i.imgur.com/QG6O42u.png)
-
 
 ## 聯絡
 Discord：NekoChan#2851
