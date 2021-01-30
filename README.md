@@ -93,7 +93,10 @@
 - 支援 各裝置的 播放器串流 [PotPlayer(Win)](https://potplayer.daum.net/?lang=zh_TW)、[IINA(Mac)](https://iina.io/)、[MX Player(Android)](https://play.google.com/store/apps/details?id=com.mxtech.videoplayer.ad)、[Infuse(iOS)](https://apps.apple.com/tw/app/infuse-6/id1136220934)
 
 ### 預覽
-![image](https://i.imgur.com/VsufyP7.png)
+![image1](https://i.imgur.com/0Jp32GQ.png)
+![image2](https://i.imgur.com/FiS723T.png)
+![image3](https://i.imgur.com/QG6O42u.png)
+
 
 ## 聯絡
 Discord：NekoChan#2851
