@@ -4,6 +4,10 @@
 
 **fork from [yanzai/goindex](https://github.com/yanzai/goindex)**
 
+### 1.8.8 更新內容
+- 更新 MDUI 排版、CSS
+- 移除 修改時間
+
 ## 1.8.7 更新內容
 - DPlayer 進度條預覽圖 將只在 WIN、MAC 系統下開啟。（考慮到手機或平板用戶的網速）
 
