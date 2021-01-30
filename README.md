@@ -4,6 +4,9 @@
 
 **fork from [yanzai/goindex](https://github.com/yanzai/goindex)**
 
+## 1.8.7 更新內容
+- DPlayer 進度條預覽圖 將只在 WIN、MAC 系統下開啟。（考慮到手機或平板用戶的網速）
+
 ## 已知問題
 - ~~有時會發生 POST 請求錯誤 狀態碼：500 （導致列表渲染不出來的主要原因）~~
 
