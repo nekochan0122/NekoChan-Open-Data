@@ -497,7 +497,7 @@ class googleDrive {
 		let obj
 		let params = { includeItemsFromAllDrives: true, supportsAllDrives: true }
 		params.q = `'${parent}' in parents and trashed = false AND name !='.password'`
-		params.orderBy = 'name,folder,modifiedTime desc'
+		params.orderBy = 'name_natural,folder,modifiedTime desc'
 		params.fields =
 			'nextPageToken, files(id, name, mimeType, size , modifiedTime)'
 		params.pageSize = this.authConfig.files_list_page_size
@@ -616,7 +616,7 @@ class googleDrive {
 		params.fields =
 			'nextPageToken, files(id, name, mimeType, size , modifiedTime)'
 		params.pageSize = this.authConfig.search_result_list_page_size
-		params.orderBy = 'name,folder,modifiedTime desc';
+		params.orderBy = 'name_natural,folder,modifiedTime desc';
 
 		let url = 'https://www.googleapis.com/drive/v3/files'
 		url += '?' + this.enQuery(params)
