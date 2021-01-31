@@ -1,22 +1,5 @@
 // NekoChan Open Data
 
-// $('head').append(
-// 	// MDUI 1.0.1
-// 	'<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/mdui/1.0.1/css/mdui.min.css" integrity="sha512-x4mi26uahzsFv2+ZklhOELAiuLt2e+hSxQ/SWbW/FuZWZJSc4Ffb33Al7SmPqXXyZieN2rNxBiDsRqAtGKsxUA==" crossorigin="anonymous" />',
-// 	// Google Fonts - Noto Sans TC, JP Medium 500
-// 	// font-family: 'Noto Sans TC', 'Noto Sans JP', sans-serif;
-// 	'<link rel="preconnect" href="//fonts.gstatic.com">',
-// 	'<link href="//fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Noto+Sans+TC:wght@500&display=swap" rel="stylesheet">',
-
-// 	// CSS
-// 	`<style>*{font-family:'Noto Sans TC','Noto Sans JP','Noto Sans SC',serif}a{text-decoration:none}a:link{color:rgba(255,255,255,.87)}a:visited{color:rgba(255,255,255,.87)}body{margin:0;padding:0;background:url(//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.2.beta16/images/background_3.webp);background-attachment:fixed;background-repeat:no-repeat;background-position:center center;background-size:cover}.mdui-theme-primary-blue .mdui-color-theme{background-color:rgb(45 45 45 / 95%)!important}.mdui-appbar{padding-right:8px;padding-left:8px;margin-right:auto;margin-left:auto;max-width:1265px}.mdui-container,.mdui-textfield-input{color:rgba(255,255,255,.87);background-color:rgb(45 45 45 / 95%)}.updating{color:rgb(251 191 72 / 87%)!important}.finish{color:rgb(255 106 106 / 87%)!important}.r18{color:rgb(249 67 177 / 87%)!important}.mdui-appbar .mdui-toolbar{height:56px;font-size:1px}.mdui-toolbar>*{padding:0 6px;margin:0 2px}.mdui-toolbar>.mdui-typo-headline{padding:0 1pc 0 0}.mdui-toolbar>i{padding:0;opacity:.5}.mdui-toolbar>a:hover,a.active,a.mdui-typo-headline{opacity:1}.mdui-list-item{transition:none}.mdui-list>.th{background-color:initial}.mdui-list-item>a{width:100%;line-height:3pc}.mdui-list-item{margin:2px 0;padding:0}.mdui-toolbar>a:last-child{opacity:1}@media screen and (max-width:980px){.mdui-list-item .mdui-text-right{display:none}.mdui-container{width:100%!important;margin:0}.mdui-toolbar>.mdui-typo-headline,.mdui-toolbar>a:last-child,.mdui-toolbar>i:first-child{display:block}}</style>`,
-
-// 	// Markdown-it 12.0.4
-// 	'<script src="//cdnjs.cloudflare.com/ajax/libs/markdown-it/12.0.4/markdown-it.min.js" integrity="sha512-0DkA2RqFvfXBVeti0R1l0E8oMkmY0X+bAA2i02Ld8xhpjpvqORUcE/UBe+0KOPzi5iNah0aBpW6uaNNrqCk73Q==" crossorigin="anonymous" async></script>',
-// 	// DPlayer 1.26.0
-// 	'<script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.7.beta23/js/DPlayer-1.26.0.min.edit.js" async></script>'
-// )
-
 // 初始化頁面，並載入必要資源
 function init() {
 	document.siteName = $('title').html()
@@ -801,12 +784,10 @@ function file_video(path) {
 	let playBtn = `<a href="potplayer://${encoded_url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent windows-btn">PotPlayer 串流</a>`
 	if (/(Mac)/i.test(navigator.userAgent)) {
 		playBtn = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent mac-btn" data-href="iina://open?url=${encoded_url}">IINA 串流</button>`
-	}
-	if (/(Android)/i.test(navigator.userAgent)) {
+	} else if (/(Android)/i.test(navigator.userAgent)) {
 		playBtn = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">MXPlayer Pro 串流</button>`
 		playBtn += `<button style="left: 15px" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">MXPlayer Free 串流</button>`
-	}
-	if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+	} else if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
 		let applelink = url.replace(/(^\w+:|^)\/\//, '')
 		playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="infuse://${applelink}">Infuse 串流</a>`
 	}
@@ -819,9 +800,9 @@ function file_video(path) {
 	// 進度條預覽切換
 	let previewSwitchElement = ''
 	if (localStorage.getItem('previewSwitch') == 'false') {
-		previewSwitchElement = `<input id="previewSwitch" type="checkbox" checked="false"/>`
+		previewSwitchElement = `<input id="previewSwitch" type="checkbox"/>`
 	} else if (localStorage.getItem('previewSwitch') == 'true') {
-		previewSwitchElement = `<input id="previewSwitch" type="checkbox" checked="true"/>`
+		previewSwitchElement = `<input id="previewSwitch" type="checkbox" checked/>`
 	}
 
 	let content = `
