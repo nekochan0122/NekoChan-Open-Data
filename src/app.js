@@ -410,11 +410,13 @@ function append_files_to_list(path, files) {
 				get_file(p, item, (data) => {
 					markdown('#readme_md', data)
 				})
+				continue
 			}
 			if (item.name == '!head.md') {
 				get_file(p, item, (data) => {
 					markdown('#head_md', data)
 				})
+				continue
 			}
 			let ext = p.split('.').pop().toLowerCase()
 			if (
