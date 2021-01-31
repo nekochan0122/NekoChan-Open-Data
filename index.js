@@ -1,7 +1,7 @@
 const authConfig = {
 	siteName: 'NekoChan Open Data', // 網站名稱
 	version: '', // 程序版本。用戶不要手動修改
-    client_id: '',
+	client_id: '',
 	client_secret: '',
 	refresh_token:
     '', // 授權 token
