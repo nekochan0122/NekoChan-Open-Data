@@ -456,22 +456,6 @@ function append_files_to_list(path, files) {
 		}
 	}
 
-	/*let targetObj = {};
-  targetFiles.forEach((myFilepath, myIndex) => {
-      if (!targetObj[myFilepath]) {
-          targetObj[myFilepath] = {
-              filepath: myFilepath,
-              prev: myIndex === 0 ? null : targetFiles[myIndex - 1],
-              next: myIndex === targetFiles.length - 1 ? null : targetFiles[myIndex + 1],
-          }
-      }
-  })
-  // console.log(targetObj)
-  if (Object.keys(targetObj).length) {
-      localStorage.setItem(path, JSON.stringify(targetObj));
-      // console.log(path)
-  }*/
-
 	if (targetFiles.length > 0) {
 		let old = localStorage.getItem(path)
 		let new_children = targetFiles
