@@ -844,6 +844,20 @@ function file_video(path) {
 			window.location.reload() // 重新整理當前網頁
 		}
 
+		// 進度條預覽圖 點擊事件
+		const previewSwitch = $('#previewSwitch')
+		previewSwitch.click(() => {
+			if (localStorage.getItem('previewSwitch') == 'true') {
+				localStorage.setItem('previewSwitch', 'false')
+				console.log(localStorage.getItem('previewSwitch'))
+				window.location.reload()
+			} else if (localStorage.getItem('previewSwitch') == 'false') {
+				localStorage.setItem('previewSwitch', 'true')
+				console.log(localStorage.getItem('previewSwitch'))
+				window.location.reload()
+			}
+		})
+
 		// 主要播放器函式
 		const loadMainPlayer = () => {
 			let currentTime = 0 // 當前播放時間
@@ -876,8 +890,6 @@ function file_video(path) {
 			// 跳轉至 currentTime
 			if (currentTime != 0) {
 				dp.seek(currentTime)
-			} else if (Number(localStorage.getItem('currentTime')) != 0) {
-				dp.seek(Number(localStorage.getItem('currentTime')))
 			}
 
 			// 紀錄已跳轉的時間
@@ -965,22 +977,6 @@ function file_video(path) {
 					// console.log(`oldVol: ${oldVol}`)
 				}
 			}
-
-			// 進度條預覽圖 點擊事件
-			const previewSwitch = $('#previewSwitch')
-			previewSwitch.click(() => {
-				if (localStorage.getItem('previewSwitch') == 'true') {
-					localStorage.setItem('previewSwitch', 'false')
-					console.log(localStorage.getItem('previewSwitch'))
-					localStorage.setItem('currentTime', dp.video.currentTime)
-					window.location.reload()
-				} else if (localStorage.getItem('previewSwitch') == 'false') {
-					localStorage.setItem('previewSwitch', 'true')
-					console.log(localStorage.getItem('previewSwitch'))
-					localStorage.setItem('currentTime', dp.video.currentTime)
-					window.location.reload()
-				}
-			})
 		}
 		// 第一次載入主播放器
 		loadMainPlayer()
