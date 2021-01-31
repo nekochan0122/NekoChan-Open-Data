@@ -1,7 +1,5 @@
 # Goindex 自用
 
-**[NekoChan Open Data](https://nekochan.ml)**
-
 **fork from [yanzai/goindex](https://github.com/yanzai/goindex)**
 
 ### 預覽
