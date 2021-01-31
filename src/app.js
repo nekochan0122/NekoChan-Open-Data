@@ -110,7 +110,7 @@ function nav(path) {
 	// })
 	// html += `</select>`
 
-	let folderPath = `當前位置： <a class="folder" href="/${cur}:/">主目錄</a>`
+	let folderPath = `　當前位置： <a class="folder" href="/${cur}:/">主目錄</a>`
 	if (!model.is_search_page) {
 		// 資料夾路徑
 		let arr = path.trim('/').split('/')
@@ -851,11 +851,9 @@ function file_video(path) {
 		previewSwitch.click(() => {
 			if (localStorage.getItem('previewSwitch') == 'true') {
 				localStorage.setItem('previewSwitch', 'false')
-				console.log(localStorage.getItem('previewSwitch'))
 				window.location.reload()
 			} else if (localStorage.getItem('previewSwitch') == 'false') {
 				localStorage.setItem('previewSwitch', 'true')
-				console.log(localStorage.getItem('previewSwitch'))
 				window.location.reload()
 			}
 		})
