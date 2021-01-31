@@ -877,7 +877,7 @@ function file_video(path) {
 			if (currentTime != 0) {
 				dp.seek(currentTime)
 			} else if (Number(localStorage.getItem('currentTime')) != 0) {
-				de.seek(Number(localStorage.getItem('currentTime')))
+				dp.seek(Number(localStorage.getItem('currentTime')))
 			}
 
 			// 紀錄已跳轉的時間
