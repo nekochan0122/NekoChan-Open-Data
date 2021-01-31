@@ -7,13 +7,13 @@ const authConfig = {
     '', // 授權 token
 	/**
 	 * 設置要顯示的多個雲端硬碟；按格式添加多個
-	 * [id]: 可以是 團隊盤id、子文件夾id、或者"root"（代表個人盤根目錄）；
+	 * [id]: 可以是 團隊盤id、子文件夾id、或者"root"（代表個人盤根目錄）
 	 * [name]: 顯示的名稱
 	 * [user]: Basic Auth 的使用者名稱
 	 * [pass]: Basic Auth 的密碼
 	 * [protect_file_link]: Basic Auth 是否用於保護文件連結，預設值（不設置時）為 false，即不保護文件連結（方便 直鏈下載/外部播放 等）
 	 * 每個盤的 Basic Auth 都可以單獨設置。Basic Auth 默認保護該盤下所有文件夾/子文件夾路徑
-	 * 【注意】默認不保護文件連結，這樣可以方便 直鏈下載/外部播放;
+	 * 【注意】默認不保護文件連結，這樣可以方便 直鏈下載/外部播放
 	 *       如果要保護文件連結，需要將 protect_file_link 設置為 true，此時如果要進行外部播放等操作，需要將 host 替換為 user:pass@host 的 形式
 	 * 不需要 Basic Auth 的盤，保持 user 和 pass 同時為空即可。（直接不設置也可以）
 	 * 【注意】對於id設置為為子文件夾id的盤將不支持搜尋功能（不影響其他盤）。
@@ -41,8 +41,8 @@ const authConfig = {
 	// 確認有 cors 用途的可以開啟
 	enable_cors_file_down: false,
 	/**
-	 * 上面的 basic auth 已經包含了盤內全局保護的功能。所以默認不再去認證 .password 文件內的密碼;
-	 * 如果在全局認證的基礎上，仍需要給某些目錄單獨進行 .password 文件內的密碼驗證的話，將此选项設置為 true;
+	 * 上面的 basic auth 已經包含了盤內全局保護的功能。所以默認不再去認證 .password 文件內的密碼
+	 * 如果在全局認證的基礎上，仍需要給某些目錄單獨進行 .password 文件內的密碼驗證的話，將此选项設置為 true
 	 * 【注意】如果開啟了 .password 文件密碼驗證，每次列目錄都會額外增加查詢目錄內 .password 文件是否存在的開銷。
 	 */
 	enable_password_file_verify: false,
@@ -51,14 +51,7 @@ const authConfig = {
 /**
  * web ui 設置
  */
-const uiConfig = {
-	// 此版本只支持 material
-	theme: 'material', // DO NOT set it to classic
-	dark_mode: true,
-	main_color: 'blue',
-	accent_color: 'blue',
-	fluid_navigation_bar: true,
-}
+const uiConfig={theme:"material",dark_mode:!0,main_color:"blue",accent_color:"blue",fluid_navigation_bar:!0}
 
 /**
  * global functions
@@ -101,35 +94,33 @@ function html(current_drive_order = 0, model = {}) {
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-  <title>${authConfig.siteName}</title>
-  <link rel="shortcut icon" href="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data/images/logo.webp" type="image/x-icon" />
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/mdui/1.0.1/css/mdui.min.css" integrity="sha512-x4mi26uahzsFv2+ZklhOELAiuLt2e+hSxQ/SWbW/FuZWZJSc4Ffb33Al7SmPqXXyZieN2rNxBiDsRqAtGKsxUA==" crossorigin="anonymous" />
-  <style>*{font-family:'Noto Sans TC','Noto Sans JP','Noto Sans SC',serif}a{text-decoration:none}a:link{color:rgba(255,255,255,.87)}a:visited{color:rgba(255,255,255,.87)}body{margin:0;padding:0;background:url(//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.2.beta16/images/background_3.webp);background-attachment:fixed;background-repeat:no-repeat;background-position:center center;background-size:cover}.mdui-theme-primary-blue .mdui-color-theme{background-color:rgb(45 45 45 / 95%)!important}.mdui-appbar{padding-right:8px;padding-left:8px;margin-right:auto;margin-left:auto;max-width:1265px}.mdui-container,.mdui-textfield-input{color:rgba(255,255,255,.87);background-color:rgb(45 45 45 / 95%)}.updating{color:rgb(251 191 72 / 87%)!important}.finish{color:rgb(255 106 106 / 87%)!important}.r18{color:rgb(249 67 177 / 87%)!important}.mdui-appbar .mdui-toolbar{height:56px;font-size:1px}.mdui-toolbar>*{padding:0 6px;margin:0 2px}.mdui-toolbar>.mdui-typo-headline{padding:0 1pc 0 0}.mdui-toolbar>i{padding:0;opacity:.5}.mdui-toolbar>a:hover,a.active,a.mdui-typo-headline{opacity:1}.mdui-list-item{transition:none}.mdui-list>.th{background-color:initial}.mdui-list-item>a{width:100%;line-height:3pc}.mdui-list-item{margin:2px 0;padding:0}.mdui-toolbar>a:last-child{opacity:1}@media screen and (max-width:980px){.mdui-list-item .mdui-text-right{display:none}.mdui-container{width:100%!important;margin:0}.mdui-toolbar>.mdui-typo-headline,.mdui-toolbar>a:last-child,.mdui-toolbar>i:first-child{display:block}}</style>
-  <link href="//fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Noto+Sans+TC:wght@500&display=swap" rel="stylesheet">
-  <link rel="preconnect" href="//fonts.gstatic.com">
-  <meta name="description" content="NekoChan分享檔案的網站" />
-  <meta property="og:title" content="NekoChan Open Data">
-  <meta property="og:description" content="NekoChan分享檔案的網站">
-  <meta property="og:url" content="//nekochan.ml/">
-  <meta property="og:locale" content="zh-Hant-TW">
-  <meta property="og:image" content="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.6.3.1/images/image_0.webp">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="NekoChan Open Data">
-  <script>
-    window.drive_names = JSON.parse('${JSON.stringify(
-			authConfig.roots.map((it) => it.name)
-		)}');
-    window.MODEL = JSON.parse('${JSON.stringify(model)}');
-    window.current_drive_order = ${current_drive_order};
-    window.UI = JSON.parse('${JSON.stringify(uiConfig)}');
-  </script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/markdown-it/12.0.4/markdown-it.min.js" integrity="sha512-0DkA2RqFvfXBVeti0R1l0E8oMkmY0X+bAA2i02Ld8xhpjpvqORUcE/UBe+0KOPzi5iNah0aBpW6uaNNrqCk73Q==" crossorigin="anonymous" async></script>
-  <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.7.beta23/js/DPlayer-1.26.0.min.edit.js" async></script>
-  <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@${
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+    <meta name="description" content="NekoChan分享檔案的網站" />
+    <meta property="og:title" content="NekoChan Open Data">
+    <meta property="og:description" content="NekoChan分享檔案的網站">
+    <meta property="og:url" content="//nekochan.ml/">
+    <meta property="og:locale" content="zh-Hant-TW">
+    <meta property="og:image" content="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.6.3.1/images/image_0.webp">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="NekoChan Open Data">
+    <title>${authConfig.siteName}</title>
+    <link rel="shortcut icon" href="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data/images/logo.webp" type="image/x-icon" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/mdui/1.0.1/css/mdui.min.css" integrity="sha512-x4mi26uahzsFv2+ZklhOELAiuLt2e+hSxQ/SWbW/FuZWZJSc4Ffb33Al7SmPqXXyZieN2rNxBiDsRqAtGKsxUA==" crossorigin="anonymous" />
+    <link href="//fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Noto+Sans+TC:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="//fonts.gstatic.com">
+    <style>*{font-family:'Noto Sans TC','Noto Sans JP','Noto Sans SC',serif}a{text-decoration:none}a:link{color:rgba(255,255,255,.87)}a:visited{color:rgba(255,255,255,.87)}body{margin:0;padding:0;background:url(//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.2.beta16/images/background_3.webp);background-attachment:fixed;background-repeat:no-repeat;background-position:center center;background-size:cover}.mdui-theme-primary-blue .mdui-color-theme{background-color:rgb(45 45 45 / 95%)!important}.mdui-appbar{padding-right:8px;padding-left:8px;margin-right:auto;margin-left:auto;max-width:1265px}.mdui-container,.mdui-textfield-input{color:rgba(255,255,255,.87);background-color:rgb(45 45 45 / 95%)}.updating{color:rgb(251 191 72 / 87%)!important}.finish{color:rgb(255 106 106 / 87%)!important}.r18{color:rgb(249 67 177 / 87%)!important}.mdui-appbar .mdui-toolbar{height:56px;font-size:1px}.mdui-toolbar>*{padding:0 6px;margin:0 2px}.mdui-toolbar>.mdui-typo-headline{padding:0 1pc 0 0}.mdui-toolbar>i{padding:0;opacity:.5}.mdui-toolbar>a:hover,a.active,a.mdui-typo-headline{opacity:1}.mdui-list-item{transition:none}.mdui-list>.th{background-color:initial}.mdui-list-item>a{width:100%;line-height:3pc}.mdui-list-item{margin:2px 0;padding:0}.mdui-toolbar>a:last-child{opacity:1}@media screen and (max-width:980px){.mdui-list-item .mdui-text-right{display:none}.mdui-container{width:100%!important;margin:0}.mdui-toolbar>.mdui-typo-headline,.mdui-toolbar>a:last-child,.mdui-toolbar>i:first-child{display:block}}</style>
+    <script>
+    window.drive_names = JSON.parse('${JSON.stringify(authConfig.roots.map((it) => it.name))}')
+    window.MODEL = JSON.parse('${JSON.stringify(model)}')
+    window.current_drive_order = ${current_drive_order}
+    window.UI = JSON.parse('${JSON.stringify(uiConfig)}')
+    </script>
+    <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/markdown-it/12.0.4/markdown-it.min.js" integrity="sha512-0DkA2RqFvfXBVeti0R1l0E8oMkmY0X+bAA2i02Ld8xhpjpvqORUcE/UBe+0KOPzi5iNah0aBpW6uaNNrqCk73Q==" crossorigin="anonymous" async></script>
+    <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.7.beta23/js/DPlayer-1.26.0.min.edit.js" async></script>
+    <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@${
         authConfig.version
     }/app.js"></script>
 </head>
@@ -139,9 +130,7 @@ function html(current_drive_order = 0, model = {}) {
 `
 }
 
-addEventListener('fetch', (event) => {
-	event.respondWith(handleRequest(event.request))
-})
+addEventListener("fetch",e=>{e.respondWith(handleRequest(e.request))})
 
 /**
  * Fetch and log a request
@@ -166,9 +155,7 @@ async function handleRequest(request) {
 
 	// 從 path 中提取 drive order
 	// 並根據 drive order 獲取對應的 gd instance
-	let gd
-	let url = new URL(request.url)
-	let path = url.pathname
+	let gd,url=new URL(request.url),path=url.pathname
 
 	/**
 	 * 重定向至起始頁
@@ -227,8 +214,7 @@ async function handleRequest(request) {
 		if (!path.match(common_reg)) {
 			return redirectToIndexPage()
 		}
-		let split = path.split('/')
-		let order = Number(split[1].slice(0, -1))
+		let split=path.split("/"),order=Number(split[1].slice(0,-1))
 		if (order >= 0 && order < gds.length) {
 			gd = gds[order]
 		} else {
