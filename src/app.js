@@ -793,11 +793,11 @@ function file_video(path) {
 	}
 	playBtn += `<a style="left: 15px" href="${encoded_url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">直連下載檔案</a>`
 
-	// 初始化參數
+	// 進度條預覽圖 初始化參數
 	if (localStorage.getItem('previewSwitch') == null) {
 		localStorage.setItem('previewSwitch', 'false')
 	}
-	// 進度條預覽切換
+	// 進度條預覽圖 元素判斷
 	let previewSwitchElement = ''
 	if (localStorage.getItem('previewSwitch') == 'false') {
 		previewSwitchElement = `<input id="previewSwitch" type="checkbox"/>`
@@ -844,20 +844,6 @@ function file_video(path) {
 			window.location.reload() // 重新整理當前網頁
 		}
 
-		// 點擊事件
-		const previewSwitch = $('#previewSwitch')
-		previewSwitch.click(() => {
-			if (localStorage.getItem('previewSwitch') == 'true') {
-				localStorage.setItem('previewSwitch', 'false')
-				console.log(localStorage.getItem('previewSwitch'))
-				window.location.reload()
-			} else if (localStorage.getItem('previewSwitch') == 'false') {
-				localStorage.setItem('previewSwitch', 'true')
-				console.log(localStorage.getItem('previewSwitch'))
-				window.location.reload()
-			}
-		})
-
 		// 主要播放器函式
 		const loadMainPlayer = () => {
 			let currentTime = 0 // 當前播放時間
@@ -888,7 +874,11 @@ function file_video(path) {
 			})
 
 			// 跳轉至 currentTime
-			dp.seek(currentTime)
+			if (currentTime != 0) {
+				dp.seek(currentTime)
+			} else if (Number(localStorage.getItem('currentTime')) != 0) {
+				de.seek(Number(localStorage.getItem('currentTime')))
+			}
 
 			// 紀錄已跳轉的時間
 			dp.on('seeked', () => {
@@ -975,6 +965,22 @@ function file_video(path) {
 					// console.log(`oldVol: ${oldVol}`)
 				}
 			}
+
+			// 進度條預覽圖 點擊事件
+			const previewSwitch = $('#previewSwitch')
+			previewSwitch.click(() => {
+				if (localStorage.getItem('previewSwitch') == 'true') {
+					localStorage.setItem('previewSwitch', 'false')
+					console.log(localStorage.getItem('previewSwitch'))
+					localStorage.setItem('currentTime', dp.video.currentTime)
+					window.location.reload()
+				} else if (localStorage.getItem('previewSwitch') == 'false') {
+					localStorage.setItem('previewSwitch', 'true')
+					console.log(localStorage.getItem('previewSwitch'))
+					localStorage.setItem('currentTime', dp.video.currentTime)
+					window.location.reload()
+				}
+			})
 		}
 		// 第一次載入主播放器
 		loadMainPlayer()
