@@ -10,7 +10,7 @@
 ![image3](https://i.imgur.com/QG6O42u.png)
 
 ### 1.8.9 更新內容
-- 新增 DPlayer 快捷鍵（數字鍵：影片進度跳轉, M：靜音(test), CTRL + 左右方向鍵：上下一集(coding)）
+- 新增 DPlayer 快捷鍵（數字鍵：影片進度跳轉, M：靜音, CTRL + 左右方向鍵：上下一集(coding)）
 
 ### 1.8.8 更新內容
 - 更新 MDUI 排版、CSS
