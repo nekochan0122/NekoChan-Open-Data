@@ -841,7 +841,7 @@ function file_video(path) {
     </div>
     <br>
 	${playBtn}
-	<span style="float: right">
+	<span id="switchElement" style="float: right">
 		<i class="mdui-icon material-icons">ondemand_video</i>
 		<span class="mdui-list-item-content">進度條預覽圖</span>
 		<label class="mdui-switch">
@@ -859,7 +859,7 @@ function file_video(path) {
 
 	// 移除移動端的 進度條預覽圖 元素
 	if (Os.isMobile) {
-		$('.mdui-switch').remove()
+		$('#switchElement').remove()
 	}
 
 	$(document).ready(() => {
