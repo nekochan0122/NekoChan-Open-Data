@@ -36,7 +36,7 @@ function init() {
 	const folderIMGElement = $('#folderIMGElement')
 	folderIMGElement.hide()
 	$(document).mousemove((event) => {
-		folderIMGElement.css({'left':`${event.pageX + 30}px`, 'top':`${event.pageY + 30}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
+		folderIMGElement.css({'left':`${event.pageX + 25}px`, 'top':`${event.pageY + 25}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
 	})
 	$(window).scroll(() => {
 		folderIMGElement.hide() // 滾動時隱藏 資料夾預覽圖元素
@@ -229,7 +229,7 @@ function requestSearch(params, resultCallback) {
 
 // 渲染文件列表
 function list(path) {
-	let timeout1 = null, timeout2 = null, href = null // 資料夾預覽圖, 停留選擇的資料夾
+	let timeout1 = null, timeout2 = null, href = null // 計時器, 資料夾預覽圖, 連結
 	let content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
@@ -288,7 +288,6 @@ function list(path) {
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
 				function () {
-					// console.log(this.querySelector('a.folder').href)
 					href = `${this.querySelector('a.folder').href}封面.webp`
 					timeout1 = setTimeout(() => {
 						$('#folderIMGElementSrc').attr('src', href)
@@ -301,7 +300,6 @@ function list(path) {
 					clearTimeout(timeout1)
 					clearTimeout(timeout2)
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
-					// console.log('hide')
 					$('#folderIMGElement').hide()
 				}
 			)
@@ -431,6 +429,10 @@ function append_files_to_list(path, files) {
 				})
 				continue
 			}
+			switch(item.name) { // 隱藏項目
+				case '封面.webp':
+					continue
+			}
 			let ext = p.split('.').pop().toLowerCase()
 			if (
 				'|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|pdf|'.includes(
@@ -489,6 +491,7 @@ function append_files_to_list(path, files) {
  * 渲染搜索結果列表。有大量重複代碼，但是裡面有不一樣的邏輯，暫時先這樣分開弄吧
  */
 function render_search_result_list() {
+	let timeout1 = null, timeout2 = null, href = null // 計時器, 資料夾預覽圖, 連結
 	let content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
@@ -543,6 +546,24 @@ function render_search_result_list() {
 		} else {
 			// 如果不是最後一頁，append數據 ，並綁定 scroll 事件（如果還未綁定），更新 scroll_status
 			append_search_result_to_list(res['data']['files'])
+			// 資料夾預覽圖
+				$('.clickFolder').hover(
+					function () {
+						href = `${this.querySelector('a.folder').href}封面.webp`
+						timeout1 = setTimeout(() => {
+							$('#folderIMGElementSrc').attr('src', href)
+						}, 800)
+						timeout2 = setTimeout(() => {
+							$('#folderIMGElement').show()
+						}, 1500)
+					},
+					() => {
+						clearTimeout(timeout1)
+						clearTimeout(timeout2)
+						$('#folderIMGElementSrc').attr('src','') // 更改 img src
+						$('#folderIMGElement').hide()
+					}
+				)
 			if (window.scroll_status.event_bound !== true) {
 				// 綁定事件，如果還未綁定
 				$(window).on('scroll', function () {
@@ -637,6 +658,12 @@ function append_search_result_to_list(files) {
 		} else {
 			let c = 'file'
 			let ext = item.name.split('.').pop().toLowerCase()
+			switch(item.name) { // 隱藏項目
+				case '!head.md':
+					continue
+				case '封面.webp':
+					continue
+			}
 			if (
 				'|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|'.includes(
 					`|${ext}|`
