@@ -550,6 +550,8 @@ function render_search_result_list() {
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
 				function () {
+					console.log(this.querySelector('a.folder'))
+					console.log(this.querySelector('a.folder').id)
 					$.post(`/${cur}:id2path`, { id: this.querySelector('a.folder').id }, (data) => {
 						console.log(data)
 						if (data) {
