@@ -27,11 +27,6 @@ function init() {
 	<div id="folderIMGElement" class="mdui-card" style="position: absolute;max-width: 300px;left: 0px; top: 0px; z-index: 999;">
 		<div class="mdui-card-media">
 			<img id="folderIMGElementSrc" src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.0.min6/images/image_1.webp">
-			<div class="mdui-card-media-covered">
-				<div class="mdui-card-primary">
-					<div class="mdui-card-primary-title">Title</div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<div id="folderPath" class="mdui-container"></div>
