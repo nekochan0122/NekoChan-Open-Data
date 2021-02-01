@@ -39,7 +39,7 @@ function init() {
 	</header>
 	<div id="folderIMGElement" class="mdui-card" style="position: absolute;max-width: 300px;left: 0px; top: 0px; z-index: 999;">
 		<div class="mdui-card-media">
-			<img id="folderIMGElementSrc" src="">
+			<img id="folderIMGElementSrc" crossorigin="anonymous" src="">
 		</div>
 	</div>
 	<div id="folderPath" class="mdui-container"></div>
