@@ -38,21 +38,21 @@ function init() {
 	<div id="content" class="mdui-container mdui-shadow-16"></div>`
 	$('body').html(html)
 	// 資料夾預覽圖
-	// const folderIMGElement = $('#folderIMGElement')
-	$('#folderIMGElement').hide()
+	const folderIMGElement = $('#folderIMGElement')
+	folderIMGElement.hide()
 	$(document).mousemove((event) => {
-		$('#folderIMGElement').css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`})
+		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`})
 	})
 	$(".folder").hover(
-		function () {
+		() => {
 			console.log('show')
-			$('#folderIMGElement').show()
+			folderIMGElement.show()
 		},
-		function () {
+		() => {
 			console.log('hide')
-			$('#folderIMGElement').hide()
+			folderIMGElement.hide()
 		}
-	);
+	)
 }
 
 function getDocumentHeight() {
