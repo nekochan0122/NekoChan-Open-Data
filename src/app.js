@@ -613,7 +613,7 @@ function append_search_result_to_list(files) {
 		item['size'] = formatFileSize(item['size'])
 		if (item['mimeType'] == 'application/vnd.google-apps.folder') {
 			// 資料夾顏色處理
-			if (/連載中/.test(item.name)) {
+		if (/連載中/.test(item.name)) {
 				className = 'updating'
 			} else if (/完結/.test(item.name)) {
 				className = 'finish'
@@ -622,14 +622,14 @@ function append_search_result_to_list(files) {
 			} else {
 				className = ''
 			}
-			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a href="${p}" class="folder">
-				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}" title="${item.name}">
-					<i class="mdui-icon material-icons">folder_open</i>
-					${item.name}
+			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a id="${item['id']}" onclick="onSearchResultItemClick(this)" class="folder">
+					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}" title="${item.name}">
+						<i class="mdui-icon material-icons">folder_open</i>
+						${item.name}
 					</div>
-				<div class="mdui-col-sm-2 mdui-text-right ${className}">${item['size']}</div>
-				</a>
-			</li>`
+					<div class="mdui-col-sm-2 mdui-text-right" ${className}>${item['size']}</div>
+	            </a>
+	        </li>`
 		} else {
 			let c = 'file'
 			let ext = item.name.split('.').pop().toLowerCase()
