@@ -229,9 +229,6 @@ function requestSearch(params, resultCallback) {
 
 // 渲染文件列表
 function list(path) {
-	for (let i = 0; i < imgSrc.length; i++) {
-		img.src = `${imgSrc[i]}%E5%B0%81%E9%9D%A2.webp`
-	}
 	let timeout1 = null, timeout2 = null, href = null // 計時器, 資料夾預覽圖, 連結
 	let content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
