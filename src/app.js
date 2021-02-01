@@ -286,6 +286,17 @@ function list(path) {
 		} else {
 			// 如果不是最後一頁，append數據 ，並綁定 scroll 事件（如果還未綁定），更新 scroll_status
 			append_files_to_list(path, res['data']['files'])
+			// 資料夾預覽圖
+			$('.folder').hover(
+				() => {
+					console.log('show')
+					$('#folderIMGElement').show()
+				},
+				() => {
+					console.log('hide')
+					$('#folderIMGElement').hide()
+				}
+			)
 			if (window.scroll_status.event_bound !== true) {
 				// 綁定事件，如果還未綁定
 				$(window).on('scroll', function () {
@@ -333,17 +344,6 @@ function list(path) {
 
 		// loading 成功，並成功渲染了新數據之後，釋放 loading 鎖，以便能继续處理 "滾動到底部" 事件
 		if (window.scroll_status.loading_lock === true) {
-			// 資料夾預覽圖
-			$('.folder').hover(
-				() => {
-					console.log('show')
-					$('#folderIMGElement').show()
-				},
-				() => {
-					console.log('hide')
-					$('#folderIMGElement').hide()
-				}
-			)
 			window.scroll_status.loading_lock = false
 		}
 	}
