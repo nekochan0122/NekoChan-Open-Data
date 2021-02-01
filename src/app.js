@@ -1101,7 +1101,7 @@ function file_video(path) {
 
 		// 當系統是電腦時 和 進度條預覽必須啟動 才使用截圖播放器
 		if (
-			!Os.isMobile == false &&
+			/(WIN|Mac)/i.test(navigator.userAgent) &&
 			localStorage.getItem('previewSwitch') == 'true'
 		) {
 			loadScreenshotPlayer() // 第一次載入截圖播放器
