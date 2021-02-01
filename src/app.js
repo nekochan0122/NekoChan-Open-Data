@@ -24,7 +24,7 @@ function init() {
 		} ${UI.dark_mode ? 'mdui-text-color-white-text' : ''}">
 	</div>
 	</header>
-	<div id="folderIMG" class="mdui-card" style="position: absolute;max-width: 500px;left: 0px; top: 0px">
+	<div id="folderIMG" class="mdui-card" style="position: absolute;max-width: 500px;left: 0px; top: 0px; z-index: 999;">
 		<div class="mdui-card-media">
 			<img src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.0.min6/images/image_1.webp">
 			<div class="mdui-card-media-covered">
