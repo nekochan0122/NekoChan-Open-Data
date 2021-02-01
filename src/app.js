@@ -1,7 +1,7 @@
 // NekoChan Open Data
 
 // 滑鼠位置
-let mouseX = 0, mouseY = 0
+// let mouseX = 0, mouseY = 0
 
 // 系統識別
 const Os = {
@@ -39,7 +39,7 @@ function init() {
 	const folderIMGElement = $('#folderIMGElement')
 	folderIMGElement.hide()
 	$(document).mousemove((event) => {
-		mouseX = event.pageX, mouseY = event.pageY
+		// mouseX = event.pageX, mouseY = event.pageY
 		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
 	})
 	$(window).scroll(() => {
@@ -291,12 +291,12 @@ function list(path) {
 			append_files_to_list(path, res['data']['files'])
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
-				() => {
+				function () {
 					// $(elemSet).nearest(pointObject[, options])
-					console.log(`X: ${mouseX}, Y: ${mouseY}`)
+					// console.log(`X: ${mouseX}, Y: ${mouseY}`)
 					// hoverFolder = $.touching({x: mouseX, y: mouseY}, '.clickFolder')
-					hoverFolder = document.elementFromPoint(mouseX - window.pageXOffset, mouseY - window.pageYOffset)
-					console.log(hoverFolder)
+					// hoverFolder = document.elementFromPoint(mouseX - window.pageXOffset, mouseY - window.pageYOffset)
+					console.log(this)
 					// $('#folderIMGElementSrc').attr('src',`${$('a.folder').attr('href')}/cover.webp`) // 更改 img src
 					timeout = setTimeout(() => {
 						console.log('show')
