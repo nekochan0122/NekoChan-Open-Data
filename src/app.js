@@ -24,12 +24,12 @@ function init() {
 		} ${UI.dark_mode ? 'mdui-text-color-white-text' : ''}">
 	</div>
 	</header>
-	<div id="previewFolder" class="mdui-container" style="position: absolute">
+	<div id="previewFolderIMG" class="mdui-container" style="position: absolute">
 		<div class="mdui-row" >
 			<div class="mdui-col-sm-6 mdui-col-md-4">
 				<div class="mdui-card">
 					<div class="mdui-card-media">
-						<img src="//cdn.w3cbus.com/mdui.org/docs/assets/docs/img/card.jpg"/>
+						<img src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.0.min6/images/image_1.webp"/>
 						<div class="mdui-card-media-covered">
 							<div class="mdui-card-primary">
 								<div class="mdui-card-primary-title">Title</div>
