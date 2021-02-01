@@ -814,13 +814,13 @@ function file_video(path) {
 	}
 	playBtn += `<a style="left: 15px" href="${encoded_url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">直連下載檔案</a>`
 
+	let previewSwitchElement = ''
 	if (!Os.isMobile) {
 		// 進度條預覽圖 初始化參數
 		if (localStorage.getItem('previewSwitch') == null) {
 			localStorage.setItem('previewSwitch', 'false')
 		}
 		// 進度條預覽圖 元素判斷
-		let previewSwitchElement = ''
 		if (localStorage.getItem('previewSwitch') == 'false') {
 			previewSwitchElement = `<input id="previewSwitch" type="checkbox"/>`
 		} else if (localStorage.getItem('previewSwitch') == 'true') {
