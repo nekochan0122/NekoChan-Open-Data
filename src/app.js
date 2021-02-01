@@ -286,12 +286,14 @@ function list(path) {
 			$('.clickFolder').hover(
 				function () {
 					href = `${this.querySelector('a.folder').href}封面.webp`
-					timeout1 = setTimeout(() => {
-						$('#folderIMGElementSrc').attr('src', href)
-					}, 800)
-					timeout2 = setTimeout(() => {
-						$('#folderIMGElement').show()
-					}, 1000)
+					$('#folderIMGElementSrc').attr('src', href)
+					$('#folderIMGElement').show()
+					// timeout1 = setTimeout(() => {
+					// 	$('#folderIMGElementSrc').attr('src', href)
+					// }, 800)
+					// timeout2 = setTimeout(() => {
+					// 	$('#folderIMGElement').show()
+					// }, 1000)
 				},
 				() => {
 					clearTimeout(timeout1)
@@ -307,12 +309,14 @@ function list(path) {
 			$('.clickFolder').hover(
 				function () {
 					href = `${this.querySelector('a.folder').href}封面.webp`
-					timeout1 = setTimeout(() => {
-						$('#folderIMGElementSrc').attr('src', href)
-					}, 800)
-					timeout2 = setTimeout(() => {
-						$('#folderIMGElement').show()
-					}, 1000)
+					$('#folderIMGElementSrc').attr('src', href)
+					$('#folderIMGElement').show()
+					// timeout1 = setTimeout(() => {
+					// 	$('#folderIMGElementSrc').attr('src', href)
+					// }, 800)
+					// timeout2 = setTimeout(() => {
+					// 	$('#folderIMGElement').show()
+					// }, 1000)
 				},
 				() => {
 					clearTimeout(timeout1)
@@ -570,12 +574,14 @@ function render_search_result_list() {
 							href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
 						}
 					})
-					timeout1 = setTimeout(() => {
-						$('#folderIMGElementSrc').attr('src', href)
-					}, 800)
-					timeout2 = setTimeout(() => {
-						$('#folderIMGElement').show()
-					}, 1000)
+					$('#folderIMGElementSrc').attr('src', href)
+					$('#folderIMGElement').show()
+					// timeout1 = setTimeout(() => {
+					// 	$('#folderIMGElementSrc').attr('src', href)
+					// }, 800)
+					// timeout2 = setTimeout(() => {
+					// 	$('#folderIMGElement').show()
+					// }, 1000)
 				},
 				() => {
 					clearTimeout(timeout1)
@@ -595,12 +601,14 @@ function render_search_result_list() {
 							href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
 						}
 					})
-					timeout1 = setTimeout(() => {
-						$('#folderIMGElementSrc').attr('src', href)
-					}, 800)
-					timeout2 = setTimeout(() => {
-						$('#folderIMGElement').show()
-					}, 1000)
+					$('#folderIMGElementSrc').attr('src', href)
+					$('#folderIMGElement').show()
+					// timeout1 = setTimeout(() => {
+					// 	$('#folderIMGElementSrc').attr('src', href)
+					// }, 800)
+					// timeout2 = setTimeout(() => {
+					// 	$('#folderIMGElement').show()
+					// }, 1000)
 				},
 				() => {
 					clearTimeout(timeout1)
