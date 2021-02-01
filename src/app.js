@@ -731,21 +731,22 @@ function file_video(path) {
 			let cur = target_children.indexOf(path)
 			let prev_child = cur - 1 > -1 ? target_children[cur - 1] : null
 			let next_child = cur + 1 < len ? target_children[cur + 1] : null
+			const btnClass1 = 'mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple'
 			targetText = `
 			<div class="mdui-container">
 				<div class="mdui-row-xs-2 mdui-m-b-1">
 					<div class="mdui-col">
 						${
 													prev_child
-														? `<button id="leftBtn" data-filepath="${prev_child}" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">上一集</button>`
-														: `<button class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple" disabled>上一集</button>`
+														? `<button id="leftBtn" data-filepath="${prev_child}" class="${btnClass1}">上一集</button>`
+														: `<button class="${btnClass1}" disabled>上一集</button>`
 												}
 					</div>
 					<div class="mdui-col">
 						${
 													next_child
-														? `<button id="rightBtn"  data-filepath="${next_child}" class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple">下一集</button>`
-														: `<button class="mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple" disabled>下一集</button>`
+														? `<button id="rightBtn"  data-filepath="${next_child}" class="${btnClass1}">下一集</button>`
+														: `<button class="${btnClass1}" disabled>下一集</button>`
 												}
 					</div>
 				</div>
@@ -754,15 +755,17 @@ function file_video(path) {
 		}
 	}
 
+	// 按鈕樣式
+	const btnClass2 = 'mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent'
 	// WIN 串流播放器
-	let playBtn = `<a href="potplayer://${encoded_url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent windows-btn">PotPlayer 串流</a>`
+	let playBtn = `<a href="potplayer://${encoded_url}" class="${btnClass2} windows-btn">PotPlayer 串流</a>`
 	// 進度條預覽圖切換元素
 	let previewSwitchElement = ''
 	// 系統檢測
 	if (!Os.isMobile) {
 		// MAC 串流播放器
 		if (/(Mac)/i.test(navigator.userAgent)) {
-			playBtn = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent mac-btn" data-href="iina://open?url=${encoded_url}">IINA 串流</button>`
+			playBtn = `<button class="${btnClass2} mac-btn" data-href="iina://open?url=${encoded_url}">IINA 串流</button>`
 		}
 		// 進度條預覽圖 初始化參數
 		if (localStorage.getItem('previewSwitch') == null) {
@@ -777,15 +780,15 @@ function file_video(path) {
 	} else {
 		// 移動端串流播放器
 		if (/(Android)/i.test(navigator.userAgent)) {
-			playBtn = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">MXPlayer Pro 串流</button>`
-			playBtn += `<button style="left: 15px" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">MXPlayer Free 串流</button>`
+			playBtn = `<button class="${btnClass2} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">MXPlayer Pro 串流</button>`
+			playBtn += `<button style="left: 15px" class="${btnClass2} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">MXPlayer Free 串流</button>`
 		} else if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
 			let applelink = url.replace(/(^\w+:|^)\/\//, '')
-			playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="infuse://${applelink}">Infuse 串流</a>`
+			playBtn = `<a class="${btnClass2}" href="infuse://${applelink}">Infuse 串流</a>`
 		}
 	}
 	// 直連下載
-	playBtn += `<a style="left: 15px" href="${encoded_url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">直連下載檔案</a>`
+	playBtn += `<a style="left: 15px" href="${encoded_url}" class="${btnClass2} download-btn">直連下載檔案</a>`
 
 	let content = `
 	<div class="mdui-container-fluid">
