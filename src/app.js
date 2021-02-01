@@ -346,7 +346,6 @@ function list(path) {
 	// 資料夾預覽圖
 	const folderIMGElement = $('#folderIMG')
 	const folder = $('.mdui-list-item.mdui-ripple.mdui-shadow-2')
-	$('.mdui-list-item.mdui-ripple.mdui-shadow-2').on
 	$(document).mousemove((event) => {
 		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`})
 		folder.hover(
