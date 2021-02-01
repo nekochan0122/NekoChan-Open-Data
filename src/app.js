@@ -39,17 +39,19 @@ function init() {
 	$('body').html(html)
 	// 資料夾預覽圖
 	const folderIMGElement = $('#folderIMGElement')
-	const folder = $('.mdui-list-item.mdui-ripple.mdui-shadow-2')
 	$(document).mousemove((event) => {
+		console.log(`${event.pageX, event.pageY}`)
 		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`})
-		folder.hover(
-			() => { // 在資料夾元素上
+		$(".folder").hover(
+			function () {
+				console.log('show')
 				folderIMGElement.show()
 			},
-			() => { // 不在在資料夾元素上
+			function () {
+				console.log('hide')
 				folderIMGElement.hide()
 			}
-		)
+		);
 	})
 }
 
@@ -394,7 +396,7 @@ function append_files_to_list(path, files) {
 			} else {
 				className = ''
 			}
-			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a href="${p}" class="folder">
+			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2 folder"><a href="${p}" class="folder">
 				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}" title="${item.name}">
 					<i class="mdui-icon material-icons">folder_open</i>
 					${item.name}
@@ -615,7 +617,7 @@ function append_search_result_to_list(files) {
 			} else {
 				className = ''
 			}
-			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a id="${item['id']}" onclick="onSearchResultItemClick(this)" class="folder">
+			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2 folder"><a id="${item['id']}" onclick="onSearchResultItemClick(this)" class="folder">
 					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}" title="${item.name}">
 						<i class="mdui-icon material-icons">folder_open</i>
 						${item.name}
