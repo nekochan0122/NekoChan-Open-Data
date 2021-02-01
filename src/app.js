@@ -336,28 +336,30 @@ function list(path) {
 	})
 }
 
-function colorFolder(string, itemName, className, p, item) {
-	const re = new RegExp(string)
-	if (string == '' && className == '') {
-		return html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a href="${p}" class="folder">
-			<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate" title="${item.name}">
-				<i class="mdui-icon material-icons">folder_open</i>
-				${item.name}
-			</div>
-			<div class="mdui-col-sm-2 mdui-text-right">${item['size']}</div>
-			</a>
-		</li>`
-	} else if (re.test(itemName)) {
-		return html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a href="${p}" class="folder">
-			<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}" title="${itemName}">
-				<i class="mdui-icon material-icons">folder_open</i>
-				${itemName}
-				</div>
-			<div class="mdui-col-sm-2 mdui-text-right updating">${item['size']}</div>
-			</a>
-		</li>`
-	}
-}
+// function colorFolder(string, itemName, className, p, item) {
+// 	const re = new RegExp(string)
+// 	if (string == '' && className == '') {
+// 		return html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a href="${p}" class="folder">
+// 			<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate" title="${item.name}">
+// 				<i class="mdui-icon material-icons">folder_open</i>
+// 				${item.name}
+// 			</div>
+// 			<div class="mdui-col-sm-2 mdui-text-right">${item['size']}</div>
+// 			</a>
+// 		</li>`
+// 	} else if (re.test(itemName)) {
+// 		return html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a href="${p}" class="folder">
+// 			<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}" title="${itemName}">
+// 				<i class="mdui-icon material-icons">folder_open</i>
+// 				${itemName}
+// 				</div>
+// 			<div class="mdui-col-sm-2 mdui-text-right updating">${item['size']}</div>
+// 			</a>
+// 		</li>`
+// 	} else {
+// 		return false
+// 	}
+// }
 
 /**
  * 把請求得來的新一頁的數據追加到 list 中
@@ -374,7 +376,10 @@ function append_files_to_list(path, files) {
 
 	html = ''
 	let targetFiles = []
+
+	let className = ''
 	for (i in files) {
+		className = '' // 重置 className
 		let item = files[i]
 		let p = `${path + item.name}/`
 		if (item['size'] == undefined) {
@@ -384,50 +389,25 @@ function append_files_to_list(path, files) {
 		item['size'] = formatFileSize(item['size'])
 		if (item['mimeType'] == 'application/vnd.google-apps.folder') {
 			// 資料夾
-			colorFolder('', item.name, '', p, item)
-			colorFolder('連載中', item.name, 'updating', p, item)
-			colorFolder('完結', item.name, 'finish', p, item)
-			colorFolder('R18', item.name, 'r18', p, item)
-			// if (/連載中/.test(item.name)) {
-			// 	// 在 class 添加 updating
-			// 	html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a href="${p}" class="folder">
-			// 		<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate updating" title="${item.name}">
-			// 			<i class="mdui-icon material-icons">folder_open</i>
-			// 			${item.name}
-			// 			</div>
-			// 		<div class="mdui-col-sm-2 mdui-text-right updating">${item['size']}</div>
-			// 		</a>
-			// 	</li>`
-			// } else if (/完結/.test(item.name)) {
-			// 	// 在 class 添加 finish
-			// 	html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a href="${p}" class="folder">
-			// 		<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate finish" title="${item.name}">
-			// 			<i class="mdui-icon material-icons">folder_open</i>
-			// 			${item.name}
-			// 		</div>
-			// 		<div class="mdui-col-sm-2 mdui-text-right finish">${item['size']}</div>
-			// 		</a>
-			// 	</li>`
-			// } else if (/R18/.test(item.name)) {
-			// 	// 在 class 添加 r18
-			// 	html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a href="${p}" class="folder">
-			// 		<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate r18" title="${item.name}">
-			// 			<i class="mdui-icon material-icons">folder_open</i>
-			// 			${item.name}
-			// 		</div>
-			// 		<div class="mdui-col-sm-2 mdui-text-right r18">${item['size']}</div>
-			// 		</a>
-			// 	</li>`
-			// } else {
-			// 	html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a href="${p}" class="folder">
-			// 		<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate" title="${item.name}">
-			// 			<i class="mdui-icon material-icons">folder_open</i>
-			// 			${item.name}
-			// 		</div>
-			// 		<div class="mdui-col-sm-2 mdui-text-right">${item['size']}</div>
-			// 		</a>
-			// 	</li>`
-			// }
+			if (/連載中/.test(item.name)) {
+				className = 'updating'
+			} else if (/完結/.test(item.name)) {
+				className = 'finish'
+			} else if (/R18/.test(item.name)) {
+				className = 'r18'
+			}
+			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a href="${p}" class="folder">
+				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}" title="${item.name}">
+					<i class="mdui-icon material-icons">folder_open</i>
+					${item.name}
+					</div>
+				<div class="mdui-col-sm-2 mdui-text-right updating">${item['size']}</div>
+				</a>
+			</li>`
+			// colorFolder('', item.name, '', p, item)
+			// colorFolder('連載中', item.name, 'updating', p, item)
+			// colorFolder('完結', item.name, 'finish', p, item)
+			// colorFolder('R18', item.name, 'r18', p, item)
 		} else {
 			// 檔案
 			let p = path + item.name
