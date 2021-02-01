@@ -1,5 +1,7 @@
 // NekoChan Open Data
 
+const { time } = require("console")
+
 // 系統識別
 const Os = {
 	isWindows: navigator.platform.toUpperCase().includes('WIN'), // .includes
@@ -287,12 +289,16 @@ function list(path) {
 			// 如果不是最後一頁，append數據 ，並綁定 scroll 事件（如果還未綁定），更新 scroll_status
 			append_files_to_list(path, res['data']['files'])
 			// 資料夾預覽圖
+			let timeout = null
 			$('.folder').hover(
 				() => {
-					console.log('show')
-					$('#folderIMGElement').show()
+					timeout = setTimeout(() => {
+						console.log('show')
+						$('#folderIMGElement').show()
+					}, 2000)
 				},
 				() => {
+					clearTimeout(timeout)
 					console.log('hide')
 					$('#folderIMGElement').hide()
 				}
