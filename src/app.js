@@ -37,9 +37,9 @@ function init() {
 	<div id="folderPath" class="mdui-container"></div>
 	<div id="content" class="mdui-container mdui-shadow-16"></div>`
 	$('body').html(html)
-	folderIMGElement.hide()
 	// 資料夾預覽圖
 	const folderIMGElement = $('#folderIMGElement')
+	folderIMGElement.hide()
 	$(document).mousemove((event) => {
 		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`})
 	})
