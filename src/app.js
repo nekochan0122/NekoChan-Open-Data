@@ -291,7 +291,7 @@ function list(path) {
 					}, 800)
 					timeout2 = setTimeout(() => {
 						$('#folderIMGElement').show()
-					}, 1500)
+					}, 1000)
 				},
 				() => {
 					clearTimeout(timeout1)
@@ -312,7 +312,7 @@ function list(path) {
 					}, 800)
 					timeout2 = setTimeout(() => {
 						$('#folderIMGElement').show()
-					}, 1500)
+					}, 1000)
 				},
 				() => {
 					clearTimeout(timeout1)
@@ -575,7 +575,7 @@ function render_search_result_list() {
 					}, 800)
 					timeout2 = setTimeout(() => {
 						$('#folderIMGElement').show()
-					}, 1500)
+					}, 1000)
 				},
 				() => {
 					clearTimeout(timeout1)
@@ -600,7 +600,7 @@ function render_search_result_list() {
 					}, 800)
 					timeout2 = setTimeout(() => {
 						$('#folderIMGElement').show()
-					}, 1500)
+					}, 1000)
 				},
 				() => {
 					clearTimeout(timeout1)
