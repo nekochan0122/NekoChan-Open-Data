@@ -229,7 +229,7 @@ function requestSearch(params, resultCallback) {
 
 // 渲染文件列表
 function list(path) {
-	let timeout = null, hoverFolder = null // 資料夾預覽圖, 停留選擇的資料夾
+	let timeout = null, hoverFolder = null, mouseEvent = null // 資料夾預覽圖, 停留選擇的資料夾
 	let content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
@@ -290,7 +290,8 @@ function list(path) {
 				() => {
 					// $('#folderIMGElementSrc').attr('src',`${$('a.folder').attr('href')}/cover.webp`) // 更改 img src
 					// $(elemSet).nearest(pointObject[, options])
-					hoverFolder = $('.clickFolder').touching({x: MouseEvent.clientX, y: MouseEvent.clientY})
+					mouseEvent = new MouseEvent('hoverEvent')
+					hoverFolder = $('.clickFolder').touching({x: mouseEvent.clientX, y: mouseEvent.clientY})
 					console.log(hoverFolder)
 					timeout = setTimeout(() => {
 						console.log('show')
