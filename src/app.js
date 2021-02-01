@@ -24,18 +24,12 @@ function init() {
 		} ${UI.dark_mode ? 'mdui-text-color-white-text' : ''}">
 	</div>
 	</header>
-	<div id="previewFolderIMG" class="mdui-container" style="position: absolute">
-		<div class="mdui-row" >
-			<div class="mdui-col-sm-6 mdui-col-md-4">
-				<div class="mdui-card">
-					<div class="mdui-card-media">
-						<img src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.0.min6/images/image_1.webp"/>
-						<div class="mdui-card-media-covered">
-							<div class="mdui-card-primary">
-								<div class="mdui-card-primary-title">Title</div>
-							</div>
-						</div>
-					</div>
+	<div id="folderIMG" class="mdui-card" style="position: absolute;max-width: 500px;left: 0; top 0">
+		<div class="mdui-card-media">
+			<img src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.0.min6/images/image_1.webp">
+			<div class="mdui-card-media-covered">
+				<div class="mdui-card-primary">
+					<div class="mdui-card-primary-title">Title</div>
 				</div>
 			</div>
 		</div>
@@ -43,6 +37,11 @@ function init() {
 	<div id="folderPath" class="mdui-container"></div>
 	<div id="content" class="mdui-container mdui-shadow-16"></div>`
 	$('body').html(html)
+	// const folderIMG = $('#folderIMG')
+	$('document').mousemove((event) => (
+		$('#folderIMG').css({'left':`${event.pageX}px`, 'top':`${event.pageY}`})
+		// console.log(`X: ${event.pageX} Y:${event.pageY}`)
+	))
 }
 
 function getDocumentHeight() {
