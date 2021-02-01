@@ -126,7 +126,7 @@ function html(current_drive_order = 0, model = {}) {
     <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/markdown-it/12.0.4/markdown-it.min.js" integrity="sha512-0DkA2RqFvfXBVeti0R1l0E8oMkmY0X+bAA2i02Ld8xhpjpvqORUcE/UBe+0KOPzi5iNah0aBpW6uaNNrqCk73Q==" crossorigin="anonymous" async></script>
-    <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.1.DPlayer.min/js/DPlayer-1.26.0.min.edit.js" async></script>
+    <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.1.DPlayer.min2/js/DPlayer-1.26.0.min.edit.js" async></script>
     <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@${
 			authConfig.version
 		}/app.js"></script>
