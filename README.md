@@ -7,7 +7,7 @@
 ![image2](https://i.imgur.com/FiS723T.png)
 ![image3](https://i.imgur.com/QG6O42u.png)
 
-## 已知問題
+### 已知問題
 - ~~有時會發生 POST 請求錯誤 狀態碼：500 （導致列表渲染不出來的主要原因）~~
 
 ### 1.9.1 更新內容
