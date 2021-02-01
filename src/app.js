@@ -236,7 +236,7 @@ function list(path) {
 	<div class="mdui-row">
 		<ul id="list" class="mdui-list">
 		</ul>
-		<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>NekoChan Open Data<br><a id="back-to-top" href="#">返回頂部</a></div>
+		<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>NekoChan Open Data｜Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
 	</div>
 	<div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>`
 	$('#content').html(content)
@@ -504,7 +504,7 @@ function render_search_result_list() {
 	<div class="mdui-row">
 	<ul id="list" class="mdui-list">
 	</ul>
-	<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項</div>
+	<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>NekoChan Open Data｜Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
 	</div>
 	<div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>`
 	$('#content').html(content)
@@ -850,7 +850,7 @@ function file_video(path) {
 		</label>
 	</span>
     <div class="mdui-textfield">
-    	<label class="mdui-textfield-label mdui-text-color-white">注意：若影片沒有畫面，請嘗試播放器。或通知我本人。</label>
+    	<label class="mdui-textfield-label mdui-text-color-white">注意：若影片沒有畫面，請嘗試播放器串流。或通知 Discord：NekoChan#2851。</label>
     </div>
     <hr>
 	</div>
