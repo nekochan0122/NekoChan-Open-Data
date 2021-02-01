@@ -213,8 +213,8 @@
 					d = e.screenshot,
 					p = e.preload,
 					c = e.url
+				a = o && 'webvtt' === o.type
 				return (
-					(a = o && 'webvtt' === o.type),
 					(t += '\n<video\n    class="dplayer-video '),
 					r && (t += 'dplayer-video-current'),
 					(t += '"\n    webkit-playsinline\n    '),
@@ -232,7 +232,7 @@
 						((t += '\n    <track kind="metadata" default src="'),
 						(t += s(o.url)),
 						(t += '"></track>\n    ')),
-					t + '\n</video>'
+					(t += '\n</video>')
 				)
 			}
 		},
@@ -247,30 +247,28 @@
 					(t.toString = function () {
 						return this.map(function (t) {
 							var a = (function (e, t) {
-								var a,
-									n,
-									o,
-									r = e[1] || '',
-									i = e[3]
-								if (!i) return r
+								var a = e[1] || '',
+									n = e[3]
+								if (!n) return a
 								if (t && 'function' == typeof btoa) {
-									var l =
-											((a = i),
-											(n = btoa(
-												unescape(encodeURIComponent(JSON.stringify(a)))
+									var o =
+											((i = n),
+											(l = btoa(
+												unescape(encodeURIComponent(JSON.stringify(i)))
 											)),
-											(o = 'sourceMappingURL=data:application/json;charset=utf-8;base64,'.concat(
-												n
+											(s = 'sourceMappingURL=data:application/json;charset=utf-8;base64,'.concat(
+												l
 											)),
-											'/*# '.concat(o, ' */')),
-										s = i.sources.map(function (e) {
+											'/*# '.concat(s, ' */')),
+										r = n.sources.map(function (e) {
 											return '/*# sourceURL='
-												.concat(i.sourceRoot || '')
+												.concat(n.sourceRoot || '')
 												.concat(e, ' */')
 										})
-									return [r].concat(s).concat([l]).join('\n')
+									return [a].concat(r).concat([o]).join('\n')
 								}
-								return [r].join('\n')
+								var i, l, s
+								return [a].join('\n')
 							})(t, e)
 							return t[2] ? '@media '.concat(t[2], ' {').concat(a, '}') : a
 						}).join('')
@@ -556,13 +554,13 @@
 						validateStatus: function (e) {
 							return e >= 200 && e < 300
 						},
-						headers: {
-							common: { Accept: 'application/json, text/plain, */*' },
-						},
 					}
-				n.forEach(['delete', 'get', 'head'], function (e) {
-					s.headers[e] = {}
+				;(s.headers = {
+					common: { Accept: 'application/json, text/plain, */*' },
 				}),
+					n.forEach(['delete', 'get', 'head'], function (e) {
+						s.headers[e] = {}
+					}),
 					n.forEach(['post', 'put', 'patch'], function (e) {
 						s.headers[e] = n.merge(r)
 					}),
@@ -1038,9 +1036,8 @@
 					d = e.icons,
 					p = e.index,
 					c = n.$each
+				e.$value, e.$index
 				return (
-					e.$value,
-					e.$index,
 					(t +=
 						'<div class="dplayer-mask"></div>\n<div class="dplayer-video-wrap">\n    '),
 					o(a(1)(r)),
@@ -1270,12 +1267,21 @@
 				o = a(37)
 			'string' == typeof (o = o.__esModule ? o.default : o) &&
 				(o = [[e.i, o, '']])
-			n(o, { insert: 'head', singleton: !1 }), (e.exports = o.locals || {})
+			var r = { insert: 'head', singleton: !1 }
+			n(o, r)
+			e.exports = o.locals || {}
 		},
 		function (e, t, a) {
 			'use strict'
 			var n,
-				o = (function () {
+				o = function () {
+					return (
+						void 0 === n &&
+							(n = Boolean(window && document && document.all && !window.atob)),
+						n
+					)
+				},
+				r = (function () {
 					var e = {}
 					return function (t) {
 						if (void 0 === e[t]) {
@@ -1294,37 +1300,37 @@
 						return e[t]
 					}
 				})(),
-				r = []
-			function i(e) {
-				for (var t = -1, a = 0; a < r.length; a++)
-					if (r[a].identifier === e) {
+				i = []
+			function l(e) {
+				for (var t = -1, a = 0; a < i.length; a++)
+					if (i[a].identifier === e) {
 						t = a
 						break
 					}
 				return t
 			}
-			function l(e, t) {
+			function s(e, t) {
 				for (var a = {}, n = [], o = 0; o < e.length; o++) {
-					var l = e[o],
-						s = t.base ? l[0] + t.base : l[0],
+					var r = e[o],
+						s = t.base ? r[0] + t.base : r[0],
 						d = a[s] || 0,
 						p = ''.concat(s, ' ').concat(d)
 					a[s] = d + 1
-					var c = i(p),
-						u = { css: l[1], media: l[2], sourceMap: l[3] }
+					var c = l(p),
+						u = { css: r[1], media: r[2], sourceMap: r[3] }
 					;-1 !== c
-						? (r[c].references++, r[c].updater(u))
-						: r.push({ identifier: p, updater: h(u, t), references: 1 }),
+						? (i[c].references++, i[c].updater(u))
+						: i.push({ identifier: p, updater: f(u, t), references: 1 }),
 						n.push(p)
 				}
 				return n
 			}
-			function s(e) {
+			function d(e) {
 				var t = document.createElement('style'),
 					n = e.attributes || {}
 				if (void 0 === n.nonce) {
-					var r = a.nc
-					r && (n.nonce = r)
+					var o = a.nc
+					o && (n.nonce = o)
 				}
 				if (
 					(Object.keys(n).forEach(function (e) {
@@ -1334,7 +1340,7 @@
 				)
 					e.insert(t)
 				else {
-					var i = o(e.insert || 'head')
+					var i = r(e.insert || 'head')
 					if (!i)
 						throw new Error(
 							"Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid."
@@ -1343,19 +1349,19 @@
 				}
 				return t
 			}
-			var d,
-				p =
-					((d = []),
+			var p,
+				c =
+					((p = []),
 					function (e, t) {
-						return (d[e] = t), d.filter(Boolean).join('\n')
+						return (p[e] = t), p.filter(Boolean).join('\n')
 					})
-			function c(e, t, a, n) {
+			function u(e, t, a, n) {
 				var o = a
 					? ''
 					: n.media
 					? '@media '.concat(n.media, ' {').concat(n.css, '}')
 					: n.css
-				if (e.styleSheet) e.styleSheet.cssText = p(t, o)
+				if (e.styleSheet) e.styleSheet.cssText = c(t, o)
 				else {
 					var r = document.createTextNode(o),
 						i = e.childNodes
@@ -1363,37 +1369,38 @@
 						i.length ? e.insertBefore(r, i[t]) : e.appendChild(r)
 				}
 			}
-			var u = null,
-				y = 0
-			function h(e, t) {
+			function y(e, t, a) {
+				var n = a.css,
+					o = a.media,
+					r = a.sourceMap
+				if (
+					(o ? e.setAttribute('media', o) : e.removeAttribute('media'),
+					r &&
+						btoa &&
+						(n += '\n/*# sourceMappingURL=data:application/json;base64,'.concat(
+							btoa(unescape(encodeURIComponent(JSON.stringify(r)))),
+							' */'
+						)),
+					e.styleSheet)
+				)
+					e.styleSheet.cssText = n
+				else {
+					for (; e.firstChild; ) e.removeChild(e.firstChild)
+					e.appendChild(document.createTextNode(n))
+				}
+			}
+			var h = null,
+				m = 0
+			function f(e, t) {
 				var a, n, o
 				if (t.singleton) {
-					var r = y++
-					;(a = u || (u = s(t))),
-						(n = c.bind(null, a, r, !1)),
-						(o = c.bind(null, a, r, !0))
+					var r = m++
+					;(a = h || (h = d(t))),
+						(n = u.bind(null, a, r, !1)),
+						(o = u.bind(null, a, r, !0))
 				} else
-					(a = s(t)),
-						(n = function (e, t, a) {
-							var n = a.css,
-								o = a.media,
-								r = a.sourceMap
-							if (
-								(o ? e.setAttribute('media', o) : e.removeAttribute('media'),
-								r &&
-									btoa &&
-									(n += '\n/*# sourceMappingURL=data:application/json;base64,'.concat(
-										btoa(unescape(encodeURIComponent(JSON.stringify(r)))),
-										' */'
-									)),
-								e.styleSheet)
-							)
-								e.styleSheet.cssText = n
-							else {
-								for (; e.firstChild; ) e.removeChild(e.firstChild)
-								e.appendChild(document.createTextNode(n))
-							}
-						}.bind(null, a, t)),
+					(a = d(t)),
+						(n = y.bind(null, a, t)),
 						(o = function () {
 							!(function (e) {
 								if (null === e.parentNode) return !1
@@ -1418,25 +1425,22 @@
 			e.exports = function (e, t) {
 				;(t = t || {}).singleton ||
 					'boolean' == typeof t.singleton ||
-					(t.singleton =
-						(void 0 === n &&
-							(n = Boolean(window && document && document.all && !window.atob)),
-						n))
-				var a = l((e = e || []), t)
+					(t.singleton = o())
+				var a = s((e = e || []), t)
 				return function (e) {
 					if (
 						((e = e || []),
 						'[object Array]' === Object.prototype.toString.call(e))
 					) {
 						for (var n = 0; n < a.length; n++) {
-							var o = i(a[n])
-							r[o].references--
+							var o = l(a[n])
+							i[o].references--
 						}
-						for (var s = l(e, t), d = 0; d < a.length; d++) {
-							var p = i(a[d])
-							0 === r[p].references && (r[p].updater(), r.splice(p, 1))
+						for (var r = s(e, t), d = 0; d < a.length; d++) {
+							var p = l(a[d])
+							0 === i[p].references && (i[p].updater(), i.splice(p, 1))
 						}
-						a = s
+						a = r
 					}
 				}
 			}
@@ -1518,7 +1522,7 @@
 											h(e)
 										})
 								  })
-								: (function () {
+								: !(function () {
 										if (e.postMessage && !e.importScripts) {
 											var t = !0,
 												a = e.onmessage
@@ -1532,7 +1536,31 @@
 											)
 										}
 								  })()
-								? ((i = 'setImmediate$' + Math.random() + '$'),
+								? e.MessageChannel
+									? (((r = new MessageChannel()).port1.onmessage = function (
+											e
+									  ) {
+											h(e.data)
+									  }),
+									  (n = function (e) {
+											r.port2.postMessage(e)
+									  }))
+									: c && 'onreadystatechange' in c.createElement('script')
+									? ((o = c.documentElement),
+									  (n = function (e) {
+											var t = c.createElement('script')
+											;(t.onreadystatechange = function () {
+												h(e),
+													(t.onreadystatechange = null),
+													o.removeChild(t),
+													(t = null)
+											}),
+												o.appendChild(t)
+									  }))
+									: (n = function (e) {
+											setTimeout(h, 0, e)
+									  })
+								: ((i = 'setImmediate$' + Math.random() + '$'),
 								  (l = function (t) {
 										t.source === e &&
 											'string' == typeof t.data &&
@@ -1544,29 +1572,7 @@
 										: e.attachEvent('onmessage', l),
 								  (n = function (t) {
 										e.postMessage(i + t, '*')
-								  }))
-								: e.MessageChannel
-								? (((r = new MessageChannel()).port1.onmessage = function (e) {
-										h(e.data)
-								  }),
-								  (n = function (e) {
-										r.port2.postMessage(e)
-								  }))
-								: c && 'onreadystatechange' in c.createElement('script')
-								? ((o = c.documentElement),
-								  (n = function (e) {
-										var t = c.createElement('script')
-										;(t.onreadystatechange = function () {
-											h(e),
-												(t.onreadystatechange = null),
-												o.removeChild(t),
-												(t = null)
-										}),
-											o.appendChild(t)
-								  }))
-								: (n = function (e) {
-										setTimeout(h, 0, e)
-								  }),
+								  })),
 							(u.setImmediate = function (e) {
 								'function' != typeof e && (e = new Function('' + e))
 								for (
@@ -2063,16 +2069,14 @@
 						return i !== r ? n + t.substring(i, r) : n
 					})(
 						(function e(t) {
-							return (
-								'string' != typeof t &&
-									(t =
-										null == t
-											? ''
-											: 'function' == typeof t
-											? e(t.call(t))
-											: JSON.stringify(t)),
-								t
-							)
+							'string' != typeof t &&
+								(t =
+									null == t
+										? ''
+										: 'function' == typeof t
+										? e(t.call(t))
+										: JSON.stringify(t))
+							return t
 						})(e)
 					)
 				}),
@@ -2086,7 +2090,8 @@
 		},
 		function (e, t, a) {
 			'use strict'
-			a.r(t), a(35)
+			a.r(t)
+			a(35)
 			var n = a(15),
 				o = /mobile/i.test(window.navigator.userAgent),
 				r = {
@@ -2270,97 +2275,53 @@
 						  })(e)
 			}
 			var p = function (e) {
-					var t = {
-						container:
-							e.element || document.getElementsByClassName('dplayer')[0],
-						live: !1,
-						autoplay: !1,
-						theme: '#b7daff',
-						loop: !1,
-						lang: (
-							navigator.language || navigator.browserLanguage
-						).toLowerCase(),
-						screenshot: !1,
-						airplay: !0,
-						hotkey: !0,
-						preload: 'metadata',
-						volume: 0.7,
-						playbackSpeed: [0.5, 0.75, 1, 1.25, 1.5, 2],
-						apiBackend: s,
-						video: {},
-						contextmenu: [],
-						mutex: !0,
-						pluginOptions: { hls: {}, flv: {}, dash: {}, webtorrent: {} },
-					}
-					for (var a in t)
-						t.hasOwnProperty(a) && !e.hasOwnProperty(a) && (e[a] = t[a])
-					return (
-						e.video && !e.video.type && (e.video.type = 'auto'),
-						'object' === d(e.danmaku) &&
-							e.danmaku &&
-							!e.danmaku.user &&
-							(e.danmaku.user = 'DIYgod'),
-						e.subtitle &&
-							(!e.subtitle.type && (e.subtitle.type = 'webvtt'),
-							!e.subtitle.fontSize && (e.subtitle.fontSize = '20px'),
-							!e.subtitle.bottom && (e.subtitle.bottom = '40px'),
-							!e.subtitle.color && (e.subtitle.color = '#fff')),
-						e.video.quality &&
-							(e.video.url = e.video.quality[e.video.defaultQuality].url),
-						e.lang && (e.lang = e.lang.toLowerCase()),
-						(e.contextmenu = e.contextmenu.concat([
-							{
-								text: 'Video info',
-								click: function (e) {
-									e.infoPanel.triggle()
-								},
+				var t = {
+					container: e.element || document.getElementsByClassName('dplayer')[0],
+					live: !1,
+					autoplay: !1,
+					theme: '#b7daff',
+					loop: !1,
+					lang: (navigator.language || navigator.browserLanguage).toLowerCase(),
+					screenshot: !1,
+					airplay: !0,
+					hotkey: !0,
+					preload: 'metadata',
+					volume: 0.7,
+					playbackSpeed: [0.5, 0.75, 1, 1.25, 1.5, 2],
+					apiBackend: s,
+					video: {},
+					contextmenu: [],
+					mutex: !0,
+					pluginOptions: { hls: {}, flv: {}, dash: {}, webtorrent: {} },
+				}
+				for (var a in t)
+					t.hasOwnProperty(a) && !e.hasOwnProperty(a) && (e[a] = t[a])
+				return (
+					e.video && !e.video.type && (e.video.type = 'auto'),
+					'object' === d(e.danmaku) &&
+						e.danmaku &&
+						!e.danmaku.user &&
+						(e.danmaku.user = 'DIYgod'),
+					e.subtitle &&
+						(!e.subtitle.type && (e.subtitle.type = 'webvtt'),
+						!e.subtitle.fontSize && (e.subtitle.fontSize = '20px'),
+						!e.subtitle.bottom && (e.subtitle.bottom = '40px'),
+						!e.subtitle.color && (e.subtitle.color = '#fff')),
+					e.video.quality &&
+						(e.video.url = e.video.quality[e.video.defaultQuality].url),
+					e.lang && (e.lang = e.lang.toLowerCase()),
+					(e.contextmenu = e.contextmenu.concat([
+						{
+							text: 'Video info',
+							click: function (e) {
+								e.infoPanel.triggle()
 							},
-							{ text: 'DPlayer v'.concat('1.26.0'), link: '#' },
-						])),
-						e
-					)
-				},
-				c = {
-					'zh-cn': {
-						'Danmaku is loading': '弹幕加载中',
-						Top: '顶部',
-						Bottom: '底部',
-						Rolling: '滚动',
-						'Input danmaku, hit Enter': '输入弹幕，回车发送',
-						'About author': '关于作者',
-						'DPlayer feedback': '播放器意见反馈',
-						'About DPlayer': '关于 DPlayer 播放器',
-						Loop: '洗脑循环',
-						Speed: '速度',
-						'Opacity for danmaku': '弹幕透明度',
-						Normal: '正常',
-						'Please input danmaku content!': '要输入弹幕内容啊喂！',
-						'Set danmaku color': '设置弹幕颜色',
-						'Set danmaku type': '设置弹幕类型',
-						'Show danmaku': '显示弹幕',
-						'Video load failed': '视频加载失败',
-						'Danmaku load failed': '弹幕加载失败',
-						'Danmaku send failed': '弹幕发送失败',
-						'Switching to': '正在切换至',
-						'Switched to': '已经切换至',
-						quality: '画质',
-						FF: '快进',
-						REW: '快退',
-						'Unlimited danmaku': '海量弹幕',
-						'Send danmaku': '发送弹幕',
-						Setting: '设置',
-						'Full screen': '全屏',
-						'Web full screen': '页面全屏',
-						Send: '发送',
-						Screenshot: '截图',
-						AirPlay: '无线投屏',
-						s: '秒',
-						'Show subtitle': '显示字幕',
-						'Hide subtitle': '隐藏字幕',
-						Volume: '音量',
-						Live: '直播',
-						'Video info': '视频统计信息',
-					},
+						},
+					])),
+					e
+				)
+			}
+			var c = {
 					'zh-tw': {
 						'Danmaku is loading': '彈幕載入中',
 						Top: '頂部',
@@ -2428,9 +2389,9 @@
 				M = a(25),
 				z = a.n(M),
 				C = a(26),
-				O = a.n(C),
-				A = a(27),
-				P = a.n(A),
+				A = a.n(C),
+				O = a(27),
+				P = a.n(O),
 				j = a(28),
 				F = a.n(j),
 				_ = a(29),
@@ -2453,7 +2414,7 @@
 					fullWeb: E.a,
 					setting: B.a,
 					right: z.a,
-					comment: O.a,
+					comment: A.a,
 					commentOff: P.a,
 					send: F.a,
 					pallette: Y.a,
@@ -2485,7 +2446,7 @@
 						(this.tran = t.tran),
 						this.init()
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
@@ -2710,6 +2671,7 @@
 							},
 						},
 					]) && J(t.prototype, a),
+					n && J(t, n),
 					e
 				)
 			})()
@@ -2755,7 +2717,7 @@
 						this._measure(''),
 						this.load()
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
@@ -3125,6 +3087,7 @@
 							},
 						},
 					]) && G(t.prototype, a),
+					n && G(t, n),
 					e
 				)
 			})()
@@ -3196,7 +3159,7 @@
 							'subtitle_change',
 						])
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
@@ -3228,6 +3191,7 @@
 							},
 						},
 					]) && te(t.prototype, a),
+					n && te(t, n),
 					e
 				)
 			})()
@@ -3285,18 +3249,18 @@
 						  document.addEventListener('msfullscreenchange', o),
 						  document.addEventListener('MSFullscreenChange', o))
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
 						{
 							key: 'isFullScreen',
 							value: function () {
-								switch (
+								var e =
 									arguments.length > 0 && void 0 !== arguments[0]
 										? arguments[0]
 										: 'browser'
-								) {
+								switch (e) {
 									case 'browser':
 										return (
 											document.fullscreenElement ||
@@ -3348,11 +3312,11 @@
 						{
 							key: 'cancel',
 							value: function () {
-								switch (
+								var e =
 									arguments.length > 0 && void 0 !== arguments[0]
 										? arguments[0]
 										: 'browser'
-								) {
+								switch (e) {
 									case 'browser':
 										document.cancelFullScreen
 											? document.cancelFullScreen()
@@ -3386,6 +3350,7 @@
 							},
 						},
 					]) && ne(t.prototype, a),
+					n && ne(t, n),
 					e
 				)
 			})()
@@ -3424,7 +3389,7 @@
 						(this.data = {}),
 						this.init()
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
@@ -3450,6 +3415,7 @@
 							},
 						},
 					]) && re(t.prototype, a),
+					n && re(t, n),
 					e
 				)
 			})()
@@ -3474,7 +3440,7 @@
 						(this.events = o),
 						this.init()
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
@@ -3530,6 +3496,7 @@
 							},
 						},
 					]) && le(t.prototype, a),
+					n && le(t, n),
 					e
 				)
 			})()
@@ -3554,7 +3521,7 @@
 						(this.elements.loaded = t.loadedBar),
 						(this.elements.danmaku = t.danmakuOpacityBar)
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
@@ -3573,6 +3540,7 @@
 							},
 						},
 					]) && de(t.prototype, a),
+					n && de(t, n),
 					e
 				)
 			})()
@@ -3604,7 +3572,7 @@
 						(this.types = ['loading', 'info', 'fps']),
 						this.init()
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
@@ -3698,6 +3666,7 @@
 							},
 						},
 					]) && ce(t.prototype, a),
+					n && ce(t, n),
 					e
 				)
 			})()
@@ -3722,7 +3691,7 @@
 							a.container.classList.remove('dplayer-bezel-transition')
 						})
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
@@ -3734,6 +3703,7 @@
 							},
 						},
 					]) && ye(t.prototype, a),
+					n && ye(t, n),
 					e
 				)
 			})()
@@ -3760,7 +3730,7 @@
 						)),
 						(this.events = t.events)
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
@@ -3804,6 +3774,7 @@
 							},
 						},
 					]) && me(t.prototype, a),
+					n && me(t, n),
 					e
 				)
 			})()
@@ -3849,7 +3820,7 @@
 						r.isSafari && this.initAirplayButton(),
 						r.isMobile || this.initVolumeButton()
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
@@ -4163,18 +4134,30 @@
 									this.player.template.camareButton.addEventListener(
 										'click',
 										function () {
-											var t,
-												a = document.createElement('canvas')
-											;(a.width = e.player.video.videoWidth),
-												(a.height = e.player.video.videoHeight),
-												a
-													.getContext('2d')
-													.drawImage(e.player.video, 0, 0, a.width, a.height),
-												a.toBlob(function (e) {
-													t = URL.createObjectURL(e)
-													return t // return URL
-												}),
-												e.player.events.trigger('screenshot', t)
+											var dataURL,
+												canvas = document.createElement('canvas')
+											canvas.width = 160
+											canvas.height = 90
+											canvas
+												.getContext('2d')
+												.drawImage(
+													e.player.video,
+													0,
+													0,
+													canvas.width,
+													canvas.height
+												)
+											var oldCanvas = document.querySelector('#player canvas')
+											var parentNode = document.querySelector(
+												'#player .dplayer-bar-preview'
+											)
+											if (oldCanvas) {
+												parentNode.removeChild(oldCanvas) // 移除舊的畫布節點
+												parentNode.appendChild(canvas) // 插入新的畫布節點
+											} else {
+												parentNode.appendChild(canvas) // 插入新的畫布節點
+											}
+											e.player.events.trigger('screenshot', dataURL)
 										}
 									)
 							},
@@ -4286,6 +4269,7 @@
 							},
 						},
 					]) && ve(t.prototype, a),
+					n && ve(t, n),
 					e
 				)
 			})()
@@ -4432,7 +4416,7 @@
 							)
 					}
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
@@ -4468,6 +4452,7 @@
 							},
 						},
 					]) && ge(t.prototype, a),
+					n && ge(t, n),
 					e
 				)
 			})()
@@ -4481,211 +4466,209 @@
 				}
 			}
 			var ke = (function () {
-					function e(t) {
-						var a = this
-						!(function (e, t) {
-							if (!(e instanceof t))
-								throw new TypeError('Cannot call a class as a function')
-						})(this, e),
-							(this.player = t),
-							this.player.template.mask.addEventListener('click', function () {
-								a.hide()
-							}),
-							this.player.template.commentButton.addEventListener(
-								'click',
-								function () {
-									a.show()
-								}
-							),
-							this.player.template.commentSettingButton.addEventListener(
-								'click',
-								function () {
-									a.toggleSetting()
-								}
-							),
-							this.player.template.commentColorSettingBox.addEventListener(
-								'click',
-								function () {
-									if (
-										a.player.template.commentColorSettingBox.querySelector(
-											'input:checked+span'
-										)
-									) {
-										var e = a.player.template.commentColorSettingBox.querySelector(
-											'input:checked'
-										).value
-										;(a.player.template.commentSettingFill.style.fill = e),
-											(a.player.template.commentInput.style.color = e),
-											(a.player.template.commentSendFill.style.fill = e)
-									}
-								}
-							),
-							this.player.template.commentInput.addEventListener(
-								'click',
-								function () {
-									a.hideSetting()
-								}
-							),
-							this.player.template.commentInput.addEventListener(
-								'keydown',
-								function (e) {
-									13 === (e || window.event).keyCode && a.send()
-								}
-							),
-							this.player.template.commentSendButton.addEventListener(
-								'click',
-								function () {
-									a.send()
-								}
-							)
-					}
-					var t, a
-					return (
-						(t = e),
-						(a = [
-							{
-								key: 'show',
-								value: function () {
-									;(this.player.controller.disableAutoHide = !0),
-										this.player.template.controller.classList.add(
-											'dplayer-controller-comment'
-										),
-										this.player.template.mask.classList.add(
-											'dplayer-mask-show'
-										),
-										this.player.container.classList.add(
-											'dplayer-show-controller'
-										),
-										this.player.template.commentInput.focus()
-								},
-							},
-							{
-								key: 'hide',
-								value: function () {
-									this.player.template.controller.classList.remove(
-										'dplayer-controller-comment'
-									),
-										this.player.template.mask.classList.remove(
-											'dplayer-mask-show'
-										),
-										this.player.container.classList.remove(
-											'dplayer-show-controller'
-										),
-										(this.player.controller.disableAutoHide = !1),
-										this.hideSetting()
-								},
-							},
-							{
-								key: 'showSetting',
-								value: function () {
-									this.player.template.commentSettingBox.classList.add(
-										'dplayer-comment-setting-open'
-									)
-								},
-							},
-							{
-								key: 'hideSetting',
-								value: function () {
-									this.player.template.commentSettingBox.classList.remove(
-										'dplayer-comment-setting-open'
-									)
-								},
-							},
-							{
-								key: 'toggleSetting',
-								value: function () {
-									this.player.template.commentSettingBox.classList.contains(
-										'dplayer-comment-setting-open'
-									)
-										? this.hideSetting()
-										: this.showSetting()
-								},
-							},
-							{
-								key: 'send',
-								value: function () {
-									var e = this
-									this.player.template.commentInput.blur(),
-										this.player.template.commentInput.value.replace(
-											/^\s+|\s+$/g,
-											''
-										)
-											? this.player.danmaku.send(
-													{
-														text: this.player.template.commentInput.value,
-														color: r.color2Number(
-															this.player.container.querySelector(
-																'.dplayer-comment-setting-color input:checked'
-															).value
-														),
-														type: parseInt(
-															this.player.container.querySelector(
-																'.dplayer-comment-setting-type input:checked'
-															).value
-														),
-													},
-													function () {
-														;(e.player.template.commentInput.value = ''),
-															e.hide()
-													}
-											  )
-											: this.player.notice(
-													this.player.tran('Please input danmaku content!')
-											  )
-								},
-							},
-						]) && xe(t.prototype, a),
-						e
-					)
-				})(),
-				Se = function e(t) {
+				function e(t) {
+					var a = this
 					!(function (e, t) {
 						if (!(e instanceof t))
 							throw new TypeError('Cannot call a class as a function')
 					})(this, e),
-						t.options.hotkey &&
-							document.addEventListener('keydown', function (e) {
-								if (t.focus) {
-									var a = document.activeElement.tagName.toUpperCase(),
-										n = document.activeElement.getAttribute('contenteditable')
-									if (
-										'INPUT' !== a &&
-										'TEXTAREA' !== a &&
-										'' !== n &&
-										'true' !== n
-									) {
-										var o,
-											r = e || window.event
-										switch (r.keyCode) {
-											case 32:
-												r.preventDefault(), t.toggle()
-												break
-											case 37:
-												if ((r.preventDefault(), t.options.live)) break
-												t.seek(t.video.currentTime - 5),
-													t.controller.setAutoHide()
-												break
-											case 39:
-												if ((r.preventDefault(), t.options.live)) break
-												t.seek(t.video.currentTime + 5),
-													t.controller.setAutoHide()
-												break
-											case 38:
-												r.preventDefault(), (o = t.volume() + 0.1), t.volume(o)
-												break
-											case 40:
-												r.preventDefault(), (o = t.volume() - 0.1), t.volume(o)
-										}
+						(this.player = t),
+						this.player.template.mask.addEventListener('click', function () {
+							a.hide()
+						}),
+						this.player.template.commentButton.addEventListener(
+							'click',
+							function () {
+								a.show()
+							}
+						),
+						this.player.template.commentSettingButton.addEventListener(
+							'click',
+							function () {
+								a.toggleSetting()
+							}
+						),
+						this.player.template.commentColorSettingBox.addEventListener(
+							'click',
+							function () {
+								if (
+									a.player.template.commentColorSettingBox.querySelector(
+										'input:checked+span'
+									)
+								) {
+									var e = a.player.template.commentColorSettingBox.querySelector(
+										'input:checked'
+									).value
+									;(a.player.template.commentSettingFill.style.fill = e),
+										(a.player.template.commentInput.style.color = e),
+										(a.player.template.commentSendFill.style.fill = e)
+								}
+							}
+						),
+						this.player.template.commentInput.addEventListener(
+							'click',
+							function () {
+								a.hideSetting()
+							}
+						),
+						this.player.template.commentInput.addEventListener(
+							'keydown',
+							function (e) {
+								13 === (e || window.event).keyCode && a.send()
+							}
+						),
+						this.player.template.commentSendButton.addEventListener(
+							'click',
+							function () {
+								a.send()
+							}
+						)
+				}
+				var t, a, n
+				return (
+					(t = e),
+					(a = [
+						{
+							key: 'show',
+							value: function () {
+								;(this.player.controller.disableAutoHide = !0),
+									this.player.template.controller.classList.add(
+										'dplayer-controller-comment'
+									),
+									this.player.template.mask.classList.add('dplayer-mask-show'),
+									this.player.container.classList.add(
+										'dplayer-show-controller'
+									),
+									this.player.template.commentInput.focus()
+							},
+						},
+						{
+							key: 'hide',
+							value: function () {
+								this.player.template.controller.classList.remove(
+									'dplayer-controller-comment'
+								),
+									this.player.template.mask.classList.remove(
+										'dplayer-mask-show'
+									),
+									this.player.container.classList.remove(
+										'dplayer-show-controller'
+									),
+									(this.player.controller.disableAutoHide = !1),
+									this.hideSetting()
+							},
+						},
+						{
+							key: 'showSetting',
+							value: function () {
+								this.player.template.commentSettingBox.classList.add(
+									'dplayer-comment-setting-open'
+								)
+							},
+						},
+						{
+							key: 'hideSetting',
+							value: function () {
+								this.player.template.commentSettingBox.classList.remove(
+									'dplayer-comment-setting-open'
+								)
+							},
+						},
+						{
+							key: 'toggleSetting',
+							value: function () {
+								this.player.template.commentSettingBox.classList.contains(
+									'dplayer-comment-setting-open'
+								)
+									? this.hideSetting()
+									: this.showSetting()
+							},
+						},
+						{
+							key: 'send',
+							value: function () {
+								var e = this
+								this.player.template.commentInput.blur(),
+									this.player.template.commentInput.value.replace(
+										/^\s+|\s+$/g,
+										''
+									)
+										? this.player.danmaku.send(
+												{
+													text: this.player.template.commentInput.value,
+													color: r.color2Number(
+														this.player.container.querySelector(
+															'.dplayer-comment-setting-color input:checked'
+														).value
+													),
+													type: parseInt(
+														this.player.container.querySelector(
+															'.dplayer-comment-setting-type input:checked'
+														).value
+													),
+												},
+												function () {
+													;(e.player.template.commentInput.value = ''), e.hide()
+												}
+										  )
+										: this.player.notice(
+												this.player.tran('Please input danmaku content!')
+										  )
+							},
+						},
+					]) && xe(t.prototype, a),
+					n && xe(t, n),
+					e
+				)
+			})()
+			var Se = function e(t) {
+				!(function (e, t) {
+					if (!(e instanceof t))
+						throw new TypeError('Cannot call a class as a function')
+				})(this, e),
+					t.options.hotkey &&
+						document.addEventListener('keydown', function (e) {
+							if (t.focus) {
+								var a = document.activeElement.tagName.toUpperCase(),
+									n = document.activeElement.getAttribute('contenteditable')
+								if (
+									'INPUT' !== a &&
+									'TEXTAREA' !== a &&
+									'' !== n &&
+									'true' !== n
+								) {
+									var o,
+										r = e || window.event
+									switch (r.keyCode) {
+										case 32:
+											r.preventDefault(), t.toggle()
+											break
+										case 37:
+											if ((r.preventDefault(), t.options.live)) break
+											t.seek(t.video.currentTime - 5),
+												t.controller.setAutoHide()
+											break
+										case 39:
+											if ((r.preventDefault(), t.options.live)) break
+											t.seek(t.video.currentTime + 5),
+												t.controller.setAutoHide()
+											break
+										case 38:
+											r.preventDefault(), (o = t.volume() + 0.1), t.volume(o)
+											break
+										case 40:
+											r.preventDefault(), (o = t.volume() - 0.1), t.volume(o)
 									}
 								}
-							}),
-						document.addEventListener('keydown', function (e) {
-							switch ((e || window.event).keyCode) {
-								case 27:
-									t.fullScreen.isFullScreen('web') && t.fullScreen.cancel('web')
 							}
-						})
-				}
+						}),
+					document.addEventListener('keydown', function (e) {
+						switch ((e || window.event).keyCode) {
+							case 27:
+								t.fullScreen.isFullScreen('web') && t.fullScreen.cancel('web')
+						}
+					})
+			}
 			function Te(e, t) {
 				for (var a = 0; a < t.length; a++) {
 					var n = t[a]
@@ -4725,7 +4708,7 @@
 							}
 						})
 				}
-				var t, a
+				var t, a, n
 				return (
 					(t = e),
 					(a = [
@@ -4763,6 +4746,7 @@
 							},
 						},
 					]) && Te(t.prototype, a),
+					n && Te(t, n),
 					e
 				)
 			})()
@@ -4793,7 +4777,7 @@
 								}
 							)
 					}
-					var t, a
+					var t, a, n
 					return (
 						(t = e),
 						(a = [
@@ -4848,6 +4832,7 @@
 								},
 							},
 						]) && Ee(t.prototype, a),
+						n && Ee(t, n),
 						e
 					)
 				})(),
@@ -4878,7 +4863,7 @@
 					e
 				)
 			}
-			function Oe(e, t) {
+			function Ae(e, t) {
 				for (var a = 0; a < t.length; a++) {
 					var n = t[a]
 					;(n.enumerable = n.enumerable || !1),
@@ -4887,7 +4872,7 @@
 						Object.defineProperty(e, n.key, n)
 				}
 			}
-			var Ae = 0,
+			var Oe = 0,
 				Pe = [],
 				je = (function () {
 					function e(t) {
@@ -4945,7 +4930,7 @@
 							(this.template = new K({
 								container: this.container,
 								options: this.options,
-								index: Ae,
+								index: Oe,
 								tran: this.tran,
 							})),
 							(this.video = this.template.video),
@@ -5013,7 +4998,7 @@
 							),
 							(this.infoPanel = new qe(this)),
 							!this.danmaku && this.options.autoplay && this.play(),
-							Ae++,
+							Oe++,
 							Pe.push(this)
 					}
 					var t, a, o
@@ -5486,19 +5471,12 @@
 										this.events.trigger('destroy')
 								},
 							},
-						]) && Oe(t.prototype, a),
-						o && Oe(t, o),
+						]) && Ae(t.prototype, a),
+						o && Ae(t, o),
 						e
 					)
 				})()
-			console.log(
-				'\n'
-					.concat(' %c DPlayer v', '1.26.0', ' ')
-					.concat('63275c8', ' %c http://dplayer.js.org ', '\n', '\n'),
-				'color: #fadfa3; background: #030307; padding:5px 0;',
-				'background: #fadfa3; padding:5px 0;'
-			),
-				(t.default = je)
+			t.default = je
 		},
 	]).default
 })
