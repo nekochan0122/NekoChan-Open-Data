@@ -229,6 +229,9 @@ function requestSearch(params, resultCallback) {
 
 // 渲染文件列表
 function list(path) {
+	for (let i = 0; i < imgSrc.length; i++) {
+		img.src = `${imgSrc[i]}%E5%B0%81%E9%9D%A2.webp`
+	}
 	let timeout1 = null, timeout2 = null, href = null // 計時器, 資料夾預覽圖, 連結
 	let content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
@@ -400,7 +403,7 @@ function append_files_to_list(path, files) {
 	let is_lastpage_loaded = null === $list.data('nextPageToken')
 	let is_firstpage = '0' == $list.data('curPageIndex')
 
-	let file_count = 0 // 檔案數量
+	let file_count = 0 , img = new Image() // 檔案數量, 圖片物件(緩存用)
 
 	html = ''
 	let targetFiles = []
@@ -415,11 +418,13 @@ function append_files_to_list(path, files) {
 
 		item['size'] = formatFileSize(item['size'])
 		if (item['mimeType'] == 'application/vnd.google-apps.folder') {
-			// 資料夾顏色處理
+			// 資料夾顏色處理 & 封面緩存
 			if (/連載中/.test(item.name)) {
 				className = 'updating'
+				img.src = `${p}%E5%B0%81%E9%9D%A2.webp` // 封面緩存
 			} else if (/完結/.test(item.name)) {
 				className = 'finish'
+				img.src = `${p}%E5%B0%81%E9%9D%A2.webp` // 封面緩存
 			} else if (/R18/.test(item.name)) {
 				className = 'r18'
 			} else {
