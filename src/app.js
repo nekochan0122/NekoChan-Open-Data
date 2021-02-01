@@ -492,6 +492,7 @@ function append_files_to_list(path, files) {
  */
 function render_search_result_list() {
 	let timeout1 = null, timeout2 = null, href = null // 計時器, 資料夾預覽圖, 連結
+	let cur = window.current_drive_order // 資料夾預覽圖 (搜尋用 變量)
 	let content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
@@ -547,23 +548,27 @@ function render_search_result_list() {
 			// 如果不是最後一頁，append數據 ，並綁定 scroll 事件（如果還未綁定），更新 scroll_status
 			append_search_result_to_list(res['data']['files'])
 			// 資料夾預覽圖
-				$('.clickFolder').hover(
-					function () {
-						href = `${this.querySelector('a.folder').href}封面.webp`
-						timeout1 = setTimeout(() => {
-							$('#folderIMGElementSrc').attr('src', href)
-						}, 800)
-						timeout2 = setTimeout(() => {
-							$('#folderIMGElement').show()
-						}, 1500)
-					},
-					() => {
-						clearTimeout(timeout1)
-						clearTimeout(timeout2)
-						$('#folderIMGElementSrc').attr('src','') // 更改 img src
-						$('#folderIMGElement').hide()
-					}
-				)
+			$('.clickFolder').hover(
+				function () {
+					$.post(`/${cur}:id2path`, { id: this.querySelector('a.folder').id }, (data) => {
+						if (data) {
+							href = window.location.href = `/${cur}:${data}封面.webp`
+						}
+					})
+					timeout1 = setTimeout(() => {
+						$('#folderIMGElementSrc').attr('src', href)
+					}, 800)
+					timeout2 = setTimeout(() => {
+						$('#folderIMGElement').show()
+					}, 1500)
+				},
+				() => {
+					clearTimeout(timeout1)
+					clearTimeout(timeout2)
+					$('#folderIMGElementSrc').attr('src','') // 更改 img src
+					$('#folderIMGElement').hide()
+				}
+			)
 			if (window.scroll_status.event_bound !== true) {
 				// 綁定事件，如果還未綁定
 				$(window).on('scroll', function () {
