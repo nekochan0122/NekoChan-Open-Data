@@ -43,16 +43,6 @@ function init() {
 	$(document).mousemove((event) => {
 		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`})
 	})
-	$('.folder').hover(
-		() => {
-			console.log('show')
-			folderIMGElement.show()
-		},
-		() => {
-			console.log('hide')
-			folderIMGElement.hide()
-		}
-	)
 }
 
 function getDocumentHeight() {
@@ -358,6 +348,17 @@ function list(path) {
 			history.go(-1)
 		}
 	})
+	// 資料夾預覽圖
+	$('.folder').hover(
+		() => {
+			console.log('show')
+			$('#folderIMGElement').show()
+		},
+		() => {
+			console.log('hide')
+			$('#folderIMGElement').hide()
+		}
+	)
 }
 
 /**
