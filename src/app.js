@@ -288,8 +288,8 @@ function list(path) {
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
 				function () {
-					console.log(this.querySelector(a.folder).href)
-					href = `${this.querySelector(a.folder).href}/cover.webp'`
+					console.log(this.querySelector('a.folder').href)
+					href = `${this.querySelector('a.folder').href}/cover.webp`
 					$('#folderIMGElementSrc').attr('src', href) // 更改 img src
 					timeout = setTimeout(() => {
 						console.log('show')
