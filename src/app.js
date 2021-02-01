@@ -815,7 +815,7 @@ function file_video(path) {
 	playBtn += `<a style="left: 15px" href="${encoded_url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">直連下載檔案</a>`
 
 	let previewSwitchElement = ''
-	if (!Os.isMobile) {
+	if (!/(Android|iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
 		// 進度條預覽圖 初始化參數
 		if (localStorage.getItem('previewSwitch') == null) {
 			localStorage.setItem('previewSwitch', 'false')
@@ -1096,7 +1096,7 @@ function file_video(path) {
 
 		// 當系統是電腦時 和 進度條預覽必須啟動 才使用截圖播放器
 		if (
-			!Os.isMobile == false &&
+			!/(Android|iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) == false &&
 			localStorage.getItem('previewSwitch') == 'true'
 		) {
 			loadScreenshotPlayer() // 第一次載入截圖播放器
