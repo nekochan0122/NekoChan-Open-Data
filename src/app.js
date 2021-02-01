@@ -26,7 +26,7 @@ function init() {
 	</header>
 	<div id="folderIMGElement" class="mdui-card" style="position: absolute;max-width: 300px;left: 0px; top: 0px; z-index: 999;">
 		<div class="mdui-card-media">
-			<img src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.0.min6/images/image_1.webp">
+			<img id="folderIMGElementSrc" src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.0.min6/images/image_1.webp">
 			<div class="mdui-card-media-covered">
 				<div class="mdui-card-primary">
 					<div class="mdui-card-primary-title">Title</div>
@@ -288,15 +288,17 @@ function list(path) {
 			// 如果不是最後一頁，append數據 ，並綁定 scroll 事件（如果還未綁定），更新 scroll_status
 			append_files_to_list(path, res['data']['files'])
 			// 資料夾預覽圖
-			$('.folder').hover(
+			$('.clickFolder').hover(
 				() => {
+					$('#folderIMGElementSrc').attr('src',`${$('a.folder').attr('href')}cover.webp`) // 更改 img src
 					timeout = setTimeout(() => {
 						console.log('show')
 						$('#folderIMGElement').show()
-					}, 2000)
+					}, 1500)
 				},
 				() => {
 					clearTimeout(timeout)
+					$('#folderIMGElementSrc').attr('src','//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.0.min6/images/image_1.webp') // 更改 img src
 					console.log('hide')
 					$('#folderIMGElement').hide()
 				}
@@ -401,7 +403,7 @@ function append_files_to_list(path, files) {
 			} else {
 				className = ''
 			}
-			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2 folder"><a href="${p}" class="folder">
+			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2 clickFolder"><a href="${p}" class="folder">
 				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}" title="${item.name}">
 					<i class="mdui-icon material-icons">folder_open</i>
 					${item.name}
@@ -613,7 +615,7 @@ function append_search_result_to_list(files) {
 		item['size'] = formatFileSize(item['size'])
 		if (item['mimeType'] == 'application/vnd.google-apps.folder') {
 			// 資料夾顏色處理
-		if (/連載中/.test(item.name)) {
+			if (/連載中/.test(item.name)) {
 				className = 'updating'
 			} else if (/完結/.test(item.name)) {
 				className = 'finish'
@@ -622,7 +624,7 @@ function append_search_result_to_list(files) {
 			} else {
 				className = ''
 			}
-			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2 folder"><a id="${item['id']}" onclick="onSearchResultItemClick(this)" class="folder">
+			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2 clickFolder"><a id="${item['id']}" onclick="onSearchResultItemClick(this)" class="folder">
 					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}" title="${item.name}">
 						<i class="mdui-icon material-icons">folder_open</i>
 						${item.name}
