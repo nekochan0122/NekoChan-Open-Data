@@ -379,7 +379,6 @@ function append_files_to_list(path, files) {
 
 	let className = ''
 	for (i in files) {
-		className = '' // 重置 className
 		let item = files[i]
 		let p = `${path + item.name}/`
 		if (item['size'] == undefined) {
@@ -388,20 +387,22 @@ function append_files_to_list(path, files) {
 
 		item['size'] = formatFileSize(item['size'])
 		if (item['mimeType'] == 'application/vnd.google-apps.folder') {
-			// 資料夾
+			// 資料夾顏色處理
 			if (/連載中/.test(item.name)) {
 				className = 'updating'
 			} else if (/完結/.test(item.name)) {
 				className = 'finish'
 			} else if (/R18/.test(item.name)) {
 				className = 'r18'
+			} else {
+				className = ''
 			}
 			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2"><a href="${p}" class="folder">
 				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}" title="${item.name}">
 					<i class="mdui-icon material-icons">folder_open</i>
 					${item.name}
 					</div>
-				<div class="mdui-col-sm-2 mdui-text-right updating">${item['size']}</div>
+				<div class="mdui-col-sm-2 mdui-text-right ${className}">${item['size']}</div>
 				</a>
 			</li>`
 			// colorFolder('', item.name, '', p, item)
