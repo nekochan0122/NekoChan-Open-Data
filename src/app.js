@@ -814,16 +814,18 @@ function file_video(path) {
 	}
 	playBtn += `<a style="left: 15px" href="${encoded_url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">直連下載檔案</a>`
 
-	// 進度條預覽圖 初始化參數
-	if (localStorage.getItem('previewSwitch') == null) {
-		localStorage.setItem('previewSwitch', 'false')
-	}
-	// 進度條預覽圖 元素判斷
-	let previewSwitchElement = ''
-	if (localStorage.getItem('previewSwitch') == 'false') {
-		previewSwitchElement = `<input id="previewSwitch" type="checkbox"/>`
-	} else if (localStorage.getItem('previewSwitch') == 'true') {
-		previewSwitchElement = `<input id="previewSwitch" type="checkbox" checked/>`
+	if (!isMobile) {
+		// 進度條預覽圖 初始化參數
+		if (localStorage.getItem('previewSwitch') == null) {
+			localStorage.setItem('previewSwitch', 'false')
+		}
+		// 進度條預覽圖 元素判斷
+		let previewSwitchElement = ''
+		if (localStorage.getItem('previewSwitch') == 'false') {
+			previewSwitchElement = `<input id="previewSwitch" type="checkbox"/>`
+		} else if (localStorage.getItem('previewSwitch') == 'true') {
+			previewSwitchElement = `<input id="previewSwitch" type="checkbox" checked/>`
+		}
 	}
 
 	let content = `
@@ -854,10 +856,6 @@ function file_video(path) {
 	</div>
     `
 	$('#content').html(content)
-	// 除了電腦設備以外不顯示 進度條預覽切換
-	if (!/(WIN|MAC)/i.test(navigator.userAgent)) {
-		$('.mdui-switch').hide()
-	}
 
 	$(document).ready(() => {
 		// DPlayer Script 未正常載入則刷新網頁
@@ -1098,7 +1096,7 @@ function file_video(path) {
 
 		// 當系統是電腦時 和 進度條預覽必須啟動 才使用截圖播放器
 		if (
-			/(WIN|MAC)/i.test(navigator.userAgent) &&
+			!isMobile == false &&
 			localStorage.getItem('previewSwitch') == 'true'
 		) {
 			loadScreenshotPlayer() // 第一次載入截圖播放器
