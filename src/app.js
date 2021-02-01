@@ -24,7 +24,7 @@ function init() {
 		} ${UI.dark_mode ? 'mdui-text-color-white-text' : ''}">
 	</div>
 	</header>
-	<div id="folderIMGElement" class="mdui-card" style="display: none;position: absolute;max-width: 300px;left: 0px; top: 0px; z-index: 999;">
+	<div id="folderIMGElement" class="mdui-card" style="position: absolute;max-width: 300px;left: 0px; top: 0px; z-index: 999;">
 		<div class="mdui-card-media">
 			<img src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.0.min6/images/image_1.webp">
 			<div class="mdui-card-media-covered">
@@ -37,6 +37,7 @@ function init() {
 	<div id="folderPath" class="mdui-container"></div>
 	<div id="content" class="mdui-container mdui-shadow-16"></div>`
 	$('body').html(html)
+	folderIMGElement.hide()
 	// 資料夾預覽圖
 	const folderIMGElement = $('#folderIMGElement')
 	$(document).mousemove((event) => {
