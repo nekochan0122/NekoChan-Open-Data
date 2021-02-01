@@ -39,8 +39,8 @@ function init() {
 	$('body').html(html)
 	// const folderIMG = $('#folderIMG')
 	$('document').mousemove((event) => (
-		$('#folderIMG').css({'left':`${event.pageX}px`, 'top':`${event.pageY}`})
-		// console.log(`X: ${event.pageX} Y:${event.pageY}`)
+		// $('#folderIMG').css({'left':`${event.pageX}px`, 'top':`${event.pageY}`})
+		console.log(`X: ${event.pageX} Y:${event.pageY}`)
 	))
 }
 
