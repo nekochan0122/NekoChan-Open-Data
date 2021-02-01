@@ -39,9 +39,9 @@ function init() {
 	$('body').html(html)
 	const folderIMG = $('#folderIMG')
 	$(document).mousemove((mouseEvent) => (
-		folderIMG.css({'left':`${mouseEvent.pageX}px`, 'top':`${mouseEvent.pageY + 315}px`})
+		folderIMG.css({'left':`${mouseEvent.pageX}px`, 'top':`${mouseEvent.pageY - 315}px`})
 		// $(window).scroll(() => (
-		// 	folderIMG.css({'left':`${mouseEvent.pageX}px`, 'top':`${mouseEvent.pageY + 315}px`})
+		// 	folderIMG.css({'left':`${mouseEvent.pageX}px`, 'top':`${mouseEvent.pageY - 315}px`})
 		// ))
 	))
 }
