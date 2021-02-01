@@ -24,6 +24,22 @@ function init() {
 		} ${UI.dark_mode ? 'mdui-text-color-white-text' : ''}">
 	</div>
 	</header>
+	<div id="previewFolder" class="mdui-container" style="position: absolute">
+		<div class="mdui-row" >
+			<div class="mdui-col-sm-6 mdui-col-md-4">
+				<div class="mdui-card">
+					<div class="mdui-card-media">
+						<img src="//cdn.w3cbus.com/mdui.org/docs/assets/docs/img/card.jpg"/>
+						<div class="mdui-card-media-covered">
+							<div class="mdui-card-primary">
+								<div class="mdui-card-primary-title">Title</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div id="folderPath" class="mdui-container"></div>
 	<div id="content" class="mdui-container mdui-shadow-16"></div>`
 	$('body').html(html)
@@ -125,9 +141,7 @@ html += `</ul>`;*/
 				// 只顯示資料夾
 				if (
 					n == '' ||
-					/md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv/.test(
-						n
-					)
+					/md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv/.test(n)
 				) {
 					break
 				}
