@@ -1,7 +1,5 @@
 // NekoChan Open Data
 
-const { time } = require("console")
-
 // 系統識別
 const Os = {
 	isWindows: navigator.platform.toUpperCase().includes('WIN'), // .includes
@@ -233,6 +231,7 @@ function requestSearch(params, resultCallback) {
 
 // 渲染文件列表
 function list(path) {
+	let timeout = null // 資料夾預覽圖 計時器變數
 	let content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
@@ -289,7 +288,6 @@ function list(path) {
 			// 如果不是最後一頁，append數據 ，並綁定 scroll 事件（如果還未綁定），更新 scroll_status
 			append_files_to_list(path, res['data']['files'])
 			// 資料夾預覽圖
-			let timeout = null
 			$('.folder').hover(
 				() => {
 					timeout = setTimeout(() => {
