@@ -1,8 +1,5 @@
 // NekoChan Open Data
 
-// 滑鼠位置
-// let mouseX = 0, mouseY = 0
-
 // 系統識別
 const Os = {
 	isWindows: navigator.platform.toUpperCase().includes('WIN'), // .includes
@@ -39,7 +36,6 @@ function init() {
 	const folderIMGElement = $('#folderIMGElement')
 	folderIMGElement.hide()
 	$(document).mousemove((event) => {
-		// mouseX = event.pageX, mouseY = event.pageY
 		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
 	})
 	$(window).scroll(() => {
@@ -233,7 +229,7 @@ function requestSearch(params, resultCallback) {
 
 // 渲染文件列表
 function list(path) {
-	let timeout = null, hoverFolder = null // 資料夾預覽圖, 停留選擇的資料夾
+	let timeout = null, href = null // 資料夾預覽圖, 停留選擇的資料夾
 	let content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
@@ -292,12 +288,9 @@ function list(path) {
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
 				function () {
-					// $(elemSet).nearest(pointObject[, options])
-					// console.log(`X: ${mouseX}, Y: ${mouseY}`)
-					// hoverFolder = $.touching({x: mouseX, y: mouseY}, '.clickFolder')
-					// hoverFolder = document.elementFromPoint(mouseX - window.pageXOffset, mouseY - window.pageYOffset)
-					console.log(this)
-					// $('#folderIMGElementSrc').attr('src',`${$('a.folder').attr('href')}/cover.webp`) // 更改 img src
+					console.log(this.querySelector(a.folder).href)
+					href = `${this.querySelector(a.folder).href}/cover.webp'`
+					$('#folderIMGElementSrc').attr('src', href) // 更改 img src
 					timeout = setTimeout(() => {
 						console.log('show')
 						$('#folderIMGElement').show()
