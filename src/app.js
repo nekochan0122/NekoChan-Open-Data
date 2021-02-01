@@ -551,6 +551,7 @@ function render_search_result_list() {
 			$('.clickFolder').hover(
 				function () {
 					$.post(`/${cur}:id2path`, { id: this.querySelector('a.folder').id }, (data) => {
+						console.log(data)
 						if (data) {
 							href = window.location.href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
 						}
