@@ -380,10 +380,6 @@ function append_files_to_list(path, files) {
 				<div class="mdui-col-sm-2 mdui-text-right ${className}">${item['size']}</div>
 				</a>
 			</li>`
-			// colorFolder('', item.name, '', p, item)
-			// colorFolder('連載中', item.name, 'updating', p, item)
-			// colorFolder('完結', item.name, 'finish', p, item)
-			// colorFolder('R18', item.name, 'r18', p, item)
 		} else {
 			// 檔案
 			let p = path + item.name
