@@ -754,20 +754,16 @@ function file_video(path) {
 		}
 	}
 
+	// WIN 串流播放器
 	let playBtn = `<a href="potplayer://${encoded_url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent windows-btn">PotPlayer 串流</a>`
-	if (/(Mac)/i.test(navigator.userAgent)) {
-		playBtn = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent mac-btn" data-href="iina://open?url=${encoded_url}">IINA 串流</button>`
-	} else if (/(Android)/i.test(navigator.userAgent)) {
-		playBtn = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">MXPlayer Pro 串流</button>`
-		playBtn += `<button style="left: 15px" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">MXPlayer Free 串流</button>`
-	} else if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-		let applelink = url.replace(/(^\w+:|^)\/\//, '')
-		playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="infuse://${applelink}">Infuse 串流</a>`
-	}
-	playBtn += `<a style="left: 15px" href="${encoded_url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">直連下載檔案</a>`
-
+	// 進度條預覽圖切換元素
 	let previewSwitchElement = ''
+	// 系統檢測
 	if (!Os.isMobile) {
+		// MAC 串流播放器
+		if (/(Mac)/i.test(navigator.userAgent)) {
+			playBtn = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent mac-btn" data-href="iina://open?url=${encoded_url}">IINA 串流</button>`
+		}
 		// 進度條預覽圖 初始化參數
 		if (localStorage.getItem('previewSwitch') == null) {
 			localStorage.setItem('previewSwitch', 'false')
@@ -778,7 +774,18 @@ function file_video(path) {
 		} else if (localStorage.getItem('previewSwitch') == 'true') {
 			previewSwitchElement = `<input id="previewSwitch" type="checkbox" checked/>`
 		}
+	} else {
+		// 移動端串流播放器
+		if (/(Android)/i.test(navigator.userAgent)) {
+			playBtn = `<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">MXPlayer Pro 串流</button>`
+			playBtn += `<button style="left: 15px" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">MXPlayer Free 串流</button>`
+		} else if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+			let applelink = url.replace(/(^\w+:|^)\/\//, '')
+			playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="infuse://${applelink}">Infuse 串流</a>`
+		}
 	}
+	// 直連下載
+	playBtn += `<a style="left: 15px" href="${encoded_url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">直連下載檔案</a>`
 
 	let content = `
 	<div class="mdui-container-fluid">
