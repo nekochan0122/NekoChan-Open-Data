@@ -37,9 +37,9 @@ function init() {
 	<div id="folderPath" class="mdui-container"></div>
 	<div id="content" class="mdui-container mdui-shadow-16"></div>`
 	$('body').html(html)
-	// const folderIMG = $('#folderIMG')
+	const folderIMG = $('#folderIMG')
 	$(document).mousemove((event) => (
-		$('#folderIMG').css({'left':`${event.pageX}px`, 'top':`${event.pageY}`})
+		folderIMG.css({'left':`${event.pageX}px`, 'top':`${event.pageY}`})
 		// console.log(`X: ${event.pageX} Y:${event.pageY}`)
 	))
 }
