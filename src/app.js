@@ -333,6 +333,17 @@ function list(path) {
 
 		// loading 成功，並成功渲染了新數據之後，釋放 loading 鎖，以便能继续處理 "滾動到底部" 事件
 		if (window.scroll_status.loading_lock === true) {
+			// 資料夾預覽圖
+			$('.folder').hover(
+				() => {
+					console.log('show')
+					$('#folderIMGElement').show()
+				},
+				() => {
+					console.log('hide')
+					$('#folderIMGElement').hide()
+				}
+			)
 			window.scroll_status.loading_lock = false
 		}
 	}
@@ -348,17 +359,6 @@ function list(path) {
 			history.go(-1)
 		}
 	})
-	// 資料夾預覽圖
-	$('.folder').hover(
-		() => {
-			console.log('show')
-			$('#folderIMGElement').show()
-		},
-		() => {
-			console.log('hide')
-			$('#folderIMGElement').hide()
-		}
-	)
 }
 
 /**
