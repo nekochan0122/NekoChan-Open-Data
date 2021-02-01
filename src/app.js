@@ -290,7 +290,7 @@ function list(path) {
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
 				() => {
-					$('#folderIMGElementSrc').attr('src',`${$('a.folder').attr('href')}cover.webp`) // 更改 img src
+					// $('#folderIMGElementSrc').attr('src',`${$('a.folder').attr('href')}/cover.webp`) // 更改 img src
 					timeout = setTimeout(() => {
 						console.log('show')
 						$('#folderIMGElement').show()
