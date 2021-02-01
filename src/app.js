@@ -40,19 +40,18 @@ function init() {
 	// 資料夾預覽圖
 	const folderIMGElement = $('#folderIMGElement')
 	$(document).mousemove((event) => {
-		console.log(`${event.pageX, event.pageY}`)
 		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`})
-		$(".folder").hover(
-			function () {
-				console.log('show')
-				folderIMGElement.show()
-			},
-			function () {
-				console.log('hide')
-				folderIMGElement.hide()
-			}
-		);
 	})
+	$(".folder").hover(
+		function () {
+			console.log('show')
+			folderIMGElement.show()
+		},
+		function () {
+			console.log('hide')
+			folderIMGElement.hide()
+		}
+	);
 }
 
 function getDocumentHeight() {
