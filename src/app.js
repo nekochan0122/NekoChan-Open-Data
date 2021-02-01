@@ -290,21 +290,20 @@ function list(path) {
 				function () {
 					// console.log(this.querySelector('a.folder').href)
 					href = `${this.querySelector('a.folder').href}cover.webp`
-					try {
-						$.ajax({
-							url: href,
-							type: 'GET',
-							complete: (response) => {
-								if (response.status == 200) {
-									$('#folderIMGElementSrc').attr('src', href) // 更改 img src
-								} else {
-									$('#folderIMGElementSrc').attr('src', '//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.2.beta52/images/no-cover.webp') // 無圖片 更改 img src
-								}
+					$.ajax({
+						url: href,
+						type: 'GET',
+						error: () => {
+							console.log('無封面')
+						},
+						complete: (response) => {
+							if (response.status == 200) {
+								$('#folderIMGElementSrc').attr('src', href) // 更改 img src
+							} else {
+								$('#folderIMGElementSrc').attr('src', '//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.2.beta52/images/no-cover.webp') // 無圖片 更改 img src
 							}
-						})
-					} catch (error) {
-						console.log('無封面')
-					}
+						}
+					})
 					timeout = setTimeout(() => {
 						// console.log('show')
 						$('#folderIMGElement').show()
