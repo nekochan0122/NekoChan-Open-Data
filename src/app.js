@@ -36,7 +36,10 @@ function init() {
 	const folderIMGElement = $('#folderIMGElement')
 	folderIMGElement.hide()
 	$(document).mousemove((event) => {
-		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`})
+		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
+	})
+	$(window).scroll(() => {
+		folderIMGElement.hide() // 滾動時隱藏 資料夾預覽圖元素
 	})
 }
 
