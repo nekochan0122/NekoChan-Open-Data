@@ -43,7 +43,7 @@ function init() {
 	$(document).mousemove((event) => {
 		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`})
 	})
-	$(".folder").hover(
+	$('.folder').hover(
 		() => {
 			console.log('show')
 			folderIMGElement.show()
