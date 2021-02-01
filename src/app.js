@@ -37,6 +37,20 @@ function init() {
 	<div id="folderPath" class="mdui-container"></div>
 	<div id="content" class="mdui-container mdui-shadow-16"></div>`
 	$('body').html(html)
+	// 資料夾預覽圖
+	const folderIMGElement = $('#folderIMG')
+	const folder = $('.mdui-list-item.mdui-ripple.mdui-shadow-2')
+	$(document).mousemove((event) => {
+		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`})
+		folder.hover(
+			() => { // 在資料夾元素上
+				folderIMGElement.show()
+			},
+			() => { // 不在在資料夾元素上
+				folderIMGElement.hide()
+			}
+		)
+	})
 }
 
 function getDocumentHeight() {
@@ -342,24 +356,6 @@ function list(path) {
 			history.go(-1)
 		}
 	})
-
-	// 資料夾預覽圖
-	const folderIMGElement = $('#folderIMG')
-	const folder = $('.mdui-list-item.mdui-ripple.mdui-shadow-2')
-	$(document).mousemove((event) => {
-		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`})
-		folder.hover(
-			() => { // 在資料夾元素上
-				folderIMGElement.show()
-			},
-			() => { // 不在在資料夾元素上
-				folderIMGElement.hide()
-			}
-		)
-	})
-	// $(window).scroll(() => {
-	// 	folderIMGElement.css({'left':`${mouseEvent.pageX}px`, 'top':`${mouseEvent.pageY - 250}px`})
-	// })
 }
 
 /**
