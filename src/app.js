@@ -229,7 +229,7 @@ function requestSearch(params, resultCallback) {
 
 // 渲染文件列表
 function list(path) {
-	let timeout = null // 資料夾預覽圖 計時器變數
+	let timeout = null, hoverFolder = null // 資料夾預覽圖, 停留選擇的資料夾
 	let content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
@@ -289,6 +289,9 @@ function list(path) {
 			$('.clickFolder').hover(
 				() => {
 					// $('#folderIMGElementSrc').attr('src',`${$('a.folder').attr('href')}/cover.webp`) // 更改 img src
+					// $(elemSet).nearest(pointObject[, options])
+					hoverFolder = $('.clickFolder').nearest({x: MouseEvent.clientX, y: MouseEvent.clientY})
+					console.log(hoverFolder)
 					timeout = setTimeout(() => {
 						console.log('show')
 						$('#folderIMGElement').show()
@@ -402,7 +405,7 @@ function append_files_to_list(path, files) {
 				className = ''
 			}
 			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2 clickFolder"><a href="${p}" class="folder">
-				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}" title="${item.name}">
+				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}">
 					<i class="mdui-icon material-icons">folder_open</i>
 					${item.name}
 					</div>
@@ -623,7 +626,7 @@ function append_search_result_to_list(files) {
 				className = ''
 			}
 			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2 clickFolder"><a id="${item['id']}" onclick="onSearchResultItemClick(this)" class="folder">
-					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}" title="${item.name}">
+					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}">
 						<i class="mdui-icon material-icons">folder_open</i>
 						${item.name}
 					</div>
