@@ -26,7 +26,7 @@ function init() {
 	</header>
 	<div id="folderIMGElement" class="mdui-card" style="position: absolute;max-width: 300px;left: 0px; top: 0px; z-index: 999;">
 		<div class="mdui-card-media">
-			<img id="folderIMGElementSrc" src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.0.min6/images/image_1.webp">
+			<img id="folderIMGElementSrc" src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.2.beta52/images/no-cover.webp">
 		</div>
 	</div>
 	<div id="folderPath" class="mdui-container"></div>
@@ -288,18 +288,28 @@ function list(path) {
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
 				function () {
-					console.log(this.querySelector('a.folder').href)
-					href = `${this.querySelector('a.folder').href}/cover.webp`
-					$('#folderIMGElementSrc').attr('src', href) // 更改 img src
+					// console.log(this.querySelector('a.folder').href)
+					href = `${this.querySelector('a.folder').href}cover.webp`
+					$.ajax({
+						url: href,
+						type: 'GET',
+						complete: (response) => {
+							if (response.status == 200) {
+								$('#folderIMGElementSrc').attr('src', href) // 更改 img src
+							} else {
+								$('#folderIMGElementSrc').attr('src', '//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.2.beta52/images/no-cover.webp') // 無圖片 更改 img src
+							}
+						}
+					})
 					timeout = setTimeout(() => {
-						console.log('show')
+						// console.log('show')
 						$('#folderIMGElement').show()
 					}, 1500)
 				},
 				() => {
 					clearTimeout(timeout)
-					$('#folderIMGElementSrc').attr('src','//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.0.min6/images/image_1.webp') // 更改 img src
-					console.log('hide')
+					$('#folderIMGElementSrc').attr('src','//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.2.beta52/images/no-cover.webp') // 更改 img src
+					// console.log('hide')
 					$('#folderIMGElement').hide()
 				}
 			)
