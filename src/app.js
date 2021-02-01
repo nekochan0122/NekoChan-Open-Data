@@ -294,7 +294,8 @@ function list(path) {
 				() => {
 					// $(elemSet).nearest(pointObject[, options])
 					console.log(`X: ${mouseX}, Y: ${mouseY}`)
-					hoverFolder = $.touching({x: mouseX, y: mouseY}, '.clickFolder')
+					// hoverFolder = $.touching({x: mouseX, y: mouseY}, '.clickFolder')
+					hover = document.elementFromPoint(mouseX, mouseY)
 					console.log(hoverFolder)
 					// $('#folderIMGElementSrc').attr('src',`${$('a.folder').attr('href')}/cover.webp`) // 更改 img src
 					timeout = setTimeout(() => {
