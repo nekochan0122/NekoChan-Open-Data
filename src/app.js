@@ -815,7 +815,7 @@ function file_video(path) {
 	playBtn += `<a style="left: 15px" href="${encoded_url}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent download-btn">直連下載檔案</a>`
 
 	let previewSwitchElement = ''
-	if (!/(Android|iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+	if (!Os.isMobile) {
 		// 進度條預覽圖 初始化參數
 		if (localStorage.getItem('previewSwitch') == null) {
 			localStorage.setItem('previewSwitch', 'false')
@@ -856,6 +856,11 @@ function file_video(path) {
 	</div>
     `
 	$('#content').html(content)
+
+	// 移除移動端的 進度條預覽圖 元素
+	if (Os.isMobile) {
+		$('.mdui-switch').remove()
+	}
 
 	$(document).ready(() => {
 		// DPlayer Script 未正常載入則刷新網頁
@@ -1096,7 +1101,7 @@ function file_video(path) {
 
 		// 當系統是電腦時 和 進度條預覽必須啟動 才使用截圖播放器
 		if (
-			!/(Android|iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) == false &&
+			!Os.isMobile == false &&
 			localStorage.getItem('previewSwitch') == 'true'
 		) {
 			loadScreenshotPlayer() // 第一次載入截圖播放器
