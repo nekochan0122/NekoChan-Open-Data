@@ -26,7 +26,7 @@ function init() {
 	</header>
 	<div id="folderIMGElement" class="mdui-card" style="position: absolute;max-width: 300px;left: 0px; top: 0px; z-index: 999;">
 		<div class="mdui-card-media">
-			<img id="folderIMGElementSrc" src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.2.beta52/images/no-cover.webp">
+			<img id="folderIMGElementSrc" src="">
 		</div>
 	</div>
 	<div id="folderPath" class="mdui-container"></div>
@@ -36,7 +36,7 @@ function init() {
 	const folderIMGElement = $('#folderIMGElement')
 	folderIMGElement.hide()
 	$(document).mousemove((event) => {
-		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - 250}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
+		folderIMGElement.css({'left':`${event.pageX}px`, 'top':`${event.pageY - folderIMGElement.height()}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
 	})
 	$(window).scroll(() => {
 		folderIMGElement.hide() // 滾動時隱藏 資料夾預覽圖元素
@@ -229,7 +229,7 @@ function requestSearch(params, resultCallback) {
 
 // 渲染文件列表
 function list(path) {
-	let timeout = null, href = null // 資料夾預覽圖, 停留選擇的資料夾
+	let timeout1 = null, timeout2 = null, href = null // 資料夾預覽圖, 停留選擇的資料夾
 	let content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
@@ -290,14 +290,17 @@ function list(path) {
 				function () {
 					// console.log(this.querySelector('a.folder').href)
 					href = `${this.querySelector('a.folder').href}封面.webp`
-					timeout = setTimeout(() => {
+					timeout1 = setTimeout(() => {
 						$('#folderIMGElementSrc').attr('src', href)
+					}, 800)
+					timeout2 = setTimeout(() => {
 						$('#folderIMGElement').show()
 					}, 1500)
 				},
 				() => {
-					clearTimeout(timeout)
-					$('#folderIMGElementSrc').attr('src','//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.2.beta52/images/no-cover.webp') // 更改 img src
+					clearTimeout(timeout1)
+					clearTimeout(timeout2)
+					$('#folderIMGElementSrc').attr('src','') // 更改 img src
 					// console.log('hide')
 					$('#folderIMGElement').hide()
 				}
