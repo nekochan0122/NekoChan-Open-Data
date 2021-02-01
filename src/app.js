@@ -11,6 +11,19 @@ const Os = {
 	),
 }
 
+// 預加載圖片
+let imageUrls = []
+function preloadImages(imageUrls, index = 0) {
+  if (imageUrls && imageUrls.length > index) {
+    const img = new Image();
+    img.onload = () => {
+      preloadImages(imageUrls, index + 1);
+    };
+    img.crossOrigin = "";
+    img.src = imageUrls[index];
+  }
+}
+
 // 初始化頁面，並載入必要資源
 function init() {
 	document.siteName = $('title').html()
@@ -282,6 +295,7 @@ function list(path) {
 			window.scroll_status.event_bound = false
 			window.scroll_status.loading_lock = false
 			append_files_to_list(path, res['data']['files'])
+			preloadImages(imageUrls) // 開始預加載封面
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
 				function () {
@@ -305,6 +319,7 @@ function list(path) {
 		} else {
 			// 如果不是最後一頁，append數據 ，並綁定 scroll 事件（如果還未綁定），更新 scroll_status
 			append_files_to_list(path, res['data']['files'])
+			preloadImages(imageUrls) // 開始預加載封面
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
 				function () {
@@ -418,10 +433,10 @@ function append_files_to_list(path, files) {
 			// 資料夾顏色處理 & 封面緩存
 			if (/連載中/.test(item.name)) {
 				className = 'updating'
-				img.src = `${p}%E5%B0%81%E9%9D%A2.webp` // 封面緩存
+				imageUrls.push(`${p}%E5%B0%81%E9%9D%A2.webp`) // 封面url存入陣列
 			} else if (/完結/.test(item.name)) {
 				className = 'finish'
-				img.src = `${p}%E5%B0%81%E9%9D%A2.webp` // 封面緩存
+				imageUrls.push(`${p}%E5%B0%81%E9%9D%A2.webp`) // 封面url存入陣列
 			} else if (/R18/.test(item.name)) {
 				className = 'r18'
 			} else {
