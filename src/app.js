@@ -24,7 +24,7 @@ function init() {
 		} ${UI.dark_mode ? 'mdui-text-color-white-text' : ''}">
 	</div>
 	</header>
-	<div id="folderIMG" class="mdui-card" style="position: absolute;max-width: 500px;left: 0px; top: 0px; z-index: 999;">
+	<div id="folderIMG" class="mdui-card" style="position: absolute;max-width: 300px;left: 0px; top: 0px; z-index: 999;">
 		<div class="mdui-card-media">
 			<img src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.0.min6/images/image_1.webp">
 			<div class="mdui-card-media-covered">
@@ -38,9 +38,11 @@ function init() {
 	<div id="content" class="mdui-container mdui-shadow-16"></div>`
 	$('body').html(html)
 	const folderIMG = $('#folderIMG')
-	$(document).mousemove((event) => (
-		folderIMG.css({'left':`${event.pageX}px`, 'top':`${event.pageY}px`})
-		// console.log(`X: ${event.pageX} Y:${event.pageY}`)
+	$(document).mousemove((mouseEvent) => (
+		folderIMG.css({'left':`${mouseEvent.pageX}px`, 'top':`${mouseEvent.pageY + 315}px`})
+		// $(window).scroll(() => (
+		// 	folderIMG.css({'left':`${mouseEvent.pageX}px`, 'top':`${mouseEvent.pageY + 315}px`})
+		// ))
 	))
 }
 
