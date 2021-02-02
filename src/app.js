@@ -833,7 +833,7 @@ function file_video(path) {
 			console.error(e)
 			target_children = []
 		}
-		if (target_children.length > 0 && target_children.includes(path)) {
+		if (target_children.length > 0) {
 			let len = target_children.length
 			let cur = target_children.indexOf(path)
 			let prev_child = cur - 1 > -1 ? target_children[cur - 1] : null
@@ -853,20 +853,6 @@ function file_video(path) {
 				</div>
 			</div>
 			`
-			// targetText = `
-			// <div class="mdui-container">
-			// 	<div class="mdui-row-xs-2 mdui-m-b-1">
-			// 		<div class="mdui-col">
-			// 			${prev_child ? `<button id="leftBtn" onclick="${window.location.href=prev_child}?a=view" class="${btnClass1}">上一集</button>`
-			// 			: `<button class="${btnClass1}" disabled>上一集</button>`}
-			// 		</div>
-			// 		<div class="mdui-col">
-			// 			${next_child ? `<button id="rightBtn"  data-filepath="${window.location.href=next_child}" class="${btnClass1}">下一集</button>`
-			// 			: `<button class="${btnClass1}" disabled>下一集</button>`}
-			// 		</div>
-			// 	</div>
-			// </div>
-			// `
 		}
 	}
 
@@ -1055,69 +1041,6 @@ function file_video(path) {
 				})
 			})
 
-			// 上下一集
-			// $(window).keyup((event) => {
-			// 	if (/Key/.test(event.code)) {
-			// 		switch (event.code[3]) {
-			// 			case 'X': // 下一集
-			// 				$('#rightBtn').click()
-			// 				break
-			// 			case 'Z': // 上一集
-			// 				$('#leftBtn').click()
-			// 				break
-			// 		}
-			// 	}
-			// })
-
-			// $(window).one('keyup', (event) => {
-			// 	if (/Key/.test(event.code)) {
-			// 		switch (event.code[3]) {
-			// 			case 'X': // 下一集
-			// 				$('#rightBtn').click()
-			// 				break
-			// 			case 'Z': // 上一集
-			// 				$('#leftBtn').click()
-			// 				break
-			// 		}
-			// 	}
-			// })
-
-			// 鍵盤快捷鍵 v2
-			// let num = 0, seekTime = 0
-			// $(window).keyup((event) => {
-			// 	seekTime = dp.video.duration / 10 // 100% / 10 = 10%
-			// 	if (/Numpad/.test(event.code) && seekTime > 0) {
-			// 		num = Number(event.code[6])
-			// 		dp.seek(seekTime * num) // 數字鍵跳轉
-			// 	} else if (/Digit/.test(event.code) && seekTime > 0) {
-			// 		num = Number(event.code[5])
-			// 		dp.seek(seekTime * num) // 上排數字鍵跳轉
-			// 	} else if (/Key/.test(event.code)) {
-			// 		switch (event.code[3]) {
-			// 			case 'M': // 靜音
-			// 				if (mute == false) {
-			// 					saveOldVol()
-			// 					dp.volume(0.0, true, false)
-			// 					mute = true
-			// 					break
-			// 				} else if (mute == true) {
-			// 					dp.volume(oldVol, true, false)
-			// 					mute = false
-			// 					break
-			// 				}
-			// 			case 'X': // 下一集
-			// 				$('#rightBtn').click()
-			// 				break
-			// 			case 'Z': // 上一集
-			// 				$('#leftBtn').click()
-			// 				break
-			// 			case 'F': // 全螢幕
-			// 				$('.dplayer-icon.dplayer-full-icon').click()
-			// 				break
-			// 		}
-			// 	}
-			// })
-
 			// 紀錄當前音量
 			const saveOldVol = () => {
 				// 直接取兩值（音量）
@@ -1254,7 +1177,6 @@ function file_video(path) {
 		if (['I', 'SPAN'].includes(e.target.nodeName)) {
 			target = $(e.target).parent()
 		}
-		// location.href = `${target.attr('data-filepath')}?a=view`
 		const filepath = target.attr('data-filepath')
 		history.pushState({}, '', `${filepath}?a=view`)
 		file(filepath)
