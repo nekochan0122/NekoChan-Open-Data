@@ -843,11 +843,11 @@ function file_video(path) {
 			<div class="mdui-container">
 				<div class="mdui-row-xs-2 mdui-m-b-1">
 					<div class="mdui-col">
-						${prev_child ? `<button id="leftBtn" onclick="${prev_child}" class="${btnClass1}">上一集</button>`
+						${prev_child ? `<button id="leftBtn" data-filepath="${prev_child}" class="${btnClass1}">上一集</button>`
 						: `<button class="${btnClass1}" disabled>上一集</button>`}
 					</div>
 					<div class="mdui-col">
-						${next_child ? `<button id="rightBtn"  onclick="${next_child}" class="${btnClass1}">下一集</button>`
+						${next_child ? `<button id="rightBtn"  data-filepath="${next_child}" class="${btnClass1}">下一集</button>`
 						: `<button class="${btnClass1}" disabled>下一集</button>`}
 					</div>
 				</div>
@@ -1235,15 +1235,16 @@ function file_video(path) {
 		}
 	})
 
-	// $('#leftBtn, #rightBtn').click((e) => {
-	// 	let target = $(e.target)
-	// 	if (['I', 'SPAN'].includes(e.target.nodeName)) {
-	// 		target = $(e.target).parent()
-	// 	}
-	// 	const filepath = target.attr('data-filepath')
-	// 	const direction = target.attr('data-direction')
-	// 	file(filepath)
-	// })
+	$('#leftBtn, #rightBtn').click((e) => {
+		let target = $(e.target)
+		if (['I', 'SPAN'].includes(e.target.nodeName)) {
+			target = $(e.target).parent()
+		}
+		location.href = target.attr('data-filepath')
+		// const filepath = target.attr('data-filepath')
+		// const direction = target.attr('data-direction')
+		// file(filepath)
+	})
 }
 
 function file_image(path) {
