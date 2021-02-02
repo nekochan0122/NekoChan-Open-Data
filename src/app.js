@@ -24,11 +24,14 @@ let imageUrls = []
 //   }
 // }
 function preloadImages(imageUrls) {
+	var name
 	for (let i = 0, length = imageUrls.length; i < length; i++) {
-		let i = new Image()
-		i.onload = () => {}
-		i.crossOrigin = ''
-		i.src = imageUrls[i]
+		name = `index_${i}` // 動態生成變量
+		window[name] = 0
+		window[`index_${i}`] = new Image ()
+		window[`index_${i}`].onload = () => {}
+		window[`index_${i}`].crossOrigin = ''
+		window[`index_${i}`].src = imageUrls[i]
 	}
 }
 
