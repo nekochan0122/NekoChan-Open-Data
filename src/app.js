@@ -1026,18 +1026,32 @@ function file_video(path) {
 									mute = false
 									break
 								}
-							case 'X': // 下一集
-								$('#rightBtn').click()
-								break
-							case 'Z': // 上一集
-								$('#leftBtn').click()
-								break
+							// case 'X': // 下一集
+							// 	$('#rightBtn').click()
+							// 	break
+							// case 'Z': // 上一集
+							// 	$('#leftBtn').click()
+							// 	break
 							case 'F': // 全螢幕
 								$('.dplayer-icon.dplayer-full-icon').click()
 								break
 						}
 					}
 				})
+			})
+
+			// 上下一集
+			$(window).keyup((event) => {
+				if (/Key/.test(event.code)) {
+					switch (event.code[3]) {
+						case 'X': // 下一集
+							$('#rightBtn').click()
+							break
+						case 'Z': // 上一集
+							$('#leftBtn').click()
+							break
+					}
+				}
 			})
 
 			// 紀錄當前音量
