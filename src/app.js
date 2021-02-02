@@ -1005,6 +1005,7 @@ function file_video(path) {
 			// 播放器載入完成
 			dp.on('loadedmetadata', () => {
 				const seekTime = dp.video.duration / 10 // 100% / 10 = 10%
+				$(window).unbind('keyup')
 				// 鍵盤快捷鍵
 				$(window).keyup((event) => {
 					if (/Numpad/.test(event.code)) {
@@ -1026,12 +1027,12 @@ function file_video(path) {
 									mute = false
 									break
 								}
-							// case 'X': // 下一集
-							// 	$('#rightBtn').click()
-							// 	break
-							// case 'Z': // 上一集
-							// 	$('#leftBtn').click()
-							// 	break
+							case 'X': // 下一集
+								$('#rightBtn').click()
+								break
+							case 'Z': // 上一集
+								$('#leftBtn').click()
+								break
 							case 'F': // 全螢幕
 								$('.dplayer-icon.dplayer-full-icon').click()
 								break
@@ -1054,18 +1055,54 @@ function file_video(path) {
 			// 	}
 			// })
 
-			$(window).one('keyup', (event) => {
-				if (/Key/.test(event.code)) {
-					switch (event.code[3]) {
-						case 'X': // 下一集
-							$('#rightBtn').click()
-							break
-						case 'Z': // 上一集
-							$('#leftBtn').click()
-							break
-					}
-				}
-			})
+			// $(window).one('keyup', (event) => {
+			// 	if (/Key/.test(event.code)) {
+			// 		switch (event.code[3]) {
+			// 			case 'X': // 下一集
+			// 				$('#rightBtn').click()
+			// 				break
+			// 			case 'Z': // 上一集
+			// 				$('#leftBtn').click()
+			// 				break
+			// 		}
+			// 	}
+			// })
+
+			// 鍵盤快捷鍵 v2
+			// let num = 0, seekTime = 0
+			// $(window).keyup((event) => {
+			// 	seekTime = dp.video.duration / 10 // 100% / 10 = 10%
+			// 	if (/Numpad/.test(event.code) && seekTime > 0) {
+			// 		num = Number(event.code[6])
+			// 		dp.seek(seekTime * num) // 數字鍵跳轉
+			// 	} else if (/Digit/.test(event.code) && seekTime > 0) {
+			// 		num = Number(event.code[5])
+			// 		dp.seek(seekTime * num) // 上排數字鍵跳轉
+			// 	} else if (/Key/.test(event.code)) {
+			// 		switch (event.code[3]) {
+			// 			case 'M': // 靜音
+			// 				if (mute == false) {
+			// 					saveOldVol()
+			// 					dp.volume(0.0, true, false)
+			// 					mute = true
+			// 					break
+			// 				} else if (mute == true) {
+			// 					dp.volume(oldVol, true, false)
+			// 					mute = false
+			// 					break
+			// 				}
+			// 			case 'X': // 下一集
+			// 				$('#rightBtn').click()
+			// 				break
+			// 			case 'Z': // 上一集
+			// 				$('#leftBtn').click()
+			// 				break
+			// 			case 'F': // 全螢幕
+			// 				$('.dplayer-icon.dplayer-full-icon').click()
+			// 				break
+			// 		}
+			// 	}
+			// })
 
 			// 紀錄當前音量
 			const saveOldVol = () => {
