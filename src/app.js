@@ -843,7 +843,7 @@ function file_video(path) {
 			<div class="mdui-container">
 				<div class="mdui-row-xs-2 mdui-m-b-1">
 					<div class="mdui-col">
-						${prev_child ? `<button id="leftBtn" data-filepath="${prev_child}" class="${btnClass1}">上一集</button>` 
+						${prev_child ? `<button id="leftBtn" data-filepath="${prev_child}" class="${btnClass1}">上一集</button>`
 						: `<button class="${btnClass1}" disabled>上一集</button>`}
 					</div>
 					<div class="mdui-col">
@@ -1045,10 +1045,12 @@ function file_video(path) {
 				if (/Key/.test(event.code)) {
 					switch (event.code[3]) {
 						case 'X': // 下一集
-							$('#rightBtn').click()
+							// $('#rightBtn').click()
+							$('#rightBtn').one('click', () => {})
 							break
 						case 'Z': // 上一集
-							$('#leftBtn').click()
+							// $('#leftBtn').click()
+							$('#leftBtn').one('click', () => {})
 							break
 					}
 				}
