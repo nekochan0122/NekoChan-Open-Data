@@ -833,7 +833,7 @@ function file_video(path) {
 			console.error(e)
 			target_children = []
 		}
-		if (target_children.length > 0 && target_children.includes(decodeURI(path))) {
+		if (target_children.length > 0 && target_children.includes(path)) {
 			let len = target_children.length
 			let cur = target_children.indexOf(path)
 			let prev_child = cur - 1 > -1 ? target_children[cur - 1] : null
