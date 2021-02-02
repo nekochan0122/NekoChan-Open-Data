@@ -1240,7 +1240,7 @@ function file_video(path) {
 		if (['I', 'SPAN'].includes(e.target.nodeName)) {
 			target = $(e.target).parent()
 		}
-		location.href = target.attr('data-filepath')
+		location.href = `${target.attr('data-filepath')}?a=view`
 		// const filepath = target.attr('data-filepath')
 		// const direction = target.attr('data-direction')
 		// file(filepath)
