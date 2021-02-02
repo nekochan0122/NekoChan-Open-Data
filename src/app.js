@@ -13,15 +13,23 @@ const Os = {
 
 // 預加載圖片
 let imageUrls = []
-function preloadImages(imageUrls, index = 0) {
-  if (imageUrls && imageUrls.length > index) {
-    const img = new Image();
-    img.onload = () => {
-      preloadImages(imageUrls, index + 1);
-    };
-    img.crossOrigin = "";
-    img.src = imageUrls[index];
-  }
+// function preloadImages(imageUrls, index = 0) {
+//   if (imageUrls && imageUrls.length > index) {
+//     const img = new Image();
+//     img.onload = () => {
+//       preloadImages(imageUrls, index + 1);
+//     };
+//     img.crossOrigin = "";
+//     img.src = imageUrls[index];
+//   }
+// }
+function preloadImages(imageUrls) {
+	for (let i = 0, length = imageUrls.length; i < length; i++) {
+		let i = new Image()
+		i.onload = () => {}
+		i.crossOrigin = ''
+		i.src = imageUrls[i]
+	}
 }
 
 // 初始化頁面，並載入必要資源
