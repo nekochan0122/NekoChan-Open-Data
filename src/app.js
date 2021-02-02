@@ -13,16 +13,6 @@ const Os = {
 
 // 預加載圖片
 let imageUrls = []
-// function preloadImages(imageUrls, index = 0) {
-//   if (imageUrls && imageUrls.length > index) {
-//     const img = new Image();
-//     img.onload = () => {
-//       preloadImages(imageUrls, index + 1);
-//     };
-//     img.crossOrigin = "";
-//     img.src = imageUrls[index];
-//   }
-// }
 function preloadImages(imageUrls) {
 	var name
 	for (let i = 0, length = imageUrls.length; i < length; i++) {
@@ -311,8 +301,8 @@ function list(path) {
 			$('.clickFolder').hover(
 				function () {
 					href = `${this.querySelector('a.folder').href}封面.webp`
-					// $('#folderIMGElementSrc').attr('src', href)
-					$('#folderIMGElementSrc')[0].src=href
+					$('#folderIMGElementSrc').attr('src', href)
+					// $('#folderIMGElementSrc')[0].src=href
 					$('#folderIMGElement').show()
 				},
 				() => {
@@ -330,8 +320,8 @@ function list(path) {
 			$('.clickFolder').hover(
 				function () {
 					href = `${this.querySelector('a.folder').href}封面.webp`
-					// $('#folderIMGElementSrc').attr('src', href)
-					$('#folderIMGElementSrc')[0].src=href
+					$('#folderIMGElementSrc').attr('src', href)
+					// $('#folderIMGElementSrc')[0].src=href
 					$('#folderIMGElement').show()
 				},
 				() => {
@@ -592,8 +582,8 @@ function render_search_result_list() {
 							href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
 						}
 					})
-					// $('#folderIMGElementSrc').attr('src', href)
-					$('#folderIMGElementSrc')[0].src=href
+					$('#folderIMGElementSrc').attr('src', href)
+					// $('#folderIMGElementSrc')[0].src=href
 					$('#folderIMGElement').show()
 				},
 				() => {
@@ -614,8 +604,8 @@ function render_search_result_list() {
 							href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
 						}
 					})
-					// $('#folderIMGElementSrc').attr('src', href)
-					$('#folderIMGElementSrc')[0].src=href
+					$('#folderIMGElementSrc').attr('src', href)
+					// $('#folderIMGElementSrc')[0].src=href
 					$('#folderIMGElement').show()
 				},
 				() => {
