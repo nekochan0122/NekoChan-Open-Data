@@ -843,18 +843,12 @@ function file_video(path) {
 			<div class="mdui-container">
 				<div class="mdui-row-xs-2 mdui-m-b-1">
 					<div class="mdui-col">
-						${
-													prev_child
-														? `<button id="leftBtn" data-filepath="${prev_child}" class="${btnClass1}">上一集</button>`
-														: `<button class="${btnClass1}" disabled>上一集</button>`
-												}
+						${prev_child ? `<button id="leftBtn" data-filepath="${prev_child}" class="${btnClass1}">上一集</button>` 
+						: `<button class="${btnClass1}" disabled>上一集</button>`}
 					</div>
 					<div class="mdui-col">
-						${
-													next_child
-														? `<button id="rightBtn"  data-filepath="${next_child}" class="${btnClass1}">下一集</button>`
-														: `<button class="${btnClass1}" disabled>下一集</button>`
-												}
+						${next_child ? `<button id="rightBtn"  data-filepath="${next_child}" class="${btnClass1}">下一集</button>`
+						: `<button class="${btnClass1}" disabled>下一集</button>`}
 					</div>
 				</div>
 			</div>
