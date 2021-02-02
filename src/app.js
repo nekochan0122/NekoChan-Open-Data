@@ -1041,16 +1041,27 @@ function file_video(path) {
 			})
 
 			// 上下一集
-			$(window).keyup((event) => {
+			// $(window).keyup((event) => {
+			// 	if (/Key/.test(event.code)) {
+			// 		switch (event.code[3]) {
+			// 			case 'X': // 下一集
+			// 				$('#rightBtn').click()
+			// 				break
+			// 			case 'Z': // 上一集
+			// 				$('#leftBtn').click()
+			// 				break
+			// 		}
+			// 	}
+			// })
+
+			$(window).one('keyup', (event) => {
 				if (/Key/.test(event.code)) {
 					switch (event.code[3]) {
 						case 'X': // 下一集
-							// $('#rightBtn').click()
-							$('#rightBtn').one('click', () => {})
+							$('#rightBtn').click()
 							break
 						case 'Z': // 上一集
-							// $('#leftBtn').click()
-							$('#leftBtn').one('click', () => {})
+							$('#leftBtn').click()
 							break
 					}
 				}
