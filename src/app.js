@@ -833,9 +833,9 @@ function file_video(path) {
 			console.error(e)
 			target_children = []
 		}
-		if (target_children.length > 0 && target_children.includes(path)) {
+		if (target_children.length > 0 && target_children.includes(fatherPathname+file_name)) {
 			let len = target_children.length
-			let cur = target_children.indexOf(path)
+			let cur = target_children.indexOf(fatherPathname+file_name)
 			let prev_child = cur - 1 > -1 ? target_children[cur - 1] : null
 			let next_child = cur + 1 < len ? target_children[cur + 1] : null
 			const btnClass1 = 'mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple'
@@ -943,128 +943,8 @@ function file_video(path) {
 			}
 		})
 
-		// 主要播放器函式(未開啟預覽圖)
-		const loadMainPlayer1 = () => {
-			let currentTime = 0 // 當前播放時間
-			let oldVol = 0.5 // 初始化音量
-			let mute = false // 靜音狀態
-
-			let dp = null // 重置變數
-
-			// DPlayer 參數
-			dp = new DPlayer({
-				container: $('#player')[0],
-				theme: '#0080ff',
-				autoplay: true,
-				lang: 'zh-tw',
-				mutex: false,
-				volume: 0.5,
-				video: {
-					url: encoded_url,
-				},
-				contextmenu: [
-					{
-						text: 'NekoChan Open Data',
-						link: '//nekochan.ml/',
-					},
-				],
-			})
-
-			// 跳轉至 currentTime
-			if (currentTime != 0) {
-				dp.seek(currentTime)
-			}
-
-			// 紀錄已跳轉的時間
-			dp.on('seeked', () => {
-				currentTime = dp.video.currentTime
-			})
-
-			// 紀錄正在跳轉的時間
-			dp.on('seeking', () => {
-				currentTime = dp.video.currentTime
-			})
-
-			// 如果影片載入失敗則重新讀取
-			dp.on('error', () => {
-				// 紀錄載入失敗時的播放時間(如果播放時間不等於 0)
-				if (dp.video.currentTime != 0) {
-					currentTime = dp.video.currentTime // 紀錄載入失敗時的播放時間
-				}
-				loadMainPlayer()
-			})
-
-			// 影片播放完畢
-			dp.on('ended', () => {
-				// 退出全螢幕
-				dp.fullScreen.cancel('browser')
-			})
-
-			// 播放器載入完成
-			dp.on('loadedmetadata', () => {
-				const seekTime = dp.video.duration / 10 // 100% / 10 = 10%
-				$(window).unbind('keyup')
-				// 鍵盤快捷鍵
-				$(window).keyup((event) => {
-					if (/Numpad/.test(event.code)) {
-						let num = Number(event.code[6])
-						dp.seek(seekTime * num) // 數字鍵跳轉
-					} else if (/Digit/.test(event.code)) {
-						let num = Number(event.code[5])
-						dp.seek(seekTime * num) // 上排數字鍵跳轉
-					} else if (/Key/.test(event.code)) {
-						switch (event.code[3]) {
-							case 'M': // 靜音
-								if (mute == false) {
-									saveOldVol()
-									dp.volume(0.0, true, false)
-									mute = true
-									break
-								} else if (mute == true) {
-									dp.volume(oldVol, true, false)
-									mute = false
-									break
-								}
-							case 'X': // 下一集
-								$('#rightBtn').click()
-								break
-							case 'Z': // 上一集
-								$('#leftBtn').click()
-								break
-							case 'F': // 全螢幕
-								$('.dplayer-icon.dplayer-full-icon').click()
-								break
-						}
-					}
-				})
-			})
-
-			// 紀錄當前音量
-			const saveOldVol = () => {
-				// 直接取兩值（音量）
-				// 50% = 0.5
-				let currentVol = `${String(
-					$('.dplayer-volume-bar-wrap').attr('data-balloon')
-				)}` // 假設 5%
-				// console.log(`current: ${currentVol}`)
-				if (currentVol[3] == '%') {
-					// 100%
-					oldVol = 1.0
-					// console.log(`oldVol: ${oldVol}`)
-				} else if (currentVol[2] == '%') {
-					// 十位數
-					oldVol = Number(`0.${currentVol[0]}`)
-					// console.log(`oldVol: ${oldVol}`)
-				} else if (currentVol[1] == '%') {
-					// 個位數（無視，設定成0.1）
-					oldVol = 0.1
-					// console.log(`oldVol: ${oldVol}`)
-				}
-			}
-		}
-
 		// 主要播放器函式(開啟預覽圖)
-		const loadMainPlayer2 = () => {
+		const loadMainPlayer = () => {
 			let currentTime = 0 // 當前播放時間
 			let oldVol = 0.5 // 初始化音量
 			let mute = false // 靜音狀態
@@ -1072,25 +952,45 @@ function file_video(path) {
 			let dp = null // 重置變數
 
 			// DPlayer 參數
-			dp = new DPlayer({
-				container: $('#player')[0],
-				theme: '#0080ff',
-				autoplay: true,
-				lang: 'zh-tw',
-				mutex: false,
-				volume: 0.5,
-				video: {
-					url: encoded_url,
-					thumbnails:
-						'//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.6.beta2/images/fake-thumbnails.webp',
-				},
-				contextmenu: [
-					{
-						text: 'NekoChan Open Data',
-						link: '//nekochan.ml/',
+			if (localStorage.getItem('previewSwitch') == 'true') {
+				dp = new DPlayer({ // 開啟預覽圖
+					container: $('#player')[0],
+					theme: '#0080ff',
+					autoplay: true,
+					lang: 'zh-tw',
+					mutex: false,
+					volume: 0.5,
+					video: {
+						url: encoded_url,
+						thumbnails:
+							'//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.6.beta2/images/fake-thumbnails.webp',
 					},
-				],
-			})
+					contextmenu: [
+						{
+							text: 'NekoChan Open Data',
+							link: '//nekochan.ml/',
+						},
+					],
+				})
+			} else if (localStorage.getItem('previewSwitch') == 'false') {
+				dp = new DPlayer({ // 關閉預覽圖
+					container: $('#player')[0],
+					theme: '#0080ff',
+					autoplay: true,
+					lang: 'zh-tw',
+					mutex: false,
+					volume: 0.5,
+					video: {
+						url: encoded_url,
+					},
+					contextmenu: [
+						{
+							text: 'NekoChan Open Data',
+							link: '//nekochan.ml/',
+						},
+					],
+				})
+			}
 
 			// 跳轉至 currentTime
 			if (currentTime != 0) {
@@ -1186,11 +1086,12 @@ function file_video(path) {
 		}
 
 		// 載入主播放器
-		if (localStorage.getItem('previewSwitch') == 'true') {
-			loadMainPlayer2()
-		} else if (localStorage.getItem('previewSwitch') == 'false') {
-			loadMainPlayer1()
-		}
+		loadMainPlayer()
+		// if (localStorage.getItem('previewSwitch') == 'true') {
+		// 	loadMainPlayer2()
+		// } else if (localStorage.getItem('previewSwitch') == 'false') {
+		// 	loadMainPlayer1()
+		// }
 
 		// =================================================================================
 		//						以上為主要播放器 、以下為截圖播放器
