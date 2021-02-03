@@ -1,4 +1,6 @@
 * {
+	margin: 0;
+	padding: 0;
 	font-family: 'Noto Sans TC', 'Noto Sans JP', 'Noto Sans SC', serif;
 }
 /* 超連結樣式 */
@@ -51,21 +53,21 @@ body {
 }
 /* 海報牆模式 */
 .folder-items {
-	width: 14.28571%;
+	width: 20%;
 }
 @media (max-width: 1199px) {
-	.folder-items {
-		width: 16.66667%;
-	}
-}
-@media (max-width: 991px) {
 	.folder-items {
 		width: 25%;
 	}
 }
+@media (max-width: 991px) {
+	.folder-items {
+		width: 35%;
+	}
+}
 @media (max-width: 767.9px) {
 	.folder-items {
-		width: 33.33333%;
+		width: 40%;
 	}
 }
 /* Other */
