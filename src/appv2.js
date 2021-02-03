@@ -390,7 +390,7 @@ function append_files_to_list(path, files) {
 		if (item['mimeType'] == 'application/vnd.google-apps.folder') {
 			html += `<a style="text-decoration: none" href="${p}">
 				<div class="testWrap" style="position: relative; display: inline-block; margin-bottom:50px; padding-right: 4px; width: 240px;">
-					<img class="testImg" src="${p}%E5%B0%81%E9%9D%A2.webp">
+					<img class="testImg" style="width: 100%" src="${p}%E5%B0%81%E9%9D%A2.webp">
 					<div class="testTitle" style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">
 					${item.name}
 					</div>
