@@ -230,7 +230,7 @@ function list(path) {
 		</ul>
 	</div>
 	<div class="mdui-row">
-		<ul id="list" class="mdui-list" style="display: flex;flex-warp: warp;justify-content: center;align-items: center;align-content: center">
+		<ul id="list" class="mdui-list" style="display: flex;flex-wrap: wrap;justify-content: center;align-items: center;align-content: center">
 		</ul>
 		<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>NekoChan Open Data｜Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
 	</div>
@@ -384,7 +384,7 @@ function append_files_to_list(path, files) {
 		item['size'] = formatFileSize(item['size'])
 		if (item['mimeType'] == 'application/vnd.google-apps.folder') {
 			html += `<a style="text-decoration: none" href="${p}">
-				<div style="margin: 0 auto 15px auto; width: 240px; height: 350px">
+				<div style="position: relative; display: inline-block; margin: 0 auto 15px auto; width: 240px; height: 350px">
 					<img style="width: 100%; height: 100%;object-fit: cover" src="${p}%E5%B0%81%E9%9D%A2.webp">
 					<div style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, #000000a3 80%, black 120%);">
 					${item.name}
