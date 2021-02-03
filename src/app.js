@@ -1087,11 +1087,6 @@ function file_video(path) {
 
 		// 載入主播放器
 		loadMainPlayer()
-		// if (localStorage.getItem('previewSwitch') == 'true') {
-		// 	loadMainPlayer2()
-		// } else if (localStorage.getItem('previewSwitch') == 'false') {
-		// 	loadMainPlayer1()
-		// }
 
 		// =================================================================================
 		//						以上為主要播放器 、以下為截圖播放器
@@ -1162,21 +1157,6 @@ function file_video(path) {
 					oldMoveTimeSec = moveTimeSec // 紀錄上一次移動時間(數字 - 單位: 秒)
 				}
 			}
-
-			// 刷新 提示點位置(coding)
-			// const highlight = $('#player .dplayer-highlight')
-			// screenshotPlayer.on('playing', () => {
-			// 	if (screenshotPlayer.video.currentTime > 1) {
-			// 		dp.options.highlight[0] = {
-			// 			text: '預覽圖進度',
-			// 			time: screenshotPlayer.video.currentTime,
-			// 		}
-			// 	}
-			// 	barWrap.remove(highlight) // 刪除提示點
-			// 	let style = (dp.options.highlight[0].time / dp.video.duration) * 100 // 位置
-			// 	barWrap.append(`<p class="dplayer-highlight" style="left: ${style}%"><spa class="dplayer-highlight-text">${dp.options.highlight[0].text}</span></p>`)
-			// 	console.log(dp.options.highlight)
-			// })
 
 			// 滑鼠事件
 			barWrap.mousemove(() => {
