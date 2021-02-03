@@ -47,14 +47,14 @@ function init() {
 	<div id="content" class="mdui-container mdui-shadow-16"></div>`
 	$('body').html(html)
 	// 資料夾預覽圖
-	const folderIMGElement = $('#folderIMGElement')
+	// const folderIMGElement = $('#folderIMGElement')
 	folderIMGElement.hide()
-	$(document).mousemove((event) => {
-		folderIMGElement.css({'left':`${event.pageX + 25}px`, 'top':`${event.pageY + 25}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
-	})
-	$(window).scroll(() => {
-		folderIMGElement.hide() // 滾動時隱藏 資料夾預覽圖元素
-	})
+	// $(document).mousemove((event) => {
+	// 	folderIMGElement.css({'left':`${event.pageX + 25}px`, 'top':`${event.pageY + 25}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
+	// })
+	// $(window).scroll(() => {
+	// 	folderIMGElement.hide() // 滾動時隱藏 資料夾預覽圖元素
+	// })
 }
 
 function getDocumentHeight() {
@@ -235,7 +235,7 @@ function list(path) {
 		</ul>
 	</div>
 	<div class="mdui-row">
-		<ul id="list" class="mdui-list">
+		<ul id="list" class="mdui-list" style="padding: 33px">
 		</ul>
 		<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>NekoChan Open Data｜Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
 	</div>
