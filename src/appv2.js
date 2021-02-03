@@ -391,7 +391,7 @@ function append_files_to_list(path, files) {
 			html += `<a style="text-decoration: none" href="${p}">
 				<div style="position: relative; display: inline-block; margin: 0 auto 20px auto; width: 240px; height: 350px">
 					<img style="width: 100%; height: 100%;object-fit: cover" src="${p}%E5%B0%81%E9%9D%A2.webp">
-					<div style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 0%, black 120%);">
+					<div style="position:absolute; bottom:0; left:0; white-space: initial; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: white; width: 100%; padding: 3px 3px; background: linear-gradient(to bottom, transparent 80%, black 120%);">
 					${item.name}
 					</div>
 				</div>
