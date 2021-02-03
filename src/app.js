@@ -243,7 +243,7 @@ function requestSearch(params, resultCallback) {
 
 // 渲染文件列表
 function list(path) {
-	let timeout1 = null, timeout2 = null, href = null // 計時器, 資料夾預覽圖, 連結
+	let href = null // 資料夾預覽圖連結
 	let content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
@@ -302,12 +302,9 @@ function list(path) {
 				function () {
 					href = `${this.querySelector('a.folder').href}封面.webp`
 					$('#folderIMGElementSrc').attr('src', href)
-					// $('#folderIMGElementSrc')[0].src=href
 					$('#folderIMGElement').show()
 				},
 				() => {
-					clearTimeout(timeout1)
-					clearTimeout(timeout2)
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
 					$('#folderIMGElement').hide()
 				}
@@ -321,12 +318,9 @@ function list(path) {
 				function () {
 					href = `${this.querySelector('a.folder').href}封面.webp`
 					$('#folderIMGElementSrc').attr('src', href)
-					// $('#folderIMGElementSrc')[0].src=href
 					$('#folderIMGElement').show()
 				},
 				() => {
-					clearTimeout(timeout1)
-					clearTimeout(timeout2)
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
 					$('#folderIMGElement').hide()
 				}
@@ -521,7 +515,7 @@ function append_files_to_list(path, files) {
  * 渲染搜索結果列表。有大量重複代碼，但是裡面有不一樣的邏輯，暫時先這樣分開弄吧
  */
 function render_search_result_list() {
-	let timeout1 = null, timeout2 = null, href = null // 計時器, 資料夾預覽圖, 連結
+	let href = null // 資料夾預覽圖連結
 	let cur = window.current_drive_order // 資料夾預覽圖 (搜尋用 變量)
 	let content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
@@ -583,12 +577,9 @@ function render_search_result_list() {
 						}
 					})
 					$('#folderIMGElementSrc').attr('src', href)
-					// $('#folderIMGElementSrc')[0].src=href
 					$('#folderIMGElement').show()
 				},
 				() => {
-					clearTimeout(timeout1)
-					clearTimeout(timeout2)
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
 					$('#folderIMGElement').hide()
 				}
@@ -605,12 +596,9 @@ function render_search_result_list() {
 						}
 					})
 					$('#folderIMGElementSrc').attr('src', href)
-					// $('#folderIMGElementSrc')[0].src=href
 					$('#folderIMGElement').show()
 				},
 				() => {
-					clearTimeout(timeout1)
-					clearTimeout(timeout2)
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
 					$('#folderIMGElement').hide()
 				}
