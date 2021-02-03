@@ -1,0 +1,103 @@
+* {
+	font-family: 'Noto Sans TC', 'Noto Sans JP', 'Noto Sans SC', serif;
+}
+/* 超連結樣式 */
+a {
+	text-decoration: none;
+}
+a:link {
+	color: rgba(255, 255, 255, 0.87);
+}
+a:visited {
+	color: rgba(255, 255, 255, 0.87);
+}
+/* 網頁背景 */
+body {
+	margin: 0px;
+	padding: 0px;
+	background: url('//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.2.beta16/images/background_3.webp');
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+}
+/* 導航背景 #232427 */
+.mdui-theme-primary-blue .mdui-color-theme {
+	background-color: rgb(45 45 45 / 95%) !important;
+}
+/* 導航樣式 */
+.mdui-appbar {
+	padding-right: 8px;
+	padding-left: 8px;
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 1265px;
+}
+/* 列表背景 #333232 */
+.mdui-container,
+.mdui-textfield-input {
+	color: rgba(255, 255, 255, 0.87);
+	background-color: rgb(45 45 45 / 95%);
+}
+/* 特殊狀態 */
+.updating {
+	color: rgb(251 191 72 / 87%) !important;
+}
+.finish {
+	color: rgb(255 106 106 / 87%) !important;
+}
+.r18 {
+	color: rgb(249 67 177 / 87%) !important;
+}
+/* Other */
+.mdui-appbar .mdui-toolbar {
+	height: 56px;
+	font-size: 1px;
+}
+.mdui-toolbar > * {
+	padding: 0 6px;
+	margin: 0 2px;
+}
+.mdui-toolbar > .mdui-typo-headline {
+	padding: 0 1pc 0 0;
+}
+.mdui-toolbar > i {
+	padding: 0;
+	opacity: 0.5;
+}
+.mdui-toolbar > a:hover,
+a.active,
+a.mdui-typo-headline {
+	opacity: 1;
+}
+.mdui-list-item {
+	transition: none;
+}
+.mdui-list > .th {
+	background-color: initial;
+}
+.mdui-list-item > a {
+	width: 100%;
+	line-height: 3pc;
+}
+.mdui-list-item {
+	margin: 2px 0;
+	padding: 0;
+}
+.mdui-toolbar > a:last-child {
+	opacity: 1;
+}
+@media screen and (max-width: 980px) {
+	.mdui-list-item .mdui-text-right {
+		display: none;
+	}
+	.mdui-container {
+		width: 100% !important;
+		margin: 0;
+	}
+	.mdui-toolbar > .mdui-typo-headline,
+	.mdui-toolbar > a:last-child,
+	.mdui-toolbar > i:first-child {
+		display: block;
+	}
+}

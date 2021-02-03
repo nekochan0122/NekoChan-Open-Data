@@ -122,22 +122,6 @@ function nav(path) {
 	let html = ''
 	let cur = window.current_drive_order || 0
 	html += `<a href="/${cur}:/" class="mdui-typo-headline folder">${document.siteName}</a>`
-	// let names = window.drive_names
-	/*html += `<button class="mdui-btn mdui-btn-raised" mdui-menu="{target: '#drive-names'}"><i class="mdui-icon mdui-icon-left material-icons">share</i> ${names[cur]}</button>`;
-html += `<ul class="mdui-menu" id="drive-names" style="transform-origin: 0px 0px; position: fixed;">`;
-names.forEach((name, idx) => {
-	html += `<li class="mdui-menu-item ${(idx === cur) ? 'mdui-list-item-active' : ''} "><a href="/${idx}:/" class="mdui-ripple">${name}</a></li>`;
-});
-html += `</ul>`;*/
-
-	// 修改為 select
-	// html += `<select class="mdui-select" onchange="window.location.href=this.value" mdui-select style="overflow:visible;padding-left:8px;padding-right:8px">`
-	// names.forEach((name, idx) => {
-	// 	html += `<option value="/${idx}:/"  ${
-	// 		idx === cur ? 'selected="selected"' : ''
-	// 	} >${name}</option>`
-	// })
-	// html += `</select>`
 
 	let folderPath = `　當前位置： <a class="folder" href="/${cur}:/">主目錄</a>`
 	if (!model.is_search_page) {
@@ -176,16 +160,6 @@ html += `</ul>`;*/
 				<i class="mdui-icon material-icons">search</i>
 			</button>
 		</div>`
-
-	// html += `<div class="mdui-toolbar-spacer"></div>
-	// <a href="//twitter.com/TW_NEKO_CHAN" target="_blank" class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-tooltip="{content: 'Twitter'}" alt="Twitter">
-	//   <img src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data/images/twitter.svg" width="30" height="45" />
-	// </a>
-	// <a href="${
-	// 	window.location
-	// }}" class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-tooltip="{content: '重新整理'}" alt="重新整理">
-	//   <img src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data/images/circular-arrow.svg" width="30" height="45" />
-	// </a>`
 
 	// 個人盤 或 團隊盤
 	if (model.root_type < 2) {
@@ -400,7 +374,7 @@ function append_files_to_list(path, files) {
 	let is_lastpage_loaded = null === $list.data('nextPageToken')
 	let is_firstpage = '0' == $list.data('curPageIndex')
 
-	let file_count = 0 , img = new Image() // 檔案數量, 圖片物件(緩存用)
+	let file_count = 0 // 檔案數量
 
 	html = ''
 	let targetFiles = []
@@ -744,7 +718,6 @@ function onSearchResultItemClick(a_ele) {
 		title: '',
 		content:
 			'<div class="mdui-text-center mdui-typo-title mdui-m-b-1">正在獲取路徑...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
-		// content: '<div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
 		history: false,
 		modal: true,
 		closeOnEsc: true,
