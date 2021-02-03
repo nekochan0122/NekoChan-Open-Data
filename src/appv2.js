@@ -38,17 +38,12 @@ function init() {
 		} ${UI.dark_mode ? 'mdui-text-color-white-text' : ''}">
 	</div>
 	</header>
-	<div id="folderIMGElement" class="mdui-card" style="position: absolute;max-width: 300px;left: 0px; top: 0px; z-index: 999;">
-		<div class="mdui-card-media">
-			<img id="folderIMGElementSrc" crossorigin="anonymous" src="">
-		</div>
-	</div>
 	<div id="folderPath" class="mdui-container"></div>
 	<div id="content" class="mdui-container mdui-shadow-16"></div>`
 	$('body').html(html)
 	// 資料夾預覽圖
 	// const folderIMGElement = $('#folderIMGElement')
-	folderIMGElement.hide()
+	// folderIMGElement.hide()
 	// $(document).mousemove((event) => {
 	// 	folderIMGElement.css({'left':`${event.pageX + 25}px`, 'top':`${event.pageY + 25}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
 	// })
