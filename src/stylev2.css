@@ -54,20 +54,26 @@ body {
 /* 海報牆模式 */
 .folder-items {
 	width: 20%;
+	height: 30%;
+	margin: 0 5px 10px 5px;
 }
 @media (max-width: 1199px) {
 	.folder-items {
 		width: 25%;
+		height: 35%;
 	}
 }
 @media (max-width: 991px) {
 	.folder-items {
 		width: 35%;
+		height: 45%;
+		margin: 0 2px 10px 2px;
 	}
 }
 @media (max-width: 767.9px) {
 	.folder-items {
 		width: 40%;
+		height: 50%;
 	}
 }
 /* Other */
