@@ -230,7 +230,7 @@ function list(path) {
 		</ul>
 	</div>
 	<div class="mdui-row">
-		<ul id="list" class="mdui-list" style="padding: 33px">
+		<ul id="list" class="mdui-list" style="display: flex;flex-warp: warp;justify-content: center;align-items: center;align-content: center">
 		</ul>
 		<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>NekoChan Open Data｜Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
 	</div>
