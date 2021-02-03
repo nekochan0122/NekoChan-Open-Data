@@ -54,8 +54,14 @@ body {
 /* 海報牆模式 */
 .folder-items {
 	width: 19%;
-	height: 350px !important;
-	margin: 0 1px 1px 1px;
+	height: 350px;
+	margin: 0 1px 10px 1px;
+	text-decoration: none;
+}
+.folder-div {
+	height: 100%;
+	position: relative;
+	display: inline-block;
 }
 .folder-img {
 	width: 100%;
@@ -74,7 +80,9 @@ body {
 	-webkit-box-orient: vertical;
 	color: white;
 	width: 100%;
-	padding: 3px 3px;
+	height: auto;
+	text-align: center;
+	padding: 5px 0 0 0;
 	background: linear-gradient(to bottom, #000000a3 80%, black 120%)
 }
 @media (max-width: 1199px) {

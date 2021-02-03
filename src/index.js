@@ -633,7 +633,7 @@ class googleDrive {
 		params.fields =
 			'nextPageToken, files(id, name, mimeType, size , modifiedTime)'
 		params.pageSize = this.authConfig.search_result_list_page_size
-		params.orderBy = 'name_natural,folder,modifiedTime desc'
+		params.orderBy = 'folder,name_natural,modifiedTime desc'
 
 		let url = 'https://www.googleapis.com/drive/v3/files'
 		url += '?' + this.enQuery(params)
