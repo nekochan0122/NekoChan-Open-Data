@@ -889,11 +889,7 @@ function file_video(path) {
 	}
 
 	$(document).ready(() => {
-		// 安卓使用 <video> 標籤
-		if (/(Android)/i.test(navigator.userAgent)) {
-			$('#player').hide()
-			$('#androidPlayer').show()
-		} else {
+		if (/(WIN|Mac)/i.test(navigator.userAgent)) {
 			// DPlayer Script 未正常載入則刷新網頁
 			if (!window.DPlayer) {
 				window.location.reload() // 重新整理當前網頁
@@ -901,6 +897,10 @@ function file_video(path) {
 				// 載入主播放器
 				loadMainPlayer()
 			}
+		} else {
+			// 移動端使用 <video> 標籤
+			$('#player').hide()
+			$('#androidPlayer').show()
 		}
 
 		// 進度條預覽圖 點擊事件
