@@ -858,7 +858,7 @@ function file_video(path) {
 			<label class="mdui-textfield-label mdui-text-color-white">當前檔案：</label>
 			<input class="mdui-textfield-input mdui-text-color-white" type="text" value="${file_name}" readonly/>
 		</div>
-		<video id="androidPlayer" src="${encoded_url}" controls="controls" style="width: 100%; display: none">您的瀏覽器不支援</video>
+		<video id="androidPlayer" src="${encoded_url}" controls="controls" style="width: 100%">您的瀏覽器不支援</video>
 		<div id="player" class="mdui-center"></div>
 		<div id="screenshotPlayer"></div>
 		<br>
