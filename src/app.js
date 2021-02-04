@@ -858,7 +858,8 @@ function file_video(path) {
 			<label class="mdui-textfield-label mdui-text-color-white">當前檔案：</label>
 			<input class="mdui-textfield-input mdui-text-color-white" type="text" value="${file_name}" readonly/>
 		</div>
-		<div class="mdui-center" id="player"></div>
+		<video id="androidPlayer" src="${encoded_url}" controls="controls" style="width: 100%; display: none">您的瀏覽器不支援</video>
+		<div id="player" class="mdui-center"></div>
 		<div id="screenshotPlayer"></div>
 		<br>
 		${targetText}
@@ -880,6 +881,7 @@ function file_video(path) {
 	</div>
 	`
 	$('#content').html(content)
+	$('#androidPlayer').hide()
 
 	// 移除移動端的 進度條預覽圖 元素
 	if (Os.isMobile) {
@@ -887,9 +889,18 @@ function file_video(path) {
 	}
 
 	$(document).ready(() => {
-		// DPlayer Script 未正常載入則刷新網頁
-		if (!window.DPlayer) {
-			window.location.reload() // 重新整理當前網頁
+		// 安卓使用 <video> 標籤
+		if (/(Android)/i.test(navigator.userAgent)) {
+			$('#player').hide()
+			$('#androidPlayer').show()
+		} else {
+			// DPlayer Script 未正常載入則刷新網頁
+			if (!window.DPlayer) {
+				window.location.reload() // 重新整理當前網頁
+			} else {
+				// 載入主播放器
+				loadMainPlayer()
+			}
 		}
 
 		// 進度條預覽圖 點擊事件
@@ -1045,9 +1056,6 @@ function file_video(path) {
 				}
 			}
 		}
-
-		// 載入主播放器
-		loadMainPlayer()
 
 		// =================================================================================
 		//						以上為主要播放器 、以下為截圖播放器
