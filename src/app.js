@@ -881,7 +881,7 @@ function file_video(path) {
 	</div>
 	`
 	$('#content').html(content)
-	$('#androidPlayer').hide()
+	$('#player').hide()
 
 	// 移除移動端的 進度條預覽圖 元素
 	if (Os.isMobile) {
@@ -894,13 +894,11 @@ function file_video(path) {
 			if (!window.DPlayer) {
 				window.location.reload() // 重新整理當前網頁
 			} else {
+				$('#androidPlayer').hide()
+				$('#player').show()
 				// 載入主播放器
 				loadMainPlayer()
 			}
-		} else {
-			// 移動端使用 <video> 標籤
-			$('#player').hide()
-			$('#androidPlayer').show()
 		}
 
 		// 進度條預覽圖 點擊事件
