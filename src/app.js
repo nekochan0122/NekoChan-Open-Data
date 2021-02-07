@@ -824,26 +824,16 @@ function file_video(path) {
 	// WIN 串流播放器
 	let playBtn = `<a href="potplayer://${encoded_url}" class="${btnClass2} windows-btn">PotPlayer 串流</a>`
 	// 進度條預覽圖切換元素
+	let switchElement = ''
 	let previewSwitchElement = ''
 	// 播放器 HTML
 	let player = ''
-	let switchElement = ''
 	// 系統檢測
 	if (!Os.isMobile) {
 		// 電腦播放器 HTML
 		player = `
 		<div id="player" class="mdui-center"></div>
 		<div id="screenshotPlayer"></div>
-		`
-		switchElement = `
-		<span id="switchElement" style="float: right">
-			<i class="mdui-icon material-icons">ondemand_video</i>
-			<span class="mdui-list-item-content">進度條預覽圖</span>
-			<label class="mdui-switch">
-				${previewSwitchElement}
-				<i class="mdui-switch-icon"></i>
-			</label>
-		</span>
 		`
 		// MAC 串流播放器按鈕
 		if (/(Mac)/i.test(navigator.userAgent)) {
@@ -859,6 +849,17 @@ function file_video(path) {
 		} else if (localStorage.getItem('previewSwitch') == 'true') {
 			previewSwitchElement = `<input id="previewSwitch" type="checkbox" checked/>`
 		}
+		// 進度條預覽圖 HTML
+		switchElement = `
+		<span id="switchElement" style="float: right">
+			<i class="mdui-icon material-icons">ondemand_video</i>
+			<span class="mdui-list-item-content">進度條預覽圖</span>
+			<label class="mdui-switch">
+				${previewSwitchElement}
+				<i class="mdui-switch-icon"></i>
+			</label>
+		</span>
+		`
 	} else {
 		// 移動端播放器 HTML
 		player = `
