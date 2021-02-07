@@ -829,8 +829,8 @@ function file_video(path) {
 	if (!Os.isMobile) {
 		// 電腦播放器 HTML
 		player = `
-		<div id="player" class="mdui-center">
-		</div><div id="screenshotPlayer"></div>
+		<div id="player" class="mdui-center"></div>
+		<div id="screenshotPlayer"></div>
 		`
 		// MAC 串流播放器按鈕
 		if (/(Mac)/i.test(navigator.userAgent)) {
@@ -893,12 +893,12 @@ function file_video(path) {
 
 	$(document).ready(() => {
 		if (/(WIN|Mac)/i.test(navigator.userAgent)) {
-			// DPlayer Script 未正常載入則刷新網頁
 			if (!window.DPlayer) {
-				window.location.reload() // 重新整理當前網頁
-			} else {
 				// 載入主播放器
 				loadMainPlayer()
+			} else {
+				// DPlayer Script 未正常載入則刷新網頁
+				window.location.reload()
 			}
 		}
 
