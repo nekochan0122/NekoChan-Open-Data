@@ -823,9 +823,16 @@ function file_video(path) {
 	let playBtn = `<a href="potplayer://${encoded_url}" class="${btnClass2} windows-btn">PotPlayer 串流</a>`
 	// 進度條預覽圖切換元素
 	let previewSwitchElement = ''
+	// 播放器 HTML
+	let player = ''
 	// 系統檢測
 	if (!Os.isMobile) {
-		// MAC 串流播放器
+		// 電腦播放器 HTML
+		player = `
+		<div id="player" class="mdui-center">
+		</div><div id="screenshotPlayer"></div>
+		`
+		// MAC 串流播放器按鈕
 		if (/(Mac)/i.test(navigator.userAgent)) {
 			playBtn = `<button class="${btnClass2} mac-btn" data-href="iina://open?url=${encoded_url}">IINA 串流</button>`
 		}
@@ -840,7 +847,11 @@ function file_video(path) {
 			previewSwitchElement = `<input id="previewSwitch" type="checkbox" checked/>`
 		}
 	} else {
-		// 移動端串流播放器
+		// 移動端播放器 HTML
+		player = `
+		<video id="androidPlayer" src="${encoded_url}" controls="controls" style="width: 100%">您的瀏覽器不支援</video>
+		`
+		// 移動端 串流播放器按鈕
 		if (/(Android)/i.test(navigator.userAgent)) {
 			playBtn = `<button class="${btnClass2} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">MXPlayer Pro 串流</button>`
 			playBtn += `<button style="left: 15px" class="${btnClass2} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">MXPlayer Free 串流</button>`
@@ -858,9 +869,7 @@ function file_video(path) {
 			<label class="mdui-textfield-label mdui-text-color-white">當前檔案：</label>
 			<input class="mdui-textfield-input mdui-text-color-white" type="text" value="${file_name}" readonly/>
 		</div>
-		<video id="androidPlayer" src="${encoded_url}" controls="controls" style="width: 100%">您的瀏覽器不支援</video>
-		<div id="player" class="mdui-center"></div>
-		<div id="screenshotPlayer"></div>
+		${player}
 		<br>
 		${targetText}
 	</div>
@@ -881,12 +890,6 @@ function file_video(path) {
 	</div>
 	`
 	$('#content').html(content)
-	$('#player').hide()
-
-	// 移除移動端的 進度條預覽圖 元素
-	if (Os.isMobile) {
-		$('#switchElement').remove()
-	}
 
 	$(document).ready(() => {
 		if (/(WIN|Mac)/i.test(navigator.userAgent)) {
@@ -894,8 +897,6 @@ function file_video(path) {
 			if (!window.DPlayer) {
 				window.location.reload() // 重新整理當前網頁
 			} else {
-				$('#androidPlayer').hide()
-				$('#player').show()
 				// 載入主播放器
 				loadMainPlayer()
 			}
