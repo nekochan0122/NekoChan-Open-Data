@@ -893,11 +893,8 @@ function file_video(path) {
 
 	if (/(WIN|Mac)/i.test(navigator.userAgent)) {
 		$(document).ready(() => {
-			// 載入主播放器
-			loadMainPlayer()
-
+			// DPlayer Script 未正常載入則刷新網頁
 			if (!window.DPlayer) {
-				// DPlayer Script 未正常載入則刷新網頁
 				window.location.reload()
 			}
 
@@ -1054,6 +1051,9 @@ function file_video(path) {
 					}
 				}
 			}
+
+			// 載入主播放器
+			loadMainPlayer()
 
 			// =================================================================================
 			//						以上為主要播放器 、以下為截圖播放器
