@@ -891,260 +891,257 @@ function file_video(path) {
 	`
 	$('#content').html(content)
 
-	$(document).ready(() => {
-		if (/(WIN|Mac)/i.test(navigator.userAgent)) {
+	if (/(WIN|Mac)/i.test(navigator.userAgent)) {
+		$(document).ready(() => {
+			// 載入主播放器
+			loadMainPlayer()
+
 			if (!window.DPlayer) {
-				// 載入主播放器
-				loadMainPlayer()
-			} else {
 				// DPlayer Script 未正常載入則刷新網頁
 				window.location.reload()
 			}
-		}
 
-		// 進度條預覽圖 點擊事件
-		const previewSwitch = $('#previewSwitch')
-		previewSwitch.click(() => {
+			// 進度條預覽圖 點擊事件
+			const previewSwitch = $('#previewSwitch')
+			previewSwitch.click(() => {
+				if (localStorage.getItem('previewSwitch') == 'true') {
+					localStorage.setItem('previewSwitch', 'false')
+					window.location.reload()
+				} else if (localStorage.getItem('previewSwitch') == 'false') {
+					localStorage.setItem('previewSwitch', 'true')
+					window.location.reload()
+				}
+			})
+
+			// 主要播放器函式(開啟預覽圖)
+			const loadMainPlayer = () => {
+				let currentTime = 0 // 當前播放時間
+				let oldVol = 0.5 // 初始化音量
+				let mute = false // 靜音狀態
+
+				let dp = null // 重置變數
+
+				// DPlayer 參數
+				if (localStorage.getItem('previewSwitch') == 'true') {
+					dp = new DPlayer({ // 開啟預覽圖
+						container: $('#player')[0],
+						theme: '#0080ff',
+						autoplay: true,
+						lang: 'zh-tw',
+						mutex: false,
+						volume: 0.5,
+						video: {
+							url: encoded_url,
+							thumbnails:
+								'//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.6.beta2/images/fake-thumbnails.webp',
+						},
+						contextmenu: [
+							{
+								text: 'NekoChan Open Data',
+								link: '//nekochan.ml/',
+							},
+						],
+					})
+				} else if (localStorage.getItem('previewSwitch') == 'false') {
+					dp = new DPlayer({ // 關閉預覽圖
+						container: $('#player')[0],
+						theme: '#0080ff',
+						autoplay: true,
+						lang: 'zh-tw',
+						mutex: false,
+						volume: 0.5,
+						video: {
+							url: encoded_url,
+						},
+						contextmenu: [
+							{
+								text: 'NekoChan Open Data',
+								link: '//nekochan.ml/',
+							},
+						],
+					})
+				}
+
+				// 跳轉至 currentTime
+				if (currentTime != 0) {
+					dp.seek(currentTime)
+				}
+
+				// 紀錄已跳轉的時間
+				dp.on('seeked', () => {
+					currentTime = dp.video.currentTime
+				})
+
+				// 紀錄正在跳轉的時間
+				dp.on('seeking', () => {
+					currentTime = dp.video.currentTime
+				})
+
+				// 如果影片載入失敗則重新讀取
+				dp.on('error', () => {
+					// 紀錄載入失敗時的播放時間(如果播放時間不等於 0)
+					if (dp.video.currentTime != 0) {
+						currentTime = dp.video.currentTime // 紀錄載入失敗時的播放時間
+					}
+					loadMainPlayer()
+				})
+
+				// 影片播放完畢
+				dp.on('ended', () => {
+					// 退出全螢幕
+					dp.fullScreen.cancel('browser')
+				})
+
+				// 播放器載入完成
+				dp.on('loadedmetadata', () => {
+					const seekTime = dp.video.duration / 10 // 100% / 10 = 10%
+					$(window).unbind('keyup')
+					// 鍵盤快捷鍵
+					$(window).keyup((event) => {
+						if (/Numpad/.test(event.code)) {
+							let num = Number(event.code[6])
+							dp.seek(seekTime * num) // 數字鍵跳轉
+						} else if (/Digit/.test(event.code)) {
+							let num = Number(event.code[5])
+							dp.seek(seekTime * num) // 上排數字鍵跳轉
+						} else if (/Key/.test(event.code)) {
+							switch (event.code[3]) {
+								case 'M': // 靜音
+									if (mute == false) {
+										saveOldVol()
+										dp.volume(0.0, true, false)
+										mute = true
+										break
+									} else if (mute == true) {
+										dp.volume(oldVol, true, false)
+										mute = false
+										break
+									}
+								case 'X': // 下一集
+									$('#rightBtn').click()
+									break
+								case 'Z': // 上一集
+									$('#leftBtn').click()
+									break
+								case 'F': // 全螢幕
+									$('.dplayer-icon.dplayer-full-icon').click()
+									break
+							}
+						}
+					})
+				})
+
+				// 紀錄當前音量
+				const saveOldVol = () => {
+					// 直接取兩值（音量）
+					// 50% = 0.5
+					let currentVol = `${String(
+						$('.dplayer-volume-bar-wrap').attr('data-balloon')
+					)}` // 假設 5%
+					// console.log(`current: ${currentVol}`)
+					if (currentVol[3] == '%') {
+						// 100%
+						oldVol = 1.0
+						// console.log(`oldVol: ${oldVol}`)
+					} else if (currentVol[2] == '%') {
+						// 十位數
+						oldVol = Number(`0.${currentVol[0]}`)
+						// console.log(`oldVol: ${oldVol}`)
+					} else if (currentVol[1] == '%') {
+						// 個位數（無視，設定成0.1）
+						oldVol = 0.1
+						// console.log(`oldVol: ${oldVol}`)
+					}
+				}
+			}
+
+			// =================================================================================
+			//						以上為主要播放器 、以下為截圖播放器
+			// =================================================================================
+
+			// 讀取截圖播放器
+			const loadScreenshotPlayer = () => {
+				let moveTimeSec = 0 // 移動時間(數字 - 單位: 秒)
+				let oldMoveTimeSec = 0 // 上一次移動時間(數字 - 單位: 秒)
+				let range = 5 // 移動時間範圍值
+				let temp = null // 格式化變數
+
+				let oldCanvas = $('#player canvas') // 舊畫布(預覽圖)
+				const screenshotPlayerElement = $('#screenshotPlayer')[0]
+				const barWrap = $('#player .dplayer-bar-wrap') // 進度條
+				const parentNode = $('#player .dplayer-bar-preview') // 畫布(預覽圖)父節點
+				screenshotPlayerElement.style.display = 'none' // 隱藏播放器
+
+				let screenshotPlayer = null // 重置變數
+				screenshotPlayer = new DPlayer({
+					// 截圖播放器
+					container: screenshotPlayerElement,
+					autoplay: true,
+					screenshot: true,
+					mutex: false,
+					video: {
+						url: encoded_url,
+					},
+				})
+				screenshotPlayer.volume(0, true, true)
+				screenshotPlayer.speed(16) // 嘗試加速讓播放器讀取更多畫面
+
+				// 獲取時間並轉換 函式
+				let toSec = (stringTime) => {
+					temp = stringTime.split(':')
+					if (stringTime.length === 2) {
+						// 將字符串轉換成數字(單位:秒)
+						moveTimeSec = Number(temp)
+					} else if (stringTime.length === 5) {
+						moveTimeSec = 60 * Number(temp[0]) + Number(temp[1])
+					} else if (stringTime.length === 8) {
+						moveTimeSec =
+							3600 * Number(temp[0]) + 60 * Number(temp[1]) + Number(temp[2])
+					}
+					seekScreenshotPlayer() //* 呼叫跳轉函式
+				}
+
+				// 跳轉截圖播放器 和 click 函式
+				let seekScreenshotPlayer = () => {
+					// 目前 range = 5
+					// 跳轉截圖播放器（比click更容易觸發，因為讀取畫面有時需要時間）
+					if (
+						moveTimeSec > oldMoveTimeSec + (range - 3) ||
+						moveTimeSec < oldMoveTimeSec - (range - 3)
+					) {
+						screenshotPlayer.seek(moveTimeSec) // 跳轉到 移動時間(數字 - 單位: 秒)
+					}
+					// 對截圖按鈕發送click(應該使用幾秒範圍，可以避免過多的click)
+					if (
+						moveTimeSec > oldMoveTimeSec + range ||
+						moveTimeSec < oldMoveTimeSec - range
+					) {
+						oldCanvas = $('#player canvas')
+						if (oldCanvas) {
+							parentNode.remove(oldCanvas) // 移除現在的畫布(預覽圖)
+						}
+						$('#screenshotPlayer .dplayer-camera-icon').click() // 點擊截圖按鈕
+						oldMoveTimeSec = moveTimeSec // 紀錄上一次移動時間(數字 - 單位: 秒)
+					}
+				}
+
+				// 滑鼠事件
+				barWrap.mousemove(() => {
+					toSec($('.dplayer-bar-time').html())
+				})
+
+				// 如果影片載入失敗則重新讀取
+				screenshotPlayer.on('error', () => {
+					loadScreenshotPlayer()
+				})
+			}
+
+			// 進度條預覽必須啟動 才使用截圖播放器
 			if (localStorage.getItem('previewSwitch') == 'true') {
-				localStorage.setItem('previewSwitch', 'false')
-				window.location.reload()
-			} else if (localStorage.getItem('previewSwitch') == 'false') {
-				localStorage.setItem('previewSwitch', 'true')
-				window.location.reload()
+				loadScreenshotPlayer() // 第一次載入截圖播放器
 			}
 		})
-
-		// 主要播放器函式(開啟預覽圖)
-		const loadMainPlayer = () => {
-			let currentTime = 0 // 當前播放時間
-			let oldVol = 0.5 // 初始化音量
-			let mute = false // 靜音狀態
-
-			let dp = null // 重置變數
-
-			// DPlayer 參數
-			if (localStorage.getItem('previewSwitch') == 'true') {
-				dp = new DPlayer({ // 開啟預覽圖
-					container: $('#player')[0],
-					theme: '#0080ff',
-					autoplay: true,
-					lang: 'zh-tw',
-					mutex: false,
-					volume: 0.5,
-					video: {
-						url: encoded_url,
-						thumbnails:
-							'//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.6.beta2/images/fake-thumbnails.webp',
-					},
-					contextmenu: [
-						{
-							text: 'NekoChan Open Data',
-							link: '//nekochan.ml/',
-						},
-					],
-				})
-			} else if (localStorage.getItem('previewSwitch') == 'false') {
-				dp = new DPlayer({ // 關閉預覽圖
-					container: $('#player')[0],
-					theme: '#0080ff',
-					autoplay: true,
-					lang: 'zh-tw',
-					mutex: false,
-					volume: 0.5,
-					video: {
-						url: encoded_url,
-					},
-					contextmenu: [
-						{
-							text: 'NekoChan Open Data',
-							link: '//nekochan.ml/',
-						},
-					],
-				})
-			}
-
-			// 跳轉至 currentTime
-			if (currentTime != 0) {
-				dp.seek(currentTime)
-			}
-
-			// 紀錄已跳轉的時間
-			dp.on('seeked', () => {
-				currentTime = dp.video.currentTime
-			})
-
-			// 紀錄正在跳轉的時間
-			dp.on('seeking', () => {
-				currentTime = dp.video.currentTime
-			})
-
-			// 如果影片載入失敗則重新讀取
-			dp.on('error', () => {
-				// 紀錄載入失敗時的播放時間(如果播放時間不等於 0)
-				if (dp.video.currentTime != 0) {
-					currentTime = dp.video.currentTime // 紀錄載入失敗時的播放時間
-				}
-				loadMainPlayer()
-			})
-
-			// 影片播放完畢
-			dp.on('ended', () => {
-				// 退出全螢幕
-				dp.fullScreen.cancel('browser')
-			})
-
-			// 播放器載入完成
-			dp.on('loadedmetadata', () => {
-				const seekTime = dp.video.duration / 10 // 100% / 10 = 10%
-				$(window).unbind('keyup')
-				// 鍵盤快捷鍵
-				$(window).keyup((event) => {
-					if (/Numpad/.test(event.code)) {
-						let num = Number(event.code[6])
-						dp.seek(seekTime * num) // 數字鍵跳轉
-					} else if (/Digit/.test(event.code)) {
-						let num = Number(event.code[5])
-						dp.seek(seekTime * num) // 上排數字鍵跳轉
-					} else if (/Key/.test(event.code)) {
-						switch (event.code[3]) {
-							case 'M': // 靜音
-								if (mute == false) {
-									saveOldVol()
-									dp.volume(0.0, true, false)
-									mute = true
-									break
-								} else if (mute == true) {
-									dp.volume(oldVol, true, false)
-									mute = false
-									break
-								}
-							case 'X': // 下一集
-								$('#rightBtn').click()
-								break
-							case 'Z': // 上一集
-								$('#leftBtn').click()
-								break
-							case 'F': // 全螢幕
-								$('.dplayer-icon.dplayer-full-icon').click()
-								break
-						}
-					}
-				})
-			})
-
-			// 紀錄當前音量
-			const saveOldVol = () => {
-				// 直接取兩值（音量）
-				// 50% = 0.5
-				let currentVol = `${String(
-					$('.dplayer-volume-bar-wrap').attr('data-balloon')
-				)}` // 假設 5%
-				// console.log(`current: ${currentVol}`)
-				if (currentVol[3] == '%') {
-					// 100%
-					oldVol = 1.0
-					// console.log(`oldVol: ${oldVol}`)
-				} else if (currentVol[2] == '%') {
-					// 十位數
-					oldVol = Number(`0.${currentVol[0]}`)
-					// console.log(`oldVol: ${oldVol}`)
-				} else if (currentVol[1] == '%') {
-					// 個位數（無視，設定成0.1）
-					oldVol = 0.1
-					// console.log(`oldVol: ${oldVol}`)
-				}
-			}
-		}
-
-		// =================================================================================
-		//						以上為主要播放器 、以下為截圖播放器
-		// =================================================================================
-
-		// 讀取截圖播放器
-		const loadScreenshotPlayer = () => {
-			let moveTimeSec = 0 // 移動時間(數字 - 單位: 秒)
-			let oldMoveTimeSec = 0 // 上一次移動時間(數字 - 單位: 秒)
-			let range = 5 // 移動時間範圍值
-			let temp = null // 格式化變數
-
-			let oldCanvas = $('#player canvas') // 舊畫布(預覽圖)
-			const screenshotPlayerElement = $('#screenshotPlayer')[0]
-			const barWrap = $('#player .dplayer-bar-wrap') // 進度條
-			const parentNode = $('#player .dplayer-bar-preview') // 畫布(預覽圖)父節點
-			screenshotPlayerElement.style.display = 'none' // 隱藏播放器
-
-			let screenshotPlayer = null // 重置變數
-			screenshotPlayer = new DPlayer({
-				// 截圖播放器
-				container: screenshotPlayerElement,
-				autoplay: true,
-				screenshot: true,
-				mutex: false,
-				video: {
-					url: encoded_url,
-				},
-			})
-			screenshotPlayer.volume(0, true, true)
-			screenshotPlayer.speed(16) // 嘗試加速讓播放器讀取更多畫面
-
-			// 獲取時間並轉換 函式
-			let toSec = (stringTime) => {
-				temp = stringTime.split(':')
-				if (stringTime.length === 2) {
-					// 將字符串轉換成數字(單位:秒)
-					moveTimeSec = Number(temp)
-				} else if (stringTime.length === 5) {
-					moveTimeSec = 60 * Number(temp[0]) + Number(temp[1])
-				} else if (stringTime.length === 8) {
-					moveTimeSec =
-						3600 * Number(temp[0]) + 60 * Number(temp[1]) + Number(temp[2])
-				}
-				seekScreenshotPlayer() //* 呼叫跳轉函式
-			}
-
-			// 跳轉截圖播放器 和 click 函式
-			let seekScreenshotPlayer = () => {
-				// 目前 range = 5
-				// 跳轉截圖播放器（比click更容易觸發，因為讀取畫面有時需要時間）
-				if (
-					moveTimeSec > oldMoveTimeSec + (range - 3) ||
-					moveTimeSec < oldMoveTimeSec - (range - 3)
-				) {
-					screenshotPlayer.seek(moveTimeSec) // 跳轉到 移動時間(數字 - 單位: 秒)
-				}
-				// 對截圖按鈕發送click(應該使用幾秒範圍，可以避免過多的click)
-				if (
-					moveTimeSec > oldMoveTimeSec + range ||
-					moveTimeSec < oldMoveTimeSec - range
-				) {
-					oldCanvas = $('#player canvas')
-					if (oldCanvas) {
-						parentNode.remove(oldCanvas) // 移除現在的畫布(預覽圖)
-					}
-					$('#screenshotPlayer .dplayer-camera-icon').click() // 點擊截圖按鈕
-					oldMoveTimeSec = moveTimeSec // 紀錄上一次移動時間(數字 - 單位: 秒)
-				}
-			}
-
-			// 滑鼠事件
-			barWrap.mousemove(() => {
-				toSec($('.dplayer-bar-time').html())
-			})
-
-			// 如果影片載入失敗則重新讀取
-			screenshotPlayer.on('error', () => {
-				loadScreenshotPlayer()
-			})
-		}
-
-		// 當系統是電腦時 和 進度條預覽必須啟動 才使用截圖播放器
-		if (
-			/(WIN|Mac)/i.test(navigator.userAgent) &&
-			localStorage.getItem('previewSwitch') == 'true'
-		) {
-			loadScreenshotPlayer() // 第一次載入截圖播放器
-		}
-	})
+	}
 
 	$('#leftBtn, #rightBtn').click((e) => {
 		let target = $(e.target)
