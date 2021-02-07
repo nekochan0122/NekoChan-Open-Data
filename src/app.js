@@ -47,14 +47,16 @@ function init() {
 	<div id="content" class="mdui-container mdui-shadow-16"></div>`
 	$('body').html(html)
 	// 資料夾預覽圖
-	const folderIMGElement = $('#folderIMGElement')
-	folderIMGElement.hide()
-	$(document).mousemove((event) => {
-		folderIMGElement.css({'left':`${event.pageX + 25}px`, 'top':`${event.pageY + 25}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
-	})
-	$(window).scroll(() => {
-		folderIMGElement.hide() // 滾動時隱藏 資料夾預覽圖元素
-	})
+	if (/(WIN|Mac)/i.test(navigator.userAgent)) {
+		const folderIMGElement = $('#folderIMGElement')
+		folderIMGElement.hide()
+		$(document).mousemove((event) => {
+			folderIMGElement.css({'left':`${event.pageX + 25}px`, 'top':`${event.pageY + 25}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
+		})
+		$(window).scroll(() => {
+			folderIMGElement.hide() // 滾動時隱藏 資料夾預覽圖元素
+		})
+	}
 }
 
 function getDocumentHeight() {
@@ -825,12 +827,23 @@ function file_video(path) {
 	let previewSwitchElement = ''
 	// 播放器 HTML
 	let player = ''
+	let switchElement = ''
 	// 系統檢測
 	if (!Os.isMobile) {
 		// 電腦播放器 HTML
 		player = `
 		<div id="player" class="mdui-center"></div>
 		<div id="screenshotPlayer"></div>
+		`
+		switchElement = `
+		<span id="switchElement" style="float: right">
+			<i class="mdui-icon material-icons">ondemand_video</i>
+			<span class="mdui-list-item-content">進度條預覽圖</span>
+			<label class="mdui-switch">
+				${previewSwitchElement}
+				<i class="mdui-switch-icon"></i>
+			</label>
+		</span>
 		`
 		// MAC 串流播放器按鈕
 		if (/(Mac)/i.test(navigator.userAgent)) {
@@ -854,14 +867,14 @@ function file_video(path) {
 		// 移動端 串流播放器按鈕
 		if (/(Android)/i.test(navigator.userAgent)) {
 			playBtn = `<button class="${btnClass2} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">MXPlayer Pro 串流</button>`
-			playBtn += `<button style="left: 15px" class="${btnClass2} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">MXPlayer Free 串流</button>`
+			playBtn += `<br><button style="margin-top: 15px" class="${btnClass2} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">MXPlayer Free 串流</button>`
 		} else if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
 			let applelink = url.replace(/(^\w+:|^)\/\//, '')
 			playBtn = `<a class="${btnClass2}" href="infuse://${applelink}">Infuse 串流</a>`
 		}
 	}
 	// 直連下載
-	playBtn += `<a style="left: 15px" href="${encoded_url}" class="${btnClass2} download-btn">直連下載檔案</a>`
+	playBtn += `<br><a style="margin-top: 15px" href="${encoded_url}" class="${btnClass2} download-btn">直連下載檔案</a>`
 
 	let content = `
 	<div class="mdui-container-fluid">
@@ -875,14 +888,7 @@ function file_video(path) {
 	</div>
 	<br>
 	${playBtn}
-	<span id="switchElement" style="float: right">
-		<i class="mdui-icon material-icons">ondemand_video</i>
-		<span class="mdui-list-item-content">進度條預覽圖</span>
-		<label class="mdui-switch">
-			${previewSwitchElement}
-			<i class="mdui-switch-icon"></i>
-		</label>
-	</span>
+	${switchElement}
 	<div class="mdui-textfield">
 		<label class="mdui-textfield-label mdui-text-color-white">注意：若影片沒有畫面，請嘗試播放器串流。或通知 Discord：NekoChan#2851。</label>
 	</div>
