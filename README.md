@@ -2,8 +2,12 @@
 
 **fork from [yanzai/goindex](https://github.com/yanzai/goindex)**
 
+---
+
 ![老婆圖](https://thumbs.gfycat.com/ImpeccableMisguidedIchthyostega-max-14mb.gif)<br>
 ~~**老婆真可愛**~~
+
+---
 
 ### 安裝 & 使用
 
