@@ -3,7 +3,7 @@
 **fork from [yanzai/goindex](https://github.com/yanzai/goindex)**
 
 ![](https://media.discordapp.net/attachments/716742766855716936/803981052838281246/38180638b642c938462dfedf1d61bbde.gif)<br>
-老婆真可愛（X
+~~老婆真可愛~~
 
 ### 安裝 & 使用
 
