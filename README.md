@@ -7,8 +7,6 @@
 ![老婆圖](https://thumbs.gfycat.com/ImpeccableMisguidedIchthyostega-max-14mb.gif)<br>
 ~~**老婆真可愛**~~
 
----
-
 ### 安裝 & 使用
 
 - 還是再次提醒一下，本項目為個人修改使用，無考慮個人化的功能，**若有需求請自行修改**。
