@@ -4,7 +4,7 @@
 
 ### 預覽
 ![image1](https://i.imgur.com/0Jp32GQ.png)
-![image2](https://i.imgur.com/FiS723T.png)
+![image2](https://i.imgur.com/N61YgfN.png)
 ![image3](https://i.imgur.com/QG6O42u.png)
 
 ### 已知問題
