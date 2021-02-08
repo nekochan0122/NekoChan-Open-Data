@@ -7,13 +7,13 @@
 - 還是再次提醒一下，本項目為個人修改使用，無考慮個人化的功能，**若有需求請自行修改**。
 
 #### 安裝：
-1. 複製最新的 [index.js](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/blob/master/index.js)（有時候會更新，自己注意）至你的 Worker。
-2. version 填入 [最新的min版本](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/releases)（比如1.9.8.min2）。
+1. 複製最新的 [index.js](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/blob/master/index.js)（有時候會更新，自己注意。）至你的 Worker。
+2. version 填入 [最新的min版本](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/releases)（例如：1.9.8.min2）。
 3. client_id, client_secret, refresh_token 和其他項目取的方法相同。
 
 #### 資料夾封面：
 - 在該資料夾中放入檔名為 '封面.webp' 即可。<br>
-（不帶引號，檔案不會渲染至列表中，也搜尋不到，默認只會預加載 完結、連載中 資料夾的封面）
+（不帶引號，檔案不會渲染至列表中，也搜尋不到。默認只會預加載 完結、連載中 資料夾的封面。）
 
 #### 彩色資料夾：
 - 本項目設定為 完結（紅色）、連載中（黃色）。
