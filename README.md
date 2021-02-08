@@ -9,7 +9,7 @@
 #### 安裝：
 1. 複製最新的 [index.js](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/blob/master/index.js)（有時候會更新，自己注意）至你的 Worker。
 2. version 填入 [最新的min版本](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/releases)（比如1.9.8.min2）。
-3. client_id, client_secret, refresh_token 和其他項目相同。
+3. client_id, client_secret, refresh_token 和其他項目取的方法相同。
 
 #### 封面：
 - 在該資料夾中放入 '封面.webp' 即可。（不會檔案渲染至列表中，也搜尋不到）。
