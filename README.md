@@ -5,7 +5,7 @@
 ### 預覽
 ![image1](https://i.imgur.com/0Jp32GQ.png)
 ![image2](https://i.imgur.com/N61YgfN.png)
-![image3](https://i.imgur.com/QG6O42u.png)
+![image3](https://i.imgur.com/EUUAMrH.png)
 
 ### 已知問題
 - ~~有時會發生 POST 請求錯誤 狀態碼：500 （導致列表渲染不出來的主要原因）~~
