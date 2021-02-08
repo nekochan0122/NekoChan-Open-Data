@@ -2,6 +2,9 @@
 
 **fork from [yanzai/goindex](https://github.com/yanzai/goindex)**
 
+![](https://media.discordapp.net/attachments/716742766855716936/803981052838281246/38180638b642c938462dfedf1d61bbde.gif)<br>
+老婆真可愛（X
+
 ### 安裝 & 使用
 
 - 還是再次提醒一下，本項目為個人修改使用，無考慮個人化的功能，**若有需求請自行修改**。
