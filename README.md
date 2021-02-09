@@ -7,6 +7,11 @@
 ![老婆圖](https://thumbs.gfycat.com/ImpeccableMisguidedIchthyostega-max-14mb.gif)<br>
 ~~**老婆真可愛**~~
 
+## 預覽
+![image1](https://i.imgur.com/0Jp32GQ.png)
+![image2](https://i.imgur.com/N61YgfN.png)
+![image3](https://i.imgur.com/EUUAMrH.png)
+
 ## 安裝 & 使用
 
 - 還是再次提醒一下，本項目為個人修改使用，無考慮個人化的功能，**若有需求請自行修改**。
@@ -31,11 +36,6 @@
 - **[ Z ]**：上一集
 - **[ X ]**：下一集
 - **[ F ]**：全螢幕、退出全螢幕
-
-## 預覽
-![image1](https://i.imgur.com/0Jp32GQ.png)
-![image2](https://i.imgur.com/N61YgfN.png)
-![image3](https://i.imgur.com/EUUAMrH.png)
 
 ## 已知問題
 - ~~在安卓系統中，播放器無法正常載入~~
