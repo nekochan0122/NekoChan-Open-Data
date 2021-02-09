@@ -149,7 +149,7 @@
 - 改寫了部分語法、以 ES6 語法壓縮檔案
 - 新增 網站 icon
 - 移除 Twitter 按鈕
-- 移除 Donate 按鈕 
+- 移除 Donate 按鈕
 - 移除 notyf 通知
 - 移除 自動切換下一集
 - 更新 jQuery 3.5.1
