@@ -15,7 +15,7 @@ a:visited {
 body {
 	margin: 0px;
 	padding: 0px;
-	background: url('//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.2.beta16/images/background_3.webp');
+	background: url('//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@master/images/background_3.webp');
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-position: center center;
