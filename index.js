@@ -106,11 +106,11 @@ function html(current_drive_order = 0, model = {}) {
     <meta property="og:description" content="NekoChan分享檔案的網站">
     <meta property="og:url" content="//nekochan.ml/">
     <meta property="og:locale" content="zh-Hant-TW">
-    <meta property="og:image" content="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.6.3.1/images/image_0.webp">
+    <meta property="og:image" content="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@master/images/image_0.webp">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="NekoChan Open Data">
     <title>${authConfig.siteName}</title>
-    <link rel="shortcut icon" href="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data/images/logo.webp" type="image/x-icon" />
+    <link rel="shortcut icon" href="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@master/images/logo.webp" type="image/x-icon" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/mdui/1.0.1/css/mdui.min.css" integrity="sha512-x4mi26uahzsFv2+ZklhOELAiuLt2e+hSxQ/SWbW/FuZWZJSc4Ffb33Al7SmPqXXyZieN2rNxBiDsRqAtGKsxUA==" crossorigin="anonymous" />
     <link rel="preconnect" href="//fonts.gstatic.com">
     <link href="//fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&family=Noto+Sans+SC:wght@500&family=Noto+Sans+TC:wght@500&display=swap" rel="stylesheet">
@@ -123,10 +123,10 @@ function html(current_drive_order = 0, model = {}) {
 		window.current_drive_order = ${current_drive_order}
 		window.UI = JSON.parse('${JSON.stringify(uiConfig)}')
     </script>
-    <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/markdown-it/12.0.4/markdown-it.min.js" integrity="sha512-0DkA2RqFvfXBVeti0R1l0E8oMkmY0X+bAA2i02Ld8xhpjpvqORUcE/UBe+0KOPzi5iNah0aBpW6uaNNrqCk73Q==" crossorigin="anonymous" async></script>
-    <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.9.1.DPlayer.min2/js/DPlayer-1.26.0.min.edit.js" async></script>
+    <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@master/js/jquery-3.5.1.min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@master/js/mdui-1.0.1.min.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@master/js/markdown-it-12.0.4.min.js" async></script>
+    <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@master/js/DPlayer-1.26.0.min.edit.js" async></script>
     <script src="//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@${
 			authConfig.version
 		}/app.js"></script>
