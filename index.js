@@ -52,10 +52,10 @@ const authConfig = {
  */
 const uiConfig = {
 	theme: 'material',
-	dark_mode: !0,
+	dark_mode: true,
 	main_color: 'blue',
 	accent_color: 'blue',
-	fluid_navigation_bar: !0,
+	fluid_navigation_bar: false,
 }
 
 /**
