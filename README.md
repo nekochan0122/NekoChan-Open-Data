@@ -175,5 +175,5 @@
 ## 聯絡
 **Discord：NekoChan#2851**
 
-## Lisense
+## License
 [MIT](LICENSE)
