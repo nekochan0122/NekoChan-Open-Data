@@ -14,7 +14,7 @@
 
 ## 安裝 & 使用
 
-- 還是再次提醒一下，本項目為個人修改使用，無考慮個人化的功能，**若有需求請自行修改。**
+- 本項目為個人修改使用，無考慮個人化的功能，**若有需求請自行修改。**
 
 #### 安裝：
 1. 複製最新的 [index.js](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/blob/master/index.js)（有時候會更新，自己注意。）至你的 Worker。
