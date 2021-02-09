@@ -1,4 +1,4 @@
-# NekoChan Open Data
+# Goindex 自用魔改版
 
 **fork from [yanzai/goindex](https://github.com/yanzai/goindex)**
 
