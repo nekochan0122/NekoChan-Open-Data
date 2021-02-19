@@ -1,6 +1,6 @@
-'use strict'
-
 // NekoChan Open Data
+
+'use strict'
 
 // 系統識別
 const Os = {
@@ -109,11 +109,11 @@ function render(path) {
 // 渲染 title
 function title(path) {
 	path = decodeURI(path)
-	let cur = window.current_drive_order || 0
-	let drive_name = window.drive_names[cur]
+	let cur = window.current_drive_order || 0,
+		drive_name = window.drive_names[cur],
+		model = window.MODEL
 	path = path.replace(`/${cur}:`, '')
 	$('title').html(`${document.siteName} - ${path}`)
-	let model = window.MODEL
 	if (model.is_search_page)
 		$('title').html(
 			`${document.siteName} - ${drive_name} - 搜尋 ${model.q} 的結果`
@@ -153,9 +153,9 @@ function nav(path) {
 	}
 	$('#folderPath').html(folderPath)
 
-	let search_text = model.is_search_page ? model.q || '' : ''
 	const isMobile = Os.isMobile
-	let search_bar = `<div class="mdui-toolbar-spacer"></div>
+	let search_text = model.is_search_page ? model.q || '' : '',
+		search_bar = `<div class="mdui-toolbar-spacer"></div>
 		<div id="search_bar" class="mdui-textfield mdui-textfield-expandable mdui-float-right mdui-textfield-expanded" style="max-width:${
 					isMobile ? 300 : 400
 				}px">
@@ -223,8 +223,8 @@ function requestSearch(params, resultCallback) {
 
 // 渲染文件列表
 function list(path) {
-	let href = null // 資料夾預覽圖連結
-	let content = `
+	let href = null, // 資料夾預覽圖連結
+		content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
 			<ul class="mdui-list">
@@ -280,7 +280,7 @@ function list(path) {
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
 				function () {
-					let href = `${this.querySelector('a.folder').href}封面.webp`
+					href = `${this.querySelector('a.folder').href}封面.webp`
 					$('#folderIMGElementSrc').attr('src', href)
 					$('#folderIMGElement').show()
 				},
@@ -296,7 +296,7 @@ function list(path) {
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
 				function () {
-					let href = `${this.querySelector('a.folder').href}封面.webp`
+					href = `${this.querySelector('a.folder').href}封面.webp`
 					$('#folderIMGElementSrc').attr('src', href)
 					$('#folderIMGElement').show()
 				},
@@ -308,9 +308,9 @@ function list(path) {
 			if (window.scroll_status.event_bound !== true) {
 				// 綁定事件，如果還未綁定
 				$(window).on('scroll', function () {
-					let scrollTop = $(this).scrollTop()
-					let scrollHeight = getDocumentHeight()
-					let windowHeight = $(this).height()
+					let scrollTop = $(this).scrollTop(),
+						scrollHeight = getDocumentHeight(),
+						windowHeight = $(this).height()
 					// 滾到底部
 					if (
 						scrollTop + windowHeight >
@@ -418,9 +418,9 @@ function append_files_to_list(path, files) {
 			</li>`
 		} else {
 			// 檔案
-			let p = path + item.name
+			let p = path + item.name,
+				c = 'file'
 			const filepath = path + item.name
-			let c = 'file'
 			// 當載入完最後一頁後，才顯示 README ，否則會影響滾動事件
 			if (is_lastpage_loaded && item.name == '!readme.md') {
 				get_file(p, item, (data) => {
@@ -554,7 +554,7 @@ function render_search_result_list() {
 				function () {
 					$.post(`/${cur}:id2path`, { id: this.querySelector('a.folder').id }, (data) => {
 						if (data) {
-							let href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
+							href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
 							$('#folderIMGElementSrc').attr('src', href)
 							$('#folderIMGElement').show()
 						}
@@ -573,7 +573,7 @@ function render_search_result_list() {
 				function () {
 					$.post(`/${cur}:id2path`, { id: this.querySelector('a.folder').id }, (data) => {
 						if (data) {
-							let href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
+							href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
 							$('#folderIMGElementSrc').attr('src', href)
 							$('#folderIMGElement').show()
 						}
@@ -1170,8 +1170,8 @@ function file_video(path) {
 }
 
 function file_image(path) {
-	let url = decodeURI(window.location.origin + path)
-	let content = `
+	let url = decodeURI(window.location.origin + path),
+		content = `
 <div class="mdui-container-fluid">
 	<br>
 	<img class="mdui-img-fluid" src="${url}"/>
