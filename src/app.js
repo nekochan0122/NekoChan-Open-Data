@@ -124,19 +124,19 @@ function title(path) {
 
 // 渲染導航欄
 function nav(path) {
-	let model = window.MODEL
-	let html = ''
-	let cur = window.current_drive_order || 0
+	let model = window.MODEL,
+		html = '',
+		cur = window.current_drive_order || 0
 	html += `<a href="/${cur}:/" class="mdui-typo-headline folder">${document.siteName}</a>`
 
 	let folderPath = `　當前位置： <a class="folder" href="/${cur}:/">主目錄</a>`
 	if (!model.is_search_page) {
 		// 資料夾路徑
-		let arr = path.trim('/').split('/')
-		let p = '/'
+		let arr = path.trim('/').split('/'),
+			p = '/'
 		if (arr.length > 1) {
 			arr.shift()
-			for (i in arr) {
+			for (let i in arr) {
 				let n = arr[i]
 				n = decodeURI(n)
 				p += `${n}/`
@@ -389,7 +389,7 @@ function append_files_to_list(path, files) {
 
 		className = ''
 
-	for (i in files) {
+	for (let i in files) {
 		let item = files[i],
 			p = `${path + item.name}/`
 		if (item['size'] == undefined) {
@@ -653,7 +653,7 @@ function append_search_result_to_list(files) {
 
 	html = ''
 
-	for (i in files) {
+	for (let i in files) {
 		let item = files[i]
 		if (item['size'] == undefined) {
 			item['size'] = ''
