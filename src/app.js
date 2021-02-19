@@ -277,8 +277,9 @@ function list(path) {
 			$('.clickFolder').hover(
 				function () {
 					href = `${this.querySelector('a.folder').href}封面.webp`
-					$('#folderIMGElementSrc').attr('src', href)
-					$('#folderIMGElement').show()
+					$('#folderIMGElementSrc').attr('src', href).load(() => { // 當圖片讀取成功時才會顯示
+						$('#folderIMGElement').show()
+					})
 				},
 				() => {
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
@@ -293,8 +294,9 @@ function list(path) {
 			$('.clickFolder').hover(
 				function () {
 					href = `${this.querySelector('a.folder').href}封面.webp`
-					$('#folderIMGElementSrc').attr('src', href)
-					$('#folderIMGElement').show()
+					$('#folderIMGElementSrc').attr('src', href).load(() => { // 當圖片讀取成功時才會顯示
+						$('#folderIMGElement').show()
+					})
 				},
 				() => {
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
@@ -552,8 +554,9 @@ function render_search_result_list() {
 							href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
 						}
 					})
-					$('#folderIMGElementSrc').attr('src', href)
-					$('#folderIMGElement').show()
+					$('#folderIMGElementSrc').attr('src', href).load(() => { // 當圖片讀取成功時才會顯示
+						$('#folderIMGElement').show()
+					})
 				},
 				() => {
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
@@ -571,8 +574,9 @@ function render_search_result_list() {
 							href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
 						}
 					})
-					$('#folderIMGElementSrc').attr('src', href)
-					$('#folderIMGElement').show()
+					$('#folderIMGElementSrc').attr('src', href).load(() => { // 當圖片讀取成功時才會顯示
+						$('#folderIMGElement').show()
+					})
 				},
 				() => {
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
@@ -776,16 +780,16 @@ function file(path) {
 
 // Preview Video
 function file_video(path) {
-	let url = decodeURI(window.location.origin + path)
-	let encoded_url = url
-	const file_name = decodeURI(
-		path.slice(path.lastIndexOf('/') + 1, path.length)
-	)
-	const currentPathname = window.location.pathname
-	const lastIndex = currentPathname.lastIndexOf('/')
-	const fatherPathname = currentPathname.slice(0, lastIndex + 1)
-	let target_children = localStorage.getItem(fatherPathname)
-	let targetText = ''
+	let url = decodeURI(window.location.origin + path),
+		encoded_url = url,
+		target_children = localStorage.getItem(fatherPathname),
+		targetText = ''
+
+	const file_name = decodeURI(path.slice(path.lastIndexOf('/') + 1, path.length)),
+		currentPathname = window.location.pathname,
+		lastIndex = currentPathname.lastIndexOf('/'),
+		fatherPathname = currentPathname.slice(0, lastIndex + 1)
+
 	if (target_children) {
 		try {
 			target_children = JSON.parse(target_children)
@@ -797,10 +801,10 @@ function file_video(path) {
 			target_children = []
 		}
 		if (target_children.length > 0 && target_children.includes(fatherPathname+file_name)) {
-			let len = target_children.length
-			let cur = target_children.indexOf(fatherPathname+file_name)
-			let prev_child = cur - 1 > -1 ? target_children[cur - 1] : null
-			let next_child = cur + 1 < len ? target_children[cur + 1] : null
+			let len = target_children.length,
+				cur = target_children.indexOf(fatherPathname+file_name),
+				prev_child = cur - 1 > -1 ? target_children[cur - 1] : null,
+				next_child = cur + 1 < len ? target_children[cur + 1] : null,
 			const btnClass1 = 'mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple'
 			targetText = `
 			<div class="mdui-container">
@@ -823,11 +827,13 @@ function file_video(path) {
 	const btnClass2 = 'mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent'
 	// WIN 串流播放器
 	let playBtn = `<a href="potplayer://${encoded_url}" class="${btnClass2} windows-btn">PotPlayer 串流</a>`
+
 	// 進度條預覽圖切換元素
-	let switchElement = ''
-	let previewSwitchElement = ''
-	// 播放器 HTML
-	let player = ''
+	let switchElement = '',
+		previewSwitchElement = '',
+		// 播放器 HTML
+		player = ''
+
 	// 系統檢測
 	if (!Os.isMobile) {
 		// 電腦播放器 HTML
@@ -919,11 +925,10 @@ function file_video(path) {
 
 			// 主要播放器函式(開啟預覽圖)
 			const loadMainPlayer = () => {
-				let currentTime = 0 // 當前播放時間
-				let oldVol = 0.5 // 初始化音量
-				let mute = false // 靜音狀態
-
-				let dp = null // 重置變數
+				let currentTime = 0, // 當前播放時間
+					oldVol = 0.5, // 初始化音量
+					mute = false, // 靜音狀態
+					dp = null // 重置變數
 
 				// DPlayer 參數
 				if (localStorage.getItem('previewSwitch') == 'true') {
@@ -1068,15 +1073,16 @@ function file_video(path) {
 
 			// 讀取截圖播放器
 			const loadScreenshotPlayer = () => {
-				let moveTimeSec = 0 // 移動時間(數字 - 單位: 秒)
-				let oldMoveTimeSec = 0 // 上一次移動時間(數字 - 單位: 秒)
-				let range = 5 // 移動時間範圍值
-				let temp = null // 格式化變數
+				let moveTimeSec = 0, // 移動時間(數字 - 單位: 秒)
+					oldMoveTimeSec = 0, // 上一次移動時間(數字 - 單位: 秒)
+					range = 5, // 移動時間範圍值
+					temp = null // 格式化變數
 
 				let oldCanvas = $('#player canvas') // 舊畫布(預覽圖)
-				const screenshotPlayerElement = $('#screenshotPlayer')[0]
-				const barWrap = $('#player .dplayer-bar-wrap') // 進度條
-				const parentNode = $('#player .dplayer-bar-preview') // 畫布(預覽圖)父節點
+				const screenshotPlayerElement = $('#screenshotPlayer')[0],
+					barWrap = $('#player .dplayer-bar-wrap'), // 進度條
+					parentNode = $('#player .dplayer-bar-preview') // 畫布(預覽圖)父節點
+
 				screenshotPlayerElement.style.display = 'none' // 隱藏播放器
 
 				let screenshotPlayer = null // 重置變數

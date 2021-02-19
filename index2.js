@@ -21,6 +21,8 @@ const authConfig = {
 		{
 			id: 'root',
 			name: '主目錄',
+			user: '',
+			pass: ''
 		},
 	],
 	/**

@@ -1,9 +1,9 @@
 const authConfig = {
-	siteName: 'NekoChan Open Data', // 網站名稱
-	version: '', // 程序版本。用戶不要手動修改
+	siteName: 'NekoChan Open Data',
+	version: '',
 	client_id: '',
 	client_secret: '',
-	refresh_token: '', // 授權 token
+	refresh_token: '',
 	/**
 	 * 設置要顯示的多個雲端硬碟；按格式添加多個
 	 * [id]: 可以是 團隊盤id、子文件夾id、或者"root"（代表個人盤根目錄）
@@ -29,7 +29,7 @@ const authConfig = {
 	 * 如果設置的值過小，會導致文件列表頁面滾動條增量載入（分頁載入）失效；
 	 * 此值的另一個作用是，如果目錄內文件數大於此設置值（即需要多頁展示的），將會對首次列目錄結果進行快取。
 	 */
-	files_list_page_size: 35,
+	files_list_page_size: 50,
 	/**
 	 * 搜索結果頁面每頁顯示的數量。【推薦設置值為 50 到 1000 之間】；
 	 * 如果設置大於1000，會導致請求 drive api 時出錯；
