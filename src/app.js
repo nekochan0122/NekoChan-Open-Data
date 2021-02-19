@@ -1205,7 +1205,6 @@ function formatFileSize(bytes) {
 String.prototype.trim = function (char) {
 	if (char) {
 		return this.replace(new RegExp(`^\\${char}+|\\${char}+$`, 'g'), '')
-		z
 	}
 	return this.replace(/^\s+|\s+$/g, '')
 }
