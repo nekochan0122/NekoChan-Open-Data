@@ -377,20 +377,21 @@ function list(path) {
  * @param files 請求得來的結果
  */
 function append_files_to_list(path, files) {
-	let $list = $('#list')
+	let $list = $('#list'),
 	// 是最後一頁數據了嗎？
-	let is_lastpage_loaded = null === $list.data('nextPageToken')
-	let is_firstpage = '0' == $list.data('curPageIndex')
+		is_lastpage_loaded = null === $list.data('nextPageToken'),
+		is_firstpage = '0' == $list.data('curPageIndex'),
 
-	let file_count = 0 // 檔案數量
+		file_count = 0, // 檔案數量
 
-	html = ''
-	let targetFiles = []
+		html = '',
+		targetFiles = [],
 
-	let className = ''
+		className = ''
+
 	for (i in files) {
-		let item = files[i]
-		let p = `${path + item.name}/`
+		let item = files[i],
+			p = `${path + item.name}/`
 		if (item['size'] == undefined) {
 			item['size'] = ''
 		}
@@ -463,8 +464,8 @@ function append_files_to_list(path, files) {
 	}
 
 	if (targetFiles.length > 0) {
-		let old = localStorage.getItem(path)
-		let new_children = targetFiles
+		let old = localStorage.getItem(path),
+			new_children = targetFiles
 		// 第1頁重設；否則追加
 		if (!is_firstpage && old) {
 			let old_children
@@ -497,9 +498,9 @@ function append_files_to_list(path, files) {
  * 渲染搜索結果列表。有大量重複代碼，但是裡面有不一樣的邏輯，暫時先這樣分開弄吧
  */
 function render_search_result_list() {
-	let href = null // 資料夾預覽圖連結
-	let cur = window.current_drive_order // 資料夾預覽圖 (搜尋用 變量)
-	let content = `
+	let href = null, // 資料夾預覽圖連結
+		cur = window.current_drive_order, // 資料夾預覽圖 (搜尋用 變量)
+		content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
 			<ul class="mdui-list">
@@ -645,9 +646,9 @@ function render_search_result_list() {
  * @param files
  */
 function append_search_result_to_list(files) {
-	let $list = $('#list')
+	let $list = $('#list'),
 	// 是最後一頁數據了嗎？
-	let is_lastpage_loaded = null === $list.data('nextPageToken')
+		is_lastpage_loaded = null === $list.data('nextPageToken')
 	// let is_firstpage = '0' == $list.data('curPageIndex');
 
 	html = ''
@@ -679,8 +680,8 @@ function append_search_result_to_list(files) {
 				</a>
 			</li>`
 		} else {
-			let c = 'file'
-			let ext = item.name.split('.').pop().toLowerCase()
+			let c = 'file',
+				ext = item.name.split('.').pop().toLowerCase()
 			switch(item.name) { // 隱藏項目
 				case '!head.md':
 					continue
@@ -721,16 +722,16 @@ function append_search_result_to_list(files) {
  * @param a_ele 點擊的元素
  */
 function onSearchResultItemClick(a_ele) {
-	let me = $(a_ele)
-	let can_preview = me.hasClass('view')
-	let cur = window.current_drive_order
-	let dialog = mdui.dialog({
-		title: '',
-		content:
-			'<div class="mdui-text-center mdui-typo-title mdui-m-b-1">正在獲取路徑...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
-		history: false,
-		modal: true,
-		closeOnEsc: true,
+	let me = $(a_ele),
+		can_preview = me.hasClass('view'),
+		cur = window.current_drive_order,
+		dialog = mdui.dialog({
+			title: '',
+			content:
+				'<div class="mdui-text-center mdui-typo-title mdui-m-b-1">正在獲取路徑...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
+			history: false,
+			modal: true,
+			closeOnEsc: true,
 	})
 	mdui.updateSpinners()
 
@@ -755,8 +756,8 @@ function onSearchResultItemClick(a_ele) {
 
 function get_file(path, file, callback) {
 	// let key = `file_path_${path}${file['modifiedTime']}`
-	let key = `file_path_${path}`
-	let data = localStorage.getItem(key)
+	let key = `file_path_${path}`,
+		data = localStorage.getItem(key)
 	if (data != undefined) {
 		return callback(data)
 	} else {
@@ -768,8 +769,8 @@ function get_file(path, file, callback) {
 }
 
 function file(path) {
-	let name = path.split('/').pop()
-	let ext = name.split('.').pop().toLowerCase().replace(`?a=view`, '')
+	let name = path.split('/').pop(),
+		ext = name.split('.').pop().toLowerCase().replace(`?a=view`, '')
 	if (
 		'|mp4|webm|avi|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|'.includes(
 			`|${ext}|`
