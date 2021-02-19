@@ -19,8 +19,8 @@
 #### 安裝：
 1. 複製最新的 [index.js](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/blob/master/index.js)（有時候會更新，自己注意。）至你的 Worker。
     - 注意：如果要使用 Basic Auth 功能，請使用 [index2.js](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/blob/master/index2.js)。
-2. version 填入 [最新的min版本](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/releases)（例如：1.9.8.min2）。
-3. client_id, client_secret, refresh_token 和其他項目取得方法相同。
+2. version 填入 [最新的min版本](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/releases)（例如：1.9.9.min）。
+3. client_id, client_secret, refresh_token 和其他 [Goindex項目](https://github.com/search?q=Goindex&type=Repositories) 取得方法相同。
 
 #### 資料夾封面：
 - 在該資料夾中放入檔名為 '封面.webp' 即可。<br>
@@ -42,6 +42,11 @@
 - ~~在安卓系統中，播放器無法正常載入~~
 
 ## 更新內容
+
+### 1.9.9
+- 開啟 嚴格模式（'use strict'）
+- 修復 嚴格模式 檢測到的所有錯誤
+- 簡化 JS
 
 ### 1.9.8
 - 修復 在安卓系統無法正常載入播放器的問題
