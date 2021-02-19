@@ -1,3 +1,5 @@
+'use strict'
+
 // NekoChan Open Data
 
 // 系統識別
@@ -806,7 +808,8 @@ function file_video(path) {
 			let len = target_children.length,
 				cur = target_children.indexOf(fatherPathname+file_name),
 				prev_child = cur - 1 > -1 ? target_children[cur - 1] : null,
-				next_child = cur + 1 < len ? target_children[cur + 1] : null,
+				next_child = cur + 1 < len ? target_children[cur + 1] : null
+
 			const btnClass1 = 'mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple'
 			targetText = `
 			<div class="mdui-container">
