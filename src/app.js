@@ -48,13 +48,15 @@ function init() {
 	$('body').html(html)
 	// 資料夾預覽圖
 	if (/(WIN|Mac)/i.test(navigator.userAgent)) {
-		const folderIMGElement = $('#folderIMGElement')
-		folderIMGElement.hide()
-		$(document).mousemove((event) => {
-			folderIMGElement.css({'left':`${event.pageX + 25}px`, 'top':`${event.pageY + 25}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
-		})
-		$(window).scroll(() => {
-			folderIMGElement.hide() // 滾動時隱藏 資料夾預覽圖元素
+		$(() => {
+			const folderIMGElement = $('#folderIMGElement')
+			folderIMGElement.hide()
+			$(document).mousemove((event) => {
+				folderIMGElement.css({'left':`${event.pageX + 25}px`, 'top':`${event.pageY + 25}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
+			})
+			$(window).on('scroll', function() {
+				folderIMGElement.hide() // 滾動時隱藏 資料夾預覽圖元素
+			})
 		})
 	}
 }
@@ -905,7 +907,7 @@ function file_video(path) {
 	$('#content').html(content)
 
 	if (/(WIN|Mac)/i.test(navigator.userAgent)) {
-		$(document).ready(() => {
+		$(() => {
 			// DPlayer Script 未正常載入則刷新網頁
 			if (!window.DPlayer) {
 				window.location.reload()
