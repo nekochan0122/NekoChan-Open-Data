@@ -280,10 +280,9 @@ function list(path) {
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
 				function () {
-					href = `${this.querySelector('a.folder').href}封面.webp`
-					$('#folderIMGElementSrc').attr('src', href).load(() => { // 當圖片讀取成功時才會顯示
-						$('#folderIMGElement').show()
-					})
+					let href = `${this.querySelector('a.folder').href}封面.webp`
+					$('#folderIMGElementSrc').attr('src', href)
+					$('#folderIMGElement').show()
 				},
 				() => {
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
@@ -297,10 +296,9 @@ function list(path) {
 			// 資料夾預覽圖
 			$('.clickFolder').hover(
 				function () {
-					href = `${this.querySelector('a.folder').href}封面.webp`
-					$('#folderIMGElementSrc').attr('src', href).load(() => { // 當圖片讀取成功時才會顯示
-						$('#folderIMGElement').show()
-					})
+					let href = `${this.querySelector('a.folder').href}封面.webp`
+					$('#folderIMGElementSrc').attr('src', href)
+					$('#folderIMGElement').show()
 				},
 				() => {
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
@@ -556,11 +554,10 @@ function render_search_result_list() {
 				function () {
 					$.post(`/${cur}:id2path`, { id: this.querySelector('a.folder').id }, (data) => {
 						if (data) {
-							href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
+							let href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
+							$('#folderIMGElementSrc').attr('src', href)
+							$('#folderIMGElement').show()
 						}
-					})
-					$('#folderIMGElementSrc').attr('src', href).load(() => { // 當圖片讀取成功時才會顯示
-						$('#folderIMGElement').show()
 					})
 				},
 				() => {
@@ -576,11 +573,10 @@ function render_search_result_list() {
 				function () {
 					$.post(`/${cur}:id2path`, { id: this.querySelector('a.folder').id }, (data) => {
 						if (data) {
-							href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
+							let href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
+							$('#folderIMGElementSrc').attr('src', href)
+							$('#folderIMGElement').show()
 						}
-					})
-					$('#folderIMGElementSrc').attr('src', href).load(() => { // 當圖片讀取成功時才會顯示
-						$('#folderIMGElement').show()
 					})
 				},
 				() => {
@@ -591,9 +587,9 @@ function render_search_result_list() {
 			if (window.scroll_status.event_bound !== true) {
 				// 綁定事件，如果還未綁定
 				$(window).on('scroll', function () {
-					let scrollTop = $(this).scrollTop()
-					let scrollHeight = getDocumentHeight()
-					let windowHeight = $(this).height()
+					let scrollTop = $(this).scrollTop(),
+						scrollHeight = getDocumentHeight(),
+						windowHeight = $(this).height()
 					// 滾到底部
 					if (
 						scrollTop + windowHeight >
