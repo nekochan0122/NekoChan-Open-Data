@@ -784,13 +784,13 @@ function file(path) {
 function file_video(path) {
 	let url = decodeURI(window.location.origin + path),
 		encoded_url = url,
-		target_children = localStorage.getItem(fatherPathname),
 		targetText = ''
 
 	const file_name = decodeURI(path.slice(path.lastIndexOf('/') + 1, path.length)),
 		currentPathname = window.location.pathname,
 		lastIndex = currentPathname.lastIndexOf('/'),
-		fatherPathname = currentPathname.slice(0, lastIndex + 1)
+		fatherPathname = currentPathname.slice(0, lastIndex + 1),
+		target_children = localStorage.getItem(fatherPathname)
 
 	if (target_children) {
 		try {
