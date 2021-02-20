@@ -789,8 +789,9 @@ function file_video(path) {
 	const file_name = decodeURI(path.slice(path.lastIndexOf('/') + 1, path.length)),
 		currentPathname = window.location.pathname,
 		lastIndex = currentPathname.lastIndexOf('/'),
-		fatherPathname = currentPathname.slice(0, lastIndex + 1),
-		target_children = localStorage.getItem(fatherPathname)
+		fatherPathname = currentPathname.slice(0, lastIndex + 1)
+
+	let target_children = localStorage.getItem(fatherPathname)
 
 	if (target_children) {
 		try {
