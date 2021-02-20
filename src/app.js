@@ -647,7 +647,8 @@ function append_search_result_to_list(files) {
 		is_lastpage_loaded = null === $list.data('nextPageToken'),
 	// let is_firstpage = '0' == $list.data('curPageIndex');
 
-		html = ''
+		html = '',
+		className = ''
 
 	for (let i in files) {
 		let item = files[i]
