@@ -167,11 +167,13 @@ function nav(path) {
 			</button>
 		</div>`
 
-	// 個人盤 或 團隊盤
-	if (model.root_type < 2) {
-		// 顯示搜索框
-		html += search_bar
-	}
+	// // 個人盤 或 團隊盤
+	// if (model.root_type < 2) {
+	// 	// 顯示搜索框
+	// 	html += search_bar
+	// }
+
+	html += search_bar
 
 	$('#nav').html(html)
 	mdui.mutation()
@@ -243,7 +245,7 @@ function list(path) {
 	<div class="mdui-row">
 		<ul id="list" class="mdui-list">
 		</ul>
-		<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>NekoChan Open Data｜Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
+		<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
 	</div>
 	<div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>`
 	$('#content').html(content)
@@ -517,7 +519,7 @@ function render_search_result_list() {
 	<div class="mdui-row">
 	<ul id="list" class="mdui-list">
 	</ul>
-	<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>NekoChan Open Data｜Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
+	<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
 	</div>
 	<div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>`
 	$('#content').html(content)
@@ -948,12 +950,6 @@ function file_video(path) {
 							thumbnails:
 								'//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.6.beta2/images/fake-thumbnails.webp',
 						},
-						contextmenu: [
-							{
-								text: 'NekoChan Open Data',
-								link: '//nekochan.ml/',
-							},
-						],
 					})
 				} else if (localStorage.getItem('previewSwitch') == 'false') {
 					dp = new DPlayer({ // 關閉預覽圖
@@ -966,12 +962,6 @@ function file_video(path) {
 						video: {
 							url: encoded_url,
 						},
-						contextmenu: [
-							{
-								text: 'NekoChan Open Data',
-								link: '//nekochan.ml/',
-							},
-						],
 					})
 				}
 
