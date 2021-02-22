@@ -12,11 +12,11 @@
 ![image2](https://i.imgur.com/N61YgfN.png)
 ![image3](https://i.imgur.com/EUUAMrH.png)
 
-## 安裝 & 使用
+## 使用 & 功能
 
 - 本項目為個人修改使用，無考慮個人化的功能，**若有需求請自行修改。**
 
-#### 安裝：
+#### 使用：
 1. 複製最新的 [index.min.js](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/blob/master/index.min.js)（有時候會更新，自己注意。）至你的 Worker。
     - 注意：如果確定要使用 Basic Auth 功能，請使用 [index.js](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/blob/master/index.js)。
 2. version 填入 [最新的min版本](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/releases)（例如：2.0.0.min）。
