@@ -19,7 +19,7 @@
 #### 安裝：
 1. 複製最新的 [index.min.js](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/blob/master/index.min.js)（有時候會更新，自己注意。）至你的 Worker。
     - 注意：如果確定要使用 Basic Auth 功能，請使用 [index.js](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/blob/master/index.js)。
-2. version 填入 [最新的min版本](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/releases)（例如：2.0.0.min）。
+2. version 填入 [最新的min版本](https://github.com/NekoChanTaiwan/NekoChan-Open-Data/releases)（例如：2.0.0.min2）。
 3. client_id, client_secret, refresh_token 和其他 [Goindex項目](https://github.com/search?q=Goindex&type=Repositories) 取得方法相同。
 
 #### 資料夾封面：
@@ -49,6 +49,7 @@
 - 導航條的網站名稱在寬度小於 980px 時隱藏，並改變搜尋欄的寬度至最寬
 - 增加導航條的搜尋欄寬度
 - 針對 MKV 格式隱藏播放器
+- 支援 Chrome 擴充功能 "DarkReader"，開啟後背景不在會變成黑色
 - 格式化、簡化 JS
 
 ### 1.9.9
