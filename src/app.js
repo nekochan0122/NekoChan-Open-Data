@@ -30,27 +30,22 @@ function preloadImages(imageUrls) {
 // 初始化頁面，並載入必要資源
 function init() {
 	document.siteName = $('title').html()
-	$('body').addClass(
-		`mdui-theme-primary-${UI.main_color} mdui-theme-accent-${UI.accent_color}`
-	)
+	$('body').addClass(`mdui-theme-primary-${UI.main_color} mdui-theme-accent-${UI.accent_color}`)
 	let html = `
-	<header class="mdui-appbar mdui-color-theme">
-	<div id="nav" class="mdui-toolbar mdui-container${
-			UI.fluid_navigation_bar ? '-fluid' : ''
-		} ${UI.dark_mode ? 'mdui-text-color-white-text' : ''}">
-	</div>
-	</header>
-	<div id="folderIMGElement" class="mdui-card" style="position: absolute;max-width: 300px;left: 0px; top: 0px; z-index: 999;">
+	<nav id="nav-warp" style="display:flex;justify-content:center">
+		<div id="nav" class="mdui-appbar mdui-container mdui-toolbar mdui-text-color-white-text" style="box-shadow: none"></div>
+	</nav>
+	<div id="folderPath" class="mdui-container"></div>
+	<div id="content" class="mdui-container"></div>
+	<div id="folderIMGElement" style="position: absolute;max-width: 300px;left: 0px; top: 0px; z-index: 999;">
 		<div class="mdui-card-media">
 			<img id="folderIMGElementSrc" crossorigin="anonymous" src="">
 		</div>
-	</div>
-	<div id="folderPath" class="mdui-container"></div>
-	<div id="content" class="mdui-container mdui-shadow-16"></div>`
+	</div>`
 	$('body').html(html)
-	// 資料夾預覽圖
 	if (/(WIN|Mac)/i.test(navigator.userAgent)) {
 		$(() => {
+			// 資料夾預覽圖
 			const folderIMGElement = $('#folderIMGElement')
 			folderIMGElement.hide()
 			$(document).mousemove((event) => {
@@ -61,6 +56,15 @@ function init() {
 			})
 		})
 	}
+
+	// 導航條黏貼
+	$(window).on('scroll', function() {
+		if($(window).scrollTop() > 0) {
+			$('#nav').css({'position': 'fixed'})
+		} else if($(window).scrollTop() === 0) {
+			$('#nav').css({'position': 'static'})
+		}
+	})
 }
 
 function getDocumentHeight() {
@@ -127,9 +131,9 @@ function nav(path) {
 	let model = window.MODEL,
 		html = '',
 		cur = window.current_drive_order || 0
-	html += `<a href="/${cur}:/" class="mdui-typo-headline folder">${document.siteName}</a>`
+	html += `<a href="/${cur}:/" id="nav-title" class="mdui-typo-headline folder">${document.siteName}</a>`
 
-	let folderPath = `　當前位置： <a class="folder" href="/${cur}:/">主目錄</a>`
+	let folderPath = `當前位置： <a class="folder" href="/${cur}:/">主目錄</a>`
 	if (!model.is_search_page) {
 		// 資料夾路徑
 		let arr = path.trim('/').split('/'),
@@ -153,12 +157,9 @@ function nav(path) {
 	}
 	$('#folderPath').html(folderPath)
 
-	const isMobile = Os.isMobile
 	let search_text = model.is_search_page ? model.q || '' : '',
 		search_bar = `<div class="mdui-toolbar-spacer"></div>
-		<div id="search_bar" class="mdui-textfield mdui-textfield-expandable mdui-float-right mdui-textfield-expanded" style="max-width:${
-					isMobile ? 300 : 400
-				}px">
+		<div id="search_bar" class="mdui-textfield mdui-textfield-expandable mdui-float-right mdui-textfield-expanded">
 			<form id="search_bar_form" method="get" action="/${cur}:search">
 				<input class="mdui-textfield-input" type="text" name="q" autocomplete ="off" placeholder="搜尋" value="${search_text}"/>
 			</form>
@@ -398,7 +399,7 @@ function append_files_to_list(path, files) {
 
 		item['size'] = formatFileSize(item['size'])
 		if (item['mimeType'] == 'application/vnd.google-apps.folder') {
-			// 資料夾顏色處理 & 封面緩存
+			// 資料夾顏色 & 封面緩存
 			if (/連載中/.test(item.name)) {
 				className = 'updating'
 				imageUrls.push(`${p}%E5%B0%81%E9%9D%A2.webp`) // 封面url存入陣列
@@ -411,10 +412,7 @@ function append_files_to_list(path, files) {
 				className = ''
 			}
 			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2 clickFolder"><a href="${p}" class="folder">
-				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}">
-					<i class="mdui-icon material-icons">folder_open</i>
-					${item.name}
-					</div>
+				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}"><i class="mdui-icon material-icons">folder_open</i>${item.name}</div>
 				<div class="mdui-col-sm-2 mdui-text-right ${className}">${item['size']}</div>
 				</a>
 			</li>`
@@ -452,11 +450,7 @@ function append_files_to_list(path, files) {
 				c += ' view'
 			}
 			html += `<li class="mdui-list-item file mdui-ripple mdui-shadow-2" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
-				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate" title="${item.name}">
-					${file_count}.
-					<i class="mdui-icon material-icons">insert_drive_file</i>
-					${item.name}
-				</div>
+				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate">${file_count}.<i class="mdui-icon material-icons">insert_drive_file</i>${item.name}</div>
 				<div class="mdui-col-sm-2 mdui-text-right">${item['size']}</div>
 				</a>
 			</li>`
@@ -671,10 +665,7 @@ function append_search_result_to_list(files) {
 				className = ''
 			}
 			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2 clickFolder"><a id="${item['id']}" onclick="onSearchResultItemClick(this)" class="folder">
-					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}">
-						<i class="mdui-icon material-icons">folder_open</i>
-						${item.name}
-					</div>
+					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}"><i class="mdui-icon material-icons">folder_open</i>${item.name}</div>
 					<div class="mdui-col-sm-2 mdui-text-right" ${className}>${item['size']}</div>
 				</a>
 			</li>`
@@ -695,10 +686,7 @@ function append_search_result_to_list(files) {
 				c += ' view'
 			}
 			html += `<li class="mdui-list-item file mdui-ripple mdui-shadow-2" target="_blank"><a id="${item['id']}" gd-type="${item.mimeType}" onclick="onSearchResultItemClick(this)" class="${c}">
-					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate" title="${item.name}">
-						<i class="mdui-icon material-icons">insert_drive_file</i>
-						${item.name}
-					</div>
+					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate"><i class="mdui-icon material-icons">insert_drive_file</i>${item.name}</div>
 					<div class="mdui-col-sm-2 mdui-text-right">${item['size']}</div>
 				</a>
 		</li>`
@@ -770,22 +758,49 @@ function get_file(path, file, callback) {
 function file(path) {
 	let name = path.split('/').pop(),
 		ext = name.split('.').pop().toLowerCase().replace(`?a=view`, '')
-	if (
-		'|mp4|webm|avi|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|'.includes(
-			`|${ext}|`
-		)
-	) {
-		return file_video(path)
+	if ('|mkv|'.includes(`|${ext}|`)) file_mkv(path)
+	if ('|mp4|webm|avi|mpg|mpeg|rm|rmvb|mov|wmv|asf|ts|flv|'.includes(`|${ext}|`)) file_video(path)
+	if ('|bmp|jpg|jpeg|png|gif|'.includes(`|${ext}|`)) file_image(path)
+}
+
+function file_mkv(path) {
+	const btnClass = 'mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent',
+		  file_name = decodeURI(path.slice(path.lastIndexOf('/') + 1, path.length))
+	let encoded_url = decodeURI(window.location.origin + path),
+		playBtn = ''
+	if (/(WIN)/i.test(navigator.userAgent)) {
+		playBtn = `<a href="potplayer://${encoded_url}" class="${btnClass} windows-btn">PotPlayer 串流</a>`
+	} else if (/(Mac)/i.test(navigator.userAgent)) {
+		playBtn = `<button class="${btnClass} mac-btn" data-href="iina://open?url=${encoded_url}">IINA 串流</button>`
+	} else if (/(Android)/i.test(navigator.userAgent)) {
+		playBtn = `<button class="${btnClass} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">MXPlayer Pro 串流</button>`
+		playBtn += `<br><button style="margin-top: 15px" class="${btnClass} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">MXPlayer Free 串流</button>`
+	} else if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+		let applelink = url.replace(/(^\w+:|^)\/\//, '')
+		playBtn = `<a class="${btnClass}" href="infuse://${applelink}">Infuse 串流</a>`
 	}
-	if ('|bmp|jpg|jpeg|png|gif|'.includes(`|${ext}|`)) {
-		return file_image(path)
-	}
+	playBtn += `<br><a style="margin-top: 15px" href="${encoded_url}" class="${btnClass} download-btn">直連下載檔案</a>`
+
+	let content = `
+	<div class="mdui-container-fluid">
+		<div class="mdui-textfield">
+			<label class="mdui-textfield-label mdui-text-color-white">當前檔案：</label>
+			<input class="mdui-textfield-input mdui-text-color-white" type="text" value="${file_name}" readonly/>
+		</div>
+	</div>
+	<br>
+	${playBtn}
+	<div class="mdui-textfield">
+		<label class="mdui-textfield-label mdui-text-color-white">偵測到檔案為 MKV ，MKV 格式不支援瀏覽器，請使用串流或下載。</label>
+	</div>
+	<hr>
+	</div>`
+	$('#content').html(content)
 }
 
 // Preview Video
 function file_video(path) {
-	let url = decodeURI(window.location.origin + path),
-		encoded_url = url,
+	let encoded_url = decodeURI(window.location.origin + path),
 		targetText = ''
 
 	const file_name = decodeURI(path.slice(path.lastIndexOf('/') + 1, path.length)),
@@ -882,7 +897,7 @@ function file_video(path) {
 			playBtn = `<button class="${btnClass2} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">MXPlayer Pro 串流</button>`
 			playBtn += `<br><button style="margin-top: 15px" class="${btnClass2} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">MXPlayer Free 串流</button>`
 		} else if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-			let applelink = url.replace(/(^\w+:|^)\/\//, '')
+			let applelink = encoded_url.replace(/(^\w+:|^)\/\//, '')
 			playBtn = `<a class="${btnClass2}" href="infuse://${applelink}">Infuse 串流</a>`
 		}
 	}
@@ -906,8 +921,7 @@ function file_video(path) {
 		<label class="mdui-textfield-label mdui-text-color-white">注意：若影片沒有畫面，請嘗試播放器串流。或通知 Discord：NekoChan#2851。</label>
 	</div>
 	<hr>
-	</div>
-	`
+	</div>`
 	$('#content').html(content)
 
 	if (/(WIN|Mac)/i.test(navigator.userAgent)) {
@@ -1163,13 +1177,12 @@ function file_video(path) {
 
 function file_image(path) {
 	let url = decodeURI(window.location.origin + path),
-		content = `
-<div class="mdui-container-fluid">
+		content = `<div class="mdui-container-fluid">
 	<br>
 	<img class="mdui-img-fluid" src="${url}"/>
-<br>
-<hr>
-</div>`
+	<br>
+	<hr>
+	</div>`
 	$('#content').html(content)
 }
 

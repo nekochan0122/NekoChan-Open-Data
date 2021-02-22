@@ -1,5 +1,7 @@
 // NekoChan Open Data
 
+'use strict'
+
 // 系統識別
 const Os = {
 	isWindows: navigator.platform.toUpperCase().includes('WIN'), // .includes
@@ -25,7 +27,7 @@ function preloadImages(imageUrls) {
 	}
 }
 
-// 初始化頁面，並載入必要資源
+// 初始化頁面
 function init() {
 	document.siteName = $('title').html()
 	$('body').addClass(
@@ -47,14 +49,18 @@ function init() {
 	<div id="content" class="mdui-container mdui-shadow-16"></div>`
 	$('body').html(html)
 	// 資料夾預覽圖
-	const folderIMGElement = $('#folderIMGElement')
-	folderIMGElement.hide()
-	$(document).mousemove((event) => {
-		folderIMGElement.css({'left':`${event.pageX + 25}px`, 'top':`${event.pageY + 25}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
-	})
-	$(window).scroll(() => {
-		folderIMGElement.hide() // 滾動時隱藏 資料夾預覽圖元素
-	})
+	if (/(WIN|Mac)/i.test(navigator.userAgent)) {
+		$(() => {
+			const folderIMGElement = $('#folderIMGElement')
+			folderIMGElement.hide()
+			$(document).mousemove((event) => {
+				folderIMGElement.css({'left':`${event.pageX + 25}px`, 'top':`${event.pageY + 25}px`}) // 滑鼠移動時 資料夾預覽圖元素 跟著移動
+			})
+			$(window).on('scroll', function() {
+				folderIMGElement.hide() // 滾動時隱藏 資料夾預覽圖元素
+			})
+		})
+	}
 }
 
 function getDocumentHeight() {
@@ -103,11 +109,11 @@ function render(path) {
 // 渲染 title
 function title(path) {
 	path = decodeURI(path)
-	let cur = window.current_drive_order || 0
-	let drive_name = window.drive_names[cur]
+	let cur = window.current_drive_order || 0,
+		drive_name = window.drive_names[cur],
+		model = window.MODEL
 	path = path.replace(`/${cur}:`, '')
 	$('title').html(`${document.siteName} - ${path}`)
-	let model = window.MODEL
 	if (model.is_search_page)
 		$('title').html(
 			`${document.siteName} - ${drive_name} - 搜尋 ${model.q} 的結果`
@@ -118,19 +124,19 @@ function title(path) {
 
 // 渲染導航欄
 function nav(path) {
-	let model = window.MODEL
-	let html = ''
-	let cur = window.current_drive_order || 0
+	let model = window.MODEL,
+		html = '',
+		cur = window.current_drive_order || 0
 	html += `<a href="/${cur}:/" class="mdui-typo-headline folder">${document.siteName}</a>`
 
 	let folderPath = `　當前位置： <a class="folder" href="/${cur}:/">主目錄</a>`
 	if (!model.is_search_page) {
 		// 資料夾路徑
-		let arr = path.trim('/').split('/')
-		let p = '/'
+		let arr = path.trim('/').split('/'),
+			p = '/'
 		if (arr.length > 1) {
 			arr.shift()
-			for (i in arr) {
+			for (let i in arr) {
 				let n = arr[i]
 				n = decodeURI(n)
 				p += `${n}/`
@@ -147,9 +153,9 @@ function nav(path) {
 	}
 	$('#folderPath').html(folderPath)
 
-	let search_text = model.is_search_page ? model.q || '' : ''
 	const isMobile = Os.isMobile
-	let search_bar = `<div class="mdui-toolbar-spacer"></div>
+	let search_text = model.is_search_page ? model.q || '' : '',
+		search_bar = `<div class="mdui-toolbar-spacer"></div>
 		<div id="search_bar" class="mdui-textfield mdui-textfield-expandable mdui-float-right mdui-textfield-expanded" style="max-width:${
 					isMobile ? 300 : 400
 				}px">
@@ -161,11 +167,13 @@ function nav(path) {
 			</button>
 		</div>`
 
-	// 個人盤 或 團隊盤
-	if (model.root_type < 2) {
-		// 顯示搜索框
-		html += search_bar
-	}
+	// // 個人盤 或 團隊盤
+	// if (model.root_type < 2) {
+	// 	// 顯示搜索框
+	// 	html += search_bar
+	// }
+
+	html += search_bar
 
 	$('#nav').html(html)
 	mdui.mutation()
@@ -217,8 +225,8 @@ function requestSearch(params, resultCallback) {
 
 // 渲染文件列表
 function list(path) {
-	let href = null // 資料夾預覽圖連結
-	let content = `
+	let href = null, // 資料夾預覽圖連結
+		content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
 			<ul class="mdui-list">
@@ -237,7 +245,7 @@ function list(path) {
 	<div class="mdui-row">
 		<ul id="list" class="mdui-list">
 		</ul>
-		<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>NekoChan Open Data｜Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
+		<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
 	</div>
 	<div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>`
 	$('#content').html(content)
@@ -302,9 +310,9 @@ function list(path) {
 			if (window.scroll_status.event_bound !== true) {
 				// 綁定事件，如果還未綁定
 				$(window).on('scroll', function () {
-					let scrollTop = $(this).scrollTop()
-					let scrollHeight = getDocumentHeight()
-					let windowHeight = $(this).height()
+					let scrollTop = $(this).scrollTop(),
+						scrollHeight = getDocumentHeight(),
+						windowHeight = $(this).height()
 					// 滾到底部
 					if (
 						scrollTop + windowHeight >
@@ -369,20 +377,21 @@ function list(path) {
  * @param files 請求得來的結果
  */
 function append_files_to_list(path, files) {
-	let $list = $('#list')
+	let $list = $('#list'),
 	// 是最後一頁數據了嗎？
-	let is_lastpage_loaded = null === $list.data('nextPageToken')
-	let is_firstpage = '0' == $list.data('curPageIndex')
+		is_lastpage_loaded = null === $list.data('nextPageToken'),
+		is_firstpage = '0' == $list.data('curPageIndex'),
 
-	let file_count = 0 // 檔案數量
+		file_count = 0, // 檔案數量
 
-	html = ''
-	let targetFiles = []
+		html = '',
+		targetFiles = [],
 
-	let className = ''
-	for (i in files) {
-		let item = files[i]
-		let p = `${path + item.name}/`
+		className = ''
+
+	for (let i in files) {
+		let item = files[i],
+			p = `${path + item.name}/`
 		if (item['size'] == undefined) {
 			item['size'] = ''
 		}
@@ -411,9 +420,9 @@ function append_files_to_list(path, files) {
 			</li>`
 		} else {
 			// 檔案
-			let p = path + item.name
+			let p = path + item.name,
+				c = 'file'
 			const filepath = path + item.name
-			let c = 'file'
 			// 當載入完最後一頁後，才顯示 README ，否則會影響滾動事件
 			if (is_lastpage_loaded && item.name == '!readme.md') {
 				get_file(p, item, (data) => {
@@ -455,8 +464,8 @@ function append_files_to_list(path, files) {
 	}
 
 	if (targetFiles.length > 0) {
-		let old = localStorage.getItem(path)
-		let new_children = targetFiles
+		let old = localStorage.getItem(path),
+			new_children = targetFiles
 		// 第1頁重設；否則追加
 		if (!is_firstpage && old) {
 			let old_children
@@ -489,9 +498,9 @@ function append_files_to_list(path, files) {
  * 渲染搜索結果列表。有大量重複代碼，但是裡面有不一樣的邏輯，暫時先這樣分開弄吧
  */
 function render_search_result_list() {
-	let href = null // 資料夾預覽圖連結
-	let cur = window.current_drive_order // 資料夾預覽圖 (搜尋用 變量)
-	let content = `
+	let href = null, // 資料夾預覽圖連結
+		cur = window.current_drive_order, // 資料夾預覽圖 (搜尋用 變量)
+		content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 		<div class="mdui-row">
 			<ul class="mdui-list">
@@ -510,7 +519,7 @@ function render_search_result_list() {
 	<div class="mdui-row">
 	<ul id="list" class="mdui-list">
 	</ul>
-	<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>NekoChan Open Data｜Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
+	<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500">共 <span class="number"></span> 項<br>Discord：NekoChan#2851<br><a id="back-to-top" href="#">返回頂部</a></div>
 	</div>
 	<div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>`
 	$('#content').html(content)
@@ -548,10 +557,10 @@ function render_search_result_list() {
 					$.post(`/${cur}:id2path`, { id: this.querySelector('a.folder').id }, (data) => {
 						if (data) {
 							href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
+							$('#folderIMGElementSrc').attr('src', href)
+							$('#folderIMGElement').show()
 						}
 					})
-					$('#folderIMGElementSrc').attr('src', href)
-					$('#folderIMGElement').show()
 				},
 				() => {
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
@@ -567,10 +576,10 @@ function render_search_result_list() {
 					$.post(`/${cur}:id2path`, { id: this.querySelector('a.folder').id }, (data) => {
 						if (data) {
 							href = `/${cur}:${data}封面.webp` // 搜尋 url + 封面.webp
+							$('#folderIMGElementSrc').attr('src', href)
+							$('#folderIMGElement').show()
 						}
 					})
-					$('#folderIMGElementSrc').attr('src', href)
-					$('#folderIMGElement').show()
 				},
 				() => {
 					$('#folderIMGElementSrc').attr('src','') // 更改 img src
@@ -580,9 +589,9 @@ function render_search_result_list() {
 			if (window.scroll_status.event_bound !== true) {
 				// 綁定事件，如果還未綁定
 				$(window).on('scroll', function () {
-					let scrollTop = $(this).scrollTop()
-					let scrollHeight = getDocumentHeight()
-					let windowHeight = $(this).height()
+					let scrollTop = $(this).scrollTop(),
+						scrollHeight = getDocumentHeight(),
+						windowHeight = $(this).height()
 					// 滾到底部
 					if (
 						scrollTop + windowHeight >
@@ -635,14 +644,15 @@ function render_search_result_list() {
  * @param files
  */
 function append_search_result_to_list(files) {
-	let $list = $('#list')
+	let $list = $('#list'),
 	// 是最後一頁數據了嗎？
-	let is_lastpage_loaded = null === $list.data('nextPageToken')
+		is_lastpage_loaded = null === $list.data('nextPageToken'),
 	// let is_firstpage = '0' == $list.data('curPageIndex');
 
-	html = ''
+		html = '',
+		className = ''
 
-	for (i in files) {
+	for (let i in files) {
 		let item = files[i]
 		if (item['size'] == undefined) {
 			item['size'] = ''
@@ -669,8 +679,8 @@ function append_search_result_to_list(files) {
 				</a>
 			</li>`
 		} else {
-			let c = 'file'
-			let ext = item.name.split('.').pop().toLowerCase()
+			let c = 'file',
+				ext = item.name.split('.').pop().toLowerCase()
 			switch(item.name) { // 隱藏項目
 				case '!head.md':
 					continue
@@ -711,16 +721,16 @@ function append_search_result_to_list(files) {
  * @param a_ele 點擊的元素
  */
 function onSearchResultItemClick(a_ele) {
-	let me = $(a_ele)
-	let can_preview = me.hasClass('view')
-	let cur = window.current_drive_order
-	let dialog = mdui.dialog({
-		title: '',
-		content:
-			'<div class="mdui-text-center mdui-typo-title mdui-m-b-1">正在獲取路徑...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
-		history: false,
-		modal: true,
-		closeOnEsc: true,
+	let me = $(a_ele),
+		can_preview = me.hasClass('view'),
+		cur = window.current_drive_order,
+		dialog = mdui.dialog({
+			title: '',
+			content:
+				'<div class="mdui-text-center mdui-typo-title mdui-m-b-1">正在獲取路徑...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
+			history: false,
+			modal: true,
+			closeOnEsc: true,
 	})
 	mdui.updateSpinners()
 
@@ -745,8 +755,8 @@ function onSearchResultItemClick(a_ele) {
 
 function get_file(path, file, callback) {
 	// let key = `file_path_${path}${file['modifiedTime']}`
-	let key = `file_path_${path}`
-	let data = localStorage.getItem(key)
+	let key = `file_path_${path}`,
+		data = localStorage.getItem(key)
 	if (data != undefined) {
 		return callback(data)
 	} else {
@@ -758,8 +768,8 @@ function get_file(path, file, callback) {
 }
 
 function file(path) {
-	let name = path.split('/').pop()
-	let ext = name.split('.').pop().toLowerCase().replace(`?a=view`, '')
+	let name = path.split('/').pop(),
+		ext = name.split('.').pop().toLowerCase().replace(`?a=view`, '')
 	if (
 		'|mp4|webm|avi|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|'.includes(
 			`|${ext}|`
@@ -774,16 +784,17 @@ function file(path) {
 
 // Preview Video
 function file_video(path) {
-	let url = decodeURI(window.location.origin + path)
-	let encoded_url = url
-	const file_name = decodeURI(
-		path.slice(path.lastIndexOf('/') + 1, path.length)
-	)
-	const currentPathname = window.location.pathname
-	const lastIndex = currentPathname.lastIndexOf('/')
-	const fatherPathname = currentPathname.slice(0, lastIndex + 1)
+	let url = decodeURI(window.location.origin + path),
+		encoded_url = url,
+		targetText = ''
+
+	const file_name = decodeURI(path.slice(path.lastIndexOf('/') + 1, path.length)),
+		currentPathname = window.location.pathname,
+		lastIndex = currentPathname.lastIndexOf('/'),
+		fatherPathname = currentPathname.slice(0, lastIndex + 1)
+
 	let target_children = localStorage.getItem(fatherPathname)
-	let targetText = ''
+
 	if (target_children) {
 		try {
 			target_children = JSON.parse(target_children)
@@ -795,10 +806,11 @@ function file_video(path) {
 			target_children = []
 		}
 		if (target_children.length > 0 && target_children.includes(fatherPathname+file_name)) {
-			let len = target_children.length
-			let cur = target_children.indexOf(fatherPathname+file_name)
-			let prev_child = cur - 1 > -1 ? target_children[cur - 1] : null
-			let next_child = cur + 1 < len ? target_children[cur + 1] : null
+			let len = target_children.length,
+				cur = target_children.indexOf(fatherPathname+file_name),
+				prev_child = cur - 1 > -1 ? target_children[cur - 1] : null,
+				next_child = cur + 1 < len ? target_children[cur + 1] : null
+
 			const btnClass1 = 'mdui-btn mdui-btn-block mdui-color-theme-accent mdui-ripple'
 			targetText = `
 			<div class="mdui-container">
@@ -821,11 +833,21 @@ function file_video(path) {
 	const btnClass2 = 'mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent'
 	// WIN 串流播放器
 	let playBtn = `<a href="potplayer://${encoded_url}" class="${btnClass2} windows-btn">PotPlayer 串流</a>`
+
 	// 進度條預覽圖切換元素
-	let previewSwitchElement = ''
+	let switchElement = '',
+		previewSwitchElement = '',
+		// 播放器 HTML
+		player = ''
+
 	// 系統檢測
 	if (!Os.isMobile) {
-		// MAC 串流播放器
+		// 電腦播放器 HTML
+		player = `
+		<div id="player" class="mdui-center"></div>
+		<div id="screenshotPlayer"></div>
+		`
+		// MAC 串流播放器按鈕
 		if (/(Mac)/i.test(navigator.userAgent)) {
 			playBtn = `<button class="${btnClass2} mac-btn" data-href="iina://open?url=${encoded_url}">IINA 串流</button>`
 		}
@@ -839,18 +861,33 @@ function file_video(path) {
 		} else if (localStorage.getItem('previewSwitch') == 'true') {
 			previewSwitchElement = `<input id="previewSwitch" type="checkbox" checked/>`
 		}
+		// 進度條預覽圖 HTML
+		switchElement = `
+		<span id="switchElement" style="float: right">
+			<i class="mdui-icon material-icons">ondemand_video</i>
+			<span class="mdui-list-item-content">進度條預覽圖</span>
+			<label class="mdui-switch">
+				${previewSwitchElement}
+				<i class="mdui-switch-icon"></i>
+			</label>
+		</span>
+		`
 	} else {
-		// 移動端串流播放器
+		// 移動端播放器 HTML
+		player = `
+		<video id="androidPlayer" src="${encoded_url}" controls="controls" style="width: 100%">您的瀏覽器不支援</video>
+		`
+		// 移動端 串流播放器按鈕
 		if (/(Android)/i.test(navigator.userAgent)) {
 			playBtn = `<button class="${btnClass2} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.pro;S.title=${path};end">MXPlayer Pro 串流</button>`
-			playBtn += `<button style="left: 15px" class="${btnClass2} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">MXPlayer Free 串流</button>`
+			playBtn += `<br><button style="margin-top: 15px" class="${btnClass2} android-btn" data-href="intent:${encoded_url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end">MXPlayer Free 串流</button>`
 		} else if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
 			let applelink = url.replace(/(^\w+:|^)\/\//, '')
 			playBtn = `<a class="${btnClass2}" href="infuse://${applelink}">Infuse 串流</a>`
 		}
 	}
 	// 直連下載
-	playBtn += `<a style="left: 15px" href="${encoded_url}" class="${btnClass2} download-btn">直連下載檔案</a>`
+	playBtn += `<br><a style="margin-top: 15px" href="${encoded_url}" class="${btnClass2} download-btn">直連下載檔案</a>`
 
 	let content = `
 	<div class="mdui-container-fluid">
@@ -858,20 +895,13 @@ function file_video(path) {
 			<label class="mdui-textfield-label mdui-text-color-white">當前檔案：</label>
 			<input class="mdui-textfield-input mdui-text-color-white" type="text" value="${file_name}" readonly/>
 		</div>
-		<video src="${encoded_url}" controls="controls" style="width: 100%">您的瀏覽器不支援</video>
+		${player}
 		<br>
 		${targetText}
 	</div>
 	<br>
 	${playBtn}
-	<span id="switchElement" style="float: right">
-		<i class="mdui-icon material-icons">ondemand_video</i>
-		<span class="mdui-list-item-content">進度條預覽圖</span>
-		<label class="mdui-switch">
-			${previewSwitchElement}
-			<i class="mdui-switch-icon"></i>
-		</label>
-	</span>
+	${switchElement}
 	<div class="mdui-textfield">
 		<label class="mdui-textfield-label mdui-text-color-white">注意：若影片沒有畫面，請嘗試播放器串流。或通知 Discord：NekoChan#2851。</label>
 	</div>
@@ -880,9 +910,244 @@ function file_video(path) {
 	`
 	$('#content').html(content)
 
-	// 移除移動端的 進度條預覽圖 元素
-	if (Os.isMobile) {
-		$('#switchElement').remove()
+	if (/(WIN|Mac)/i.test(navigator.userAgent)) {
+		$(() => {
+			// DPlayer Script 未正常載入則刷新網頁
+			if (!window.DPlayer) {
+				window.location.reload()
+			}
+
+			// 進度條預覽圖 點擊事件
+			const previewSwitch = $('#previewSwitch')
+			previewSwitch.click(() => {
+				if (localStorage.getItem('previewSwitch') == 'true') {
+					localStorage.setItem('previewSwitch', 'false')
+					window.location.reload()
+				} else if (localStorage.getItem('previewSwitch') == 'false') {
+					localStorage.setItem('previewSwitch', 'true')
+					window.location.reload()
+				}
+			})
+
+			// 主要播放器函式(開啟預覽圖)
+			const loadMainPlayer = () => {
+				let currentTime = 0, // 當前播放時間
+					oldVol = 0.5, // 初始化音量
+					mute = false, // 靜音狀態
+					dp = null // 重置變數
+
+				// DPlayer 參數
+				if (localStorage.getItem('previewSwitch') == 'true') {
+					dp = new DPlayer({ // 開啟預覽圖
+						container: $('#player')[0],
+						theme: '#0080ff',
+						autoplay: true,
+						lang: 'zh-tw',
+						mutex: false,
+						volume: 0.5,
+						video: {
+							url: encoded_url,
+							thumbnails:
+								'//cdn.jsdelivr.net/gh/NekoChanTaiwan/NekoChan-Open-Data@1.8.6.beta2/images/fake-thumbnails.webp',
+						},
+					})
+				} else if (localStorage.getItem('previewSwitch') == 'false') {
+					dp = new DPlayer({ // 關閉預覽圖
+						container: $('#player')[0],
+						theme: '#0080ff',
+						autoplay: true,
+						lang: 'zh-tw',
+						mutex: false,
+						volume: 0.5,
+						video: {
+							url: encoded_url,
+						},
+					})
+				}
+
+				// 跳轉至 currentTime
+				if (currentTime != 0) {
+					dp.seek(currentTime)
+				}
+
+				// 紀錄已跳轉的時間
+				dp.on('seeked', () => {
+					currentTime = dp.video.currentTime
+				})
+
+				// 紀錄正在跳轉的時間
+				dp.on('seeking', () => {
+					currentTime = dp.video.currentTime
+				})
+
+				// 如果影片載入失敗則重新讀取
+				dp.on('error', () => {
+					// 紀錄載入失敗時的播放時間(如果播放時間不等於 0)
+					if (dp.video.currentTime != 0) {
+						currentTime = dp.video.currentTime // 紀錄載入失敗時的播放時間
+					}
+					loadMainPlayer()
+				})
+
+				// 影片播放完畢
+				dp.on('ended', () => {
+					// 退出全螢幕
+					dp.fullScreen.cancel('browser')
+				})
+
+				// 播放器載入完成
+				dp.on('loadedmetadata', () => {
+					const seekTime = dp.video.duration / 10 // 100% / 10 = 10%
+					$(window).unbind('keyup')
+					// 鍵盤快捷鍵
+					$(window).keyup((event) => {
+						if (/Numpad/.test(event.code)) {
+							let num = Number(event.code[6])
+							dp.seek(seekTime * num) // 數字鍵跳轉
+						} else if (/Digit/.test(event.code)) {
+							let num = Number(event.code[5])
+							dp.seek(seekTime * num) // 上排數字鍵跳轉
+						} else if (/Key/.test(event.code)) {
+							switch (event.code[3]) {
+								case 'M': // 靜音
+									if (mute == false) {
+										saveOldVol()
+										dp.volume(0.0, true, false)
+										mute = true
+										break
+									} else if (mute == true) {
+										dp.volume(oldVol, true, false)
+										mute = false
+										break
+									}
+								case 'X': // 下一集
+									$('#rightBtn').click()
+									break
+								case 'Z': // 上一集
+									$('#leftBtn').click()
+									break
+								case 'F': // 全螢幕
+									$('.dplayer-icon.dplayer-full-icon').click()
+									break
+							}
+						}
+					})
+				})
+
+				// 紀錄當前音量
+				const saveOldVol = () => {
+					// 直接取兩值（音量）
+					// 50% = 0.5
+					let currentVol = `${String(
+						$('.dplayer-volume-bar-wrap').attr('data-balloon')
+					)}` // 假設 5%
+					// console.log(`current: ${currentVol}`)
+					if (currentVol[3] == '%') {
+						// 100%
+						oldVol = 1.0
+						// console.log(`oldVol: ${oldVol}`)
+					} else if (currentVol[2] == '%') {
+						// 十位數
+						oldVol = Number(`0.${currentVol[0]}`)
+						// console.log(`oldVol: ${oldVol}`)
+					} else if (currentVol[1] == '%') {
+						// 個位數（無視，設定成0.1）
+						oldVol = 0.1
+						// console.log(`oldVol: ${oldVol}`)
+					}
+				}
+			}
+
+			// 載入主播放器
+			loadMainPlayer()
+
+			// =================================================================================
+			//						以上為主要播放器 、以下為截圖播放器
+			// =================================================================================
+
+			// 讀取截圖播放器
+			const loadScreenshotPlayer = () => {
+				let moveTimeSec = 0, // 移動時間(數字 - 單位: 秒)
+					oldMoveTimeSec = 0, // 上一次移動時間(數字 - 單位: 秒)
+					range = 5, // 移動時間範圍值
+					temp = null // 格式化變數
+
+				let oldCanvas = $('#player canvas') // 舊畫布(預覽圖)
+				const screenshotPlayerElement = $('#screenshotPlayer')[0],
+					barWrap = $('#player .dplayer-bar-wrap'), // 進度條
+					parentNode = $('#player .dplayer-bar-preview') // 畫布(預覽圖)父節點
+
+				screenshotPlayerElement.style.display = 'none' // 隱藏播放器
+
+				let screenshotPlayer = null // 重置變數
+				screenshotPlayer = new DPlayer({
+					// 截圖播放器
+					container: screenshotPlayerElement,
+					autoplay: true,
+					screenshot: true,
+					mutex: false,
+					video: {
+						url: encoded_url,
+					},
+				})
+				screenshotPlayer.volume(0, true, true)
+				screenshotPlayer.speed(16) // 嘗試加速讓播放器讀取更多畫面
+
+				// 獲取時間並轉換 函式
+				let toSec = (stringTime) => {
+					temp = stringTime.split(':')
+					if (stringTime.length === 2) {
+						// 將字符串轉換成數字(單位:秒)
+						moveTimeSec = Number(temp)
+					} else if (stringTime.length === 5) {
+						moveTimeSec = 60 * Number(temp[0]) + Number(temp[1])
+					} else if (stringTime.length === 8) {
+						moveTimeSec =
+							3600 * Number(temp[0]) + 60 * Number(temp[1]) + Number(temp[2])
+					}
+					seekScreenshotPlayer() //* 呼叫跳轉函式
+				}
+
+				// 跳轉截圖播放器 和 click 函式
+				let seekScreenshotPlayer = () => {
+					// 目前 range = 5
+					// 跳轉截圖播放器（比click更容易觸發，因為讀取畫面有時需要時間）
+					if (
+						moveTimeSec > oldMoveTimeSec + (range - 3) ||
+						moveTimeSec < oldMoveTimeSec - (range - 3)
+					) {
+						screenshotPlayer.seek(moveTimeSec) // 跳轉到 移動時間(數字 - 單位: 秒)
+					}
+					// 對截圖按鈕發送click(應該使用幾秒範圍，可以避免過多的click)
+					if (
+						moveTimeSec > oldMoveTimeSec + range ||
+						moveTimeSec < oldMoveTimeSec - range
+					) {
+						oldCanvas = $('#player canvas')
+						if (oldCanvas) {
+							parentNode.remove(oldCanvas) // 移除現在的畫布(預覽圖)
+						}
+						$('#screenshotPlayer .dplayer-camera-icon').click() // 點擊截圖按鈕
+						oldMoveTimeSec = moveTimeSec // 紀錄上一次移動時間(數字 - 單位: 秒)
+					}
+				}
+
+				// 滑鼠事件
+				barWrap.mousemove(() => {
+					toSec($('.dplayer-bar-time').html())
+				})
+
+				// 如果影片載入失敗則重新讀取
+				screenshotPlayer.on('error', () => {
+					loadScreenshotPlayer()
+				})
+			}
+
+			// 進度條預覽必須啟動 才使用截圖播放器
+			if (localStorage.getItem('previewSwitch') == 'true') {
+				loadScreenshotPlayer() // 第一次載入截圖播放器
+			}
+		})
 	}
 
 	$('#leftBtn, #rightBtn').click((e) => {
@@ -897,8 +1162,8 @@ function file_video(path) {
 }
 
 function file_image(path) {
-	let url = decodeURI(window.location.origin + path)
-	let content = `
+	let url = decodeURI(window.location.origin + path),
+		content = `
 <div class="mdui-container-fluid">
 	<br>
 	<img class="mdui-img-fluid" src="${url}"/>
@@ -928,7 +1193,6 @@ function formatFileSize(bytes) {
 String.prototype.trim = function (char) {
 	if (char) {
 		return this.replace(new RegExp(`^\\${char}+|\\${char}+$`, 'g'), '')
-		z
 	}
 	return this.replace(/^\s+|\s+$/g, '')
 }

@@ -1,3 +1,4 @@
+/* 全局字體樣是 */
 * {
 	font-family: 'Noto Sans TC', 'Noto Sans JP', 'Noto Sans SC', serif;
 }
@@ -21,6 +22,10 @@ body {
 	background-position: center center;
 	background-size: cover;
 }
+/* 搜尋欄 */
+#search_bar {
+	max-width: 600px;
+}
 /* 導航背景 #232427 */
 .mdui-theme-primary-blue .mdui-color-theme {
 	background-color: rgb(45 45 45 / 95%) !important;
@@ -31,7 +36,6 @@ body {
 	padding-left: 8px;
 	margin-right: auto;
 	margin-left: auto;
-	max-width: 1265px;
 }
 /* 列表背景 #333232 */
 .mdui-container,
@@ -39,7 +43,7 @@ body {
 	color: rgba(255, 255, 255, 0.87);
 	background-color: rgb(45 45 45 / 95%);
 }
-/* 特殊狀態 */
+/* 資料夾顏色 */
 .updating {
 	color: rgb(251 191 72 / 87%) !important;
 }
@@ -88,6 +92,12 @@ a.mdui-typo-headline {
 	opacity: 1;
 }
 @media screen and (max-width: 980px) {
+	#nav-title{
+		display: none;
+	}
+	#search_bar{
+		max-width: 100%;
+	}
 	.mdui-list-item .mdui-text-right {
 		display: none;
 	}
