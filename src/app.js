@@ -30,7 +30,6 @@ function preloadImages(imageUrls) {
 // 初始化頁面，並載入必要資源
 function init() {
 	document.siteName = $('title').html()
-	$('html').css({'height': `${window.innerHeight}`})
 	$('body').addClass(`mdui-theme-primary-${UI.main_color} mdui-theme-accent-${UI.accent_color}`)
 	let html = `
 	<nav id="nav-warp" style="display:flex;justify-content:center">
