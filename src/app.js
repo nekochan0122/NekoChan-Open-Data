@@ -30,7 +30,8 @@ function preloadImages(imageUrls) {
 // 初始化頁面，並載入必要資源
 function init() {
 	document.siteName = $('title').html()
-	$('body').addClass(`mdui-theme-primary-${UI.main_color} mdui-theme-accent-${UI.accent_color}`).css({'height': `${window.innerHeight}`})
+	$('html').css({'height': `${window.innerHeight}`})
+	$('body').addClass(`mdui-theme-primary-${UI.main_color} mdui-theme-accent-${UI.accent_color}`)
 	let html = `
 	<nav id="nav-warp" style="display:flex;justify-content:center">
 		<div id="nav" class="mdui-appbar mdui-container mdui-toolbar mdui-text-color-white-text" style="box-shadow: none"></div>
