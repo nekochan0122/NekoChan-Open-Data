@@ -232,14 +232,8 @@ function list(path) {
 		<div class="mdui-row">
 			<ul class="mdui-list">
 			<li class="mdui-list-item th">
-				<div class="mdui-col-xs-12 mdui-col-sm-10">
-					檔案名稱
-					<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
-				</div>
-				<div class="mdui-col-sm-2 mdui-text-right">
-					檔案大小
-					<i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>
-				</div>
+				<div class="mdui-col-xs-12 mdui-col-sm-10">檔案名稱<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i></div>
+				<div class="mdui-col-sm-2 mdui-text-right">檔案大小<i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i></div>
 			</li>
 		</ul>
 	</div>
@@ -412,7 +406,7 @@ function append_files_to_list(path, files) {
 				className = ''
 			}
 			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2 clickFolder"><a href="${p}" class="folder">
-				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}"><i class="mdui-icon material-icons">folder_open</i>${item.name}</div>
+				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}"><i class="mdui-icon material-icons">folder_open</i> ${item.name}</div>
 				<div class="mdui-col-sm-2 mdui-text-right ${className}">${item['size']}</div>
 				</a>
 			</li>`
@@ -450,7 +444,7 @@ function append_files_to_list(path, files) {
 				c += ' view'
 			}
 			html += `<li class="mdui-list-item file mdui-ripple mdui-shadow-2" target="_blank"><a gd-type="${item.mimeType}" href="${p}" class="${c}">
-				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate">${file_count}.<i class="mdui-icon material-icons">insert_drive_file</i>${item.name}</div>
+				<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate">${file_count}.<i class="mdui-icon material-icons">insert_drive_file</i> ${item.name}</div>
 				<div class="mdui-col-sm-2 mdui-text-right">${item['size']}</div>
 				</a>
 			</li>`
@@ -499,14 +493,8 @@ function render_search_result_list() {
 		<div class="mdui-row">
 			<ul class="mdui-list">
 				<li class="mdui-list-item th">
-					<div class="mdui-col-xs-12 mdui-col-sm-10">
-						檔案名稱
-						<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
-					</div>
-					<div class="mdui-col-sm-2 mdui-text-right">
-						檔案大小
-						<i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>
-					</div>
+					<div class="mdui-col-xs-12 mdui-col-sm-10">檔案名稱<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i></div>
+					<div class="mdui-col-sm-2 mdui-text-right">檔案大小<i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i></div>
 				</li>
 			</ul>
 		</div>
@@ -665,7 +653,7 @@ function append_search_result_to_list(files) {
 				className = ''
 			}
 			html += `<li class="mdui-list-item mdui-ripple mdui-shadow-2 clickFolder"><a id="${item['id']}" onclick="onSearchResultItemClick(this)" class="folder">
-					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}"><i class="mdui-icon material-icons">folder_open</i>${item.name}</div>
+					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate ${className}"><i class="mdui-icon material-icons">folder_open</i> ${item.name}</div>
 					<div class="mdui-col-sm-2 mdui-text-right" ${className}>${item['size']}</div>
 				</a>
 			</li>`
@@ -686,7 +674,7 @@ function append_search_result_to_list(files) {
 				c += ' view'
 			}
 			html += `<li class="mdui-list-item file mdui-ripple mdui-shadow-2" target="_blank"><a id="${item['id']}" gd-type="${item.mimeType}" onclick="onSearchResultItemClick(this)" class="${c}">
-					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate"><i class="mdui-icon material-icons">insert_drive_file</i>${item.name}</div>
+					<div class="mdui-col-xs-12 mdui-col-sm-10 mdui-text-truncate"><i class="mdui-icon material-icons">insert_drive_file</i> ${item.name}</div>
 					<div class="mdui-col-sm-2 mdui-text-right">${item['size']}</div>
 				</a>
 		</li>`
